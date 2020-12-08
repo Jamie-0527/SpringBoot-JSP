@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace需要对应dao接口的完全限定名 （包名+类名）-->
+<mapper namespace="com.min.graduation.dao.AdminDao">
+
+    <!--设置Admin中封装的resultMap-->
+    <resultMap id="AdminMapper" type="Admin">
+        <collection property="student" resultMap="StudentMapper"/>
+        <collection property="teacher" resultMap="TeacherMapper"/>
+        <collection property="grade" resultMap="GradeMapper"/>
+        <collection property="company" resultMap="CompanyMapper"/>
+    </resultMap>
+    <!--学生-->
+    <resultMap id="StudentMapper" type="Student">
+        <id property="s_id" column="s_id"/>
+        <result property="s_name" column="s_name"/>
+        <result property="s_class_no" column="s_class_no"/>
+        <result property="s_phone" column="s_phone"/>
+        <result property="s_college" column="s_college"/>
+        <result property="company_id" column="company_id"/>
+    </resultMap>
+    <!--教师-->
+    <resultMap id="TeacherMapper" type="Teacher">
+        <id property="t_id" column="t_id"/>
+        <result property="t_name" column="t_name"/>
+        <result property="t_rank" column="t_rank"/>
+        <result property="t_college" column="t_college"/>
+        <result property="t_phone" column="t_phone"/>
+    </resultMap>
+    <!--班级-->
+    <resultMap id="GradeMapper" type="Grade">
+        <id property="c_id" column="c_id"/>
+        <id property="t_id" column="t_id"/>
+        <result property="c_name" column="c_name"/>
+    </resultMap>
+    <!--公司-->
+    <resultMap id="CompanyMapper" type="Company">
+        <id property="company_id" column="company_id"/>
+        <id property="company_person_id" column="company_person_id"/>
+        <result property="company_name" column="company_name"/>
+        <result property="company_address" column="company_address"/>
+        <result property="company_person" column="company_person"/>
+        <result property="company_phone" column="company_phone"/>
+    </resultMap>
+
+
+    <!--查询所有学生信息-->
+    <select id="findAllStudent" resultMap="AdminMapper">
+        select s.s_id,s.s_name,g.c_name,s.s_phone,s.s_college,c.company_name  from student s
+                                                left join grade g on s.s_class_no=g.c_id
+												left join company c on s.company_id=c.company_id
+    </select>
+    <!--添加学生信息-->
+    <insert id="addStudent" parameterType="Student">
+        insert into student (s_id,s_name,s_class_no,s_phone,s_college,company_id)
+        values (#{s_id},#{s_name},#{s_class_no},#{s_phone},#{s_college},#{company_id})
+    </insert>
+    <!--添加学生登录信息-->
+    <insert id="addLogin" parameterType="Map">
+        insert into login (user_name,password,authority,create_time,modify_time)
+        values (#{userName},'123456',#{authority},now(),now())
+    </insert>
+    <!--更新学生信息-->
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
+            <if test="s_name != null and s_name != ''">s_name=#{s_name},</if>
+            <if test="s_class_no != null and s_class_no != ''">s_class_no=#{s_class_no},</if>
+            <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
+            <if test="s_college != null and s_college != ''">s_college=#{s_college},</if>
+            <if test="company_id != null and company_id != ''">company_id=#{company_id},</if>
+        </trim>
+    </update>
+    <!--删除学生信息-->
+    <delete id="deleteStudent" parameterType="String">
+        delete from student where s_id = #{sid}
+    </delete>
+
+    <!--查询教师信息-->
+    <select id="findAllTeacher" resultMap="AdminMapper">
+        select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone,g.c_name from teacher t
+        left join grade g on t.t_id=g.t_id
+    </select>
+
+    <!--添加教师-->
+    <insert id="addTeacher" parameterType="Teacher">
+        insert into teacher (t_id,t_name,t_rank,t_college,t_phone)
+        values (#{t_id},#{t_name},#{t_rank},#{t_college},#{t_phone})
+    </insert>
+
+    <!--更新教师信息-->
+    <update id="updateTeacher" parameterType="Teacher">
+        update teacher
+        <trim prefix="set" suffix="where t_id=#{t_id}" suffixOverrides=",">
+            <if test="t_name != null and t_name != ''">t_name=#{t_name},</if>
+            <if test="t_rank != null and t_rank != ''">t_rank=#{t_rank},</if>
+            <if test="t_college != null and t_college != ''">t_college=#{t_college},</if>
+            <if test="t_phone != null and t_phone != ''">t_phone=#{t_phone},</if>
+        </trim>
+    </update>
+
+    <!--删除教师-->
+    <delete id="deleteTeacher" parameterType="String">
+        delete from teacher where t_id = #{tid}
+    </delete>
+
+    <!--查询所有公司-->
+    <select id="findAllCompany" resultMap="AdminMapper">
+        select * from company
+    </select>
+    
+    <!--添加公司-->
+    <insert id="addCompany" parameterType="Company">
+        insert into company (company_id,company_name,company_address,company_person_id,company_person,company_phone)
+        values (#{company_id},#{company_name},#{company_address},#{company_person_id},#{company_person},#{company_phone})
+    </insert>
+
+    <!--更新公司信息-->
+    <update id="updateCompany" parameterType="Company">
+        update company
+        <trim prefix="set" suffix="where company_id=#{company_id} and company_person_id=#{company_person_id}" suffixOverrides=",">
+            <if test="company_name != null and company_name != ''">company_name=#{company_name},</if>
+            <if test="company_address != null and company_address != ''">company_address=#{company_address},</if>
+            <if test="company_person != null and company_person != ''">company_person=#{company_person},</if>
+            <if test="company_phone != null and company_phone != ''">company_phone=#{company_phone},</if>
+        </trim>
+    </update>
+
+    <!--删除公司-->
+    <delete id="deleteCompany" parameterType="String">
+        delete from company where company_id=#{company_id}
+    </delete>
+
+    <!--根据名字查询公司信息-->
+    <select id="findCompanyByName" parameterType="String" resultMap="CompanyMapper">
+        select company_id,company_name,company_address,company_person_id,company_person,company_phone from company
+        where company_name = #{company_name}
+    </select>
+
+
+</mapper>

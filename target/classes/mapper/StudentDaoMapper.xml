@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace需要对应dao接口的完全限定名 （包名+类名）-->
+<mapper namespace="com.min.graduation.dao.StudentDao">
+
+    <resultMap id="StudentMapper" type="Student">
+        <id property="s_id" column="s_id"/>
+        <result property="s_name" column="s_name"/>
+        <result property="s_class_no" column="s_class_no"/>
+        <result property="s_phone" column="s_phone"/>
+        <result property="s_college" column="s_college"/>
+        <result property="company_id" column="company_id"/>
+
+        <!--        <association property="grade" resultMap="GradeMapper"/>-->
+        <!--        <association property="company" resultMap="CompanyMapper"/>-->
+    </resultMap>
+
+    <!--班级-->
+    <resultMap id="GradeMapper" type="Grade">
+        <id property="c_id" column="c_id"/>
+        <id property="t_id" column="t_id"/>
+        <result property="c_name" column="c_name"/>
+    </resultMap>
+    <!--公司-->
+    <resultMap id="CompanyMapper" type="Company">
+        <id property="company_id" column="company_id"/>
+        <id property="company_person_id" column="company_person_id"/>
+        <result property="company_name" column="company_name"/>
+        <result property="company_address" column="company_address"/>
+        <result property="company_person" column="company_person"/>
+        <result property="company_phone" column="company_phone"/>
+    </resultMap>
+
+    <!--查询所有-->
+    <select id="findAll" resultType="Student">
+        select s_id,s_name,s_class_no,s_phone,s_college,company_id from student
+    </select>
+
+    <!--根据名字模糊查询-->
+    <select id="findByName" parameterType="String" resultType="Student">
+        select s_id,s_name,s_class_no,s_phone,s_college,company_id from student
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="name != null and name != ''">
+                s_name like concat('%',#{name},'%')
+            </if>
+        </trim>
+    </select>
+
+    <!--查询指定学号查询信息-->
+    <select id="findById" parameterType="String" resultType="Student">
+        select s_id,s_name,s_class_no,s_phone,s_college,company_id from student
+        <trim prefix="where" prefixOverrides="and | or">
+            <if test="sid != null and sid != ''">
+                s_id = #{sid}
+            </if>
+        </trim>
+    </select>
+
+    <!--添加用户-->
+    <insert id="addStudent" parameterType="Student">
+        insert into student (s_id,s_name,s_class_no,s_phone,s_college,company_id)
+        values (#{s_id},#{s_name},#{s_class_no},#{s_phone},#{s_college},#{company_id})
+    </insert>
+
+    <!--更新用户信息-->
+    <update id="updateStudent" parameterType="Student">
+        update student
+        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
+            <if test="s_name != null and s_name != ''">s_name=#{s_name},</if>
+            <if test="s_class_no != null and s_class_no != ''">s_class_no=#{s_class_no},</if>
+            <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
+            <if test="s_college != null and s_college != ''">s_college=#{s_college},</if>
+            <if test="company_id != null and company_id != ''">company_id=#{company_id},</if>
+        </trim>
+    </update>
+
+    <!--根据ID删除用户-->
+    <delete id="deleteStudent" parameterType="String">
+        delete from student where s_id = #{s_id}
+    </delete>
+
+
+
+    <!--查询个人信息-->
+    <select id="personInformation" resultMap="StudentMapper" parameterType="String">
+        select s.s_id,s.s_name,g.c_name,s.s_phone,s.s_college,c.company_name from student s
+                                                left join grade g on s.s_class_no=g.c_id
+												left join company c on s.company_id=c.company_id
+												where s.s_id = '${sid}'
+    </select>
+    <!--查询班级同学信息-->
+    <select id="findGradeStudent" resultMap="StudentMapper" parameterType="String">
+        select s.s_id,s.s_name,g.c_name,s.s_phone,s.s_college,c.company_name from student s
+                                                left join grade g on s.s_class_no=g.c_id
+												left join company c on s.company_id=c.company_id
+												where g.c_name = '${gradeName}'
+    </select>
+    <!--查询实习公司信息-->
+    <select id="findCompany" resultMap="StudentMapper" parameterType="String">
+        select s.s_id,s.s_name,c.company_id,c.company_name,c.company_address,c.company_person_id,c.company_person,c.company_phone from student s
+												left join company c on s.company_id=c.company_id
+												where s.s_name = '${name}'
+    </select>
+    <!--根据班级ID查询班级信息-->
+    <select id="findGradeInfo" parameterType="String" resultMap="GradeMapper">
+        select * from grade where c_name = #{className}
+    </select>
+
+</mapper>

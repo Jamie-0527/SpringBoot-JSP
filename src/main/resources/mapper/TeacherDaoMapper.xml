@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace需要对应dao接口的完全限定名 （包名+类名）-->
+<mapper namespace="com.min.graduation.dao.TeacherDao">
+
+    <resultMap id="TeacherMapper" type="Teacher">
+        <id property="t_id" column="t_id"/>
+        <result property="t_name" column="t_name"/>
+        <result property="t_rank" column="t_rank"/>
+        <result property="t_college" column="t_college"/>
+        <result property="t_phone" column="t_phone"/>
+
+        <collection property="grade" resultMap="GradeMapper"/>
+        <collection property="student" resultMap="StudentMapper"/>
+    </resultMap>
+
+    <!--班级-->
+    <resultMap id="GradeMapper" type="Grade">
+        <id property="c_id" column="c_id"/>
+        <result property="c_name" column="c_name"/>
+        <result property="t_id" column="t_id"/>
+    </resultMap>
+    <!--学生-->
+    <resultMap id="StudentMapper" type="Student">
+        <id property="s_id" column="s_id"/>
+        <result property="s_name" column="s_name"/>
+        <result property="s_class_no" column="s_class_no"/>
+        <result property="s_phone" column="s_phone"/>
+        <result property="s_college" column="s_college"/>
+        <result property="company_id" column="company_id"/>
+    </resultMap>
+
+    <!--查询个人信息-->
+    <select id="personInformation" resultMap="TeacherMapper" parameterType="String">
+        select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone,g.c_name from teacher t left join grade g on t.t_id=g.t_id where t.t_id = '${tid}'
+    </select>
+
+    <!--查询班级学生信息-->
+    <select id="findClassStudent" resultMap="TeacherMapper" parameterType="String">
+        select s.s_id,s.s_name,g.c_name,s.s_phone from teacher t left join grade g on t.t_id=g.t_id
+												left join student s on s.s_class_no=g.c_id
+												where t.t_name = '${name}'
+    </select>
+
+    <!--更新个人信息-->
+    <update id="updateTeacher" parameterType="Teacher">
+        update teacher
+        <trim prefix="set" suffix="where t_id=#{t_id}" suffixOverrides=",">
+            <if test="t_name != null and t_name != ''">t_name=#{t_name},</if>
+            <if test="t_rank != null and t_rank != ''">t_rank=#{t_rank},</if>
+            <if test="t_college != null and t_college != ''">t_college=#{t_college},</if>
+            <if test="t_phone != null and t_phone != ''">t_phone=#{t_phone},</if>
+        </trim>
+    </update>
+    
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace需要对应dao接口的完全限定名 （包名+类名）-->
+<mapper namespace="com.min.graduation.dao.LoginDao">
+    
+    <resultMap id="LoginMapper" type="Login">
+        <id property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="authority" column="authority"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+    </resultMap>
+
+
+    <select id="login" parameterType="String" resultMap="LoginMapper">
+        select user_name,password,authority from login where user_name=#{uname}
+    </select>
+
+    <insert id="register" parameterType="Login">
+        insert into login (user_name,password,authority,create_time,modify_time)
+        values (#{userName},#{password},#{authority},#{createTime},#{modifyTime})
+    </insert>
+
+    <update id="update" parameterType="String">
+        update login set password = #{password},modify_time = now() where user_name = #{uname}
+    </update>
+    
+</mapper>
