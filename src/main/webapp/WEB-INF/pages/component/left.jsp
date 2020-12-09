@@ -45,7 +45,7 @@
     </div>
     <div style="background-color: rgb(22,24,29); ">
         <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b1">学生账户</div></a>
-        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">学校账户</div></a>
+        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">教师账户</div></a>
         <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
     </div>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="infoManagement">
@@ -53,8 +53,8 @@
     </div>
     <div style="background-color: rgb(22,24,29); ">
         <a href="studentManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a1">学生管理</div></a>
-        <a href="teacherManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a2">学校管理</div></a>
-        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a3">企业管理</div></a>
+        <a href="teacherManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a2">教师管理</div></a>
+        <a href="companyManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a3">企业管理</div></a>
     </div>
     <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">论文管理</a>
     <a id="personalCenter" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">

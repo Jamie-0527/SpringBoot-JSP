@@ -17,7 +17,9 @@
         <result property="s_class_no" column="s_class_no"/>
         <result property="s_phone" column="s_phone"/>
         <result property="s_college" column="s_college"/>
-        <result property="company_id" column="company_id"/>
+        <result property="company_name" column="company_name"/>
+
+        <association property="grade" resultMap="GradeMapper"/>
     </resultMap>
     <!--教师-->
     <resultMap id="TeacherMapper" type="Teacher">
@@ -45,15 +47,14 @@
 
 
     <!--查询所有学生信息-->
-    <select id="findAllStudent" resultMap="AdminMapper">
-        select s.s_id,s.s_name,g.c_name,s.s_phone,s.s_college,c.company_name  from student s
-                                                left join grade g on s.s_class_no=g.c_id
-												left join company c on s.company_id=c.company_id
+    <select id="findAllStudent" resultMap="StudentMapper">
+            select s.s_id,s.s_name,g.c_name,s.s_phone,s.s_college,s.company_name  from student s
+            left join grade g on s.s_class_no = g.c_id
     </select>
     <!--添加学生信息-->
     <insert id="addStudent" parameterType="Student">
-        insert into student (s_id,s_name,s_class_no,s_phone,s_college,company_id)
-        values (#{s_id},#{s_name},#{s_class_no},#{s_phone},#{s_college},#{company_id})
+        insert into student (s_id,s_name,s_class_no,s_phone,s_college,company_name)
+        values (#{s_id},#{s_name},#{s_class_no},#{s_phone},#{s_college},#{company_name})
     </insert>
     <!--添加学生登录信息-->
     <insert id="addLogin" parameterType="Map">
@@ -68,7 +69,7 @@
             <if test="s_class_no != null and s_class_no != ''">s_class_no=#{s_class_no},</if>
             <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
             <if test="s_college != null and s_college != ''">s_college=#{s_college},</if>
-            <if test="company_id != null and company_id != ''">company_id=#{company_id},</if>
+            <if test="company_name != null and company_name != ''">company_name=#{company_name},</if>
         </trim>
     </update>
     <!--删除学生信息-->
@@ -77,9 +78,8 @@
     </delete>
 
     <!--查询教师信息-->
-    <select id="findAllTeacher" resultMap="AdminMapper">
-        select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone,g.c_name from teacher t
-        left join grade g on t.t_id=g.t_id
+    <select id="findAllTeacher" resultMap="TeacherMapper">
+        select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone from teacher t
     </select>
 
     <!--添加教师-->
@@ -105,7 +105,7 @@
     </delete>
 
     <!--查询所有公司-->
-    <select id="findAllCompany" resultMap="AdminMapper">
+    <select id="findAllCompany" resultMap="CompanyMapper">
         select * from company
     </select>
     
@@ -118,7 +118,7 @@
     <!--更新公司信息-->
     <update id="updateCompany" parameterType="Company">
         update company
-        <trim prefix="set" suffix="where company_id=#{company_id} and company_person_id=#{company_person_id}" suffixOverrides=",">
+        <trim prefix="set" suffix="where company_id=#{company_id} or company_person_id=#{company_person_id}" suffixOverrides=",">
             <if test="company_name != null and company_name != ''">company_name=#{company_name},</if>
             <if test="company_address != null and company_address != ''">company_address=#{company_address},</if>
             <if test="company_person != null and company_person != ''">company_person=#{company_person},</if>

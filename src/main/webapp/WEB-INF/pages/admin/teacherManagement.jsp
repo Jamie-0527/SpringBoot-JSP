@@ -37,6 +37,10 @@
     }
 </script>
 
+<style>
+    #lastLine:last-child td,#lastLine:last-child th{border-bottom: 1px solid rgb(222,226,230);}
+</style>
+
 <body>
 
 <%--导航条--%>
@@ -53,12 +57,12 @@
     <table class="table table-striped">
         <thead>
         <tr align="center">
-            <th scope="col">编号</th>
-            <th scope="col">工号</th>
-            <th scope="col">姓名</th>
-            <th scope="col">职称</th>
-            <th scope="col">学院</th>
-            <th scope="col">联系电话</th>
+            <th class="border-right" scope="col">编号</th>
+            <th class="border-right" scope="col">工号</th>
+            <th class="border-right" scope="col">姓名</th>
+            <th class="border-right" scope="col">职称</th>
+            <th class="border-right" scope="col">学院</th>
+            <th class="border-right" scope="col">联系电话</th>
             <th scope="col">操作</th>
         </tr>
         </thead>
@@ -66,13 +70,13 @@
         <tbody>
         <c:forEach items="${allTeacher}" var="t" varStatus="status">
             <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
-            <tr align="center">
-                <th scope="row">${status.index+1}</th>
-                <td>${t.teacher.t_id}</td>
-                <td>${t.teacher.t_name}</td>
-                <td>${t.teacher.t_rank}</td>
-                <td>${t.student.s_phone}</td>
-                <td>${t.student.s_college}</td>
+            <tr align="center" id="lastLine">
+                <th class="border-right" scope="row">${status.index+1}</th>
+                <td class="border-right">${t.t_id}</td>
+                <td class="border-right">${t.t_name}</td>
+                <td class="border-right">${t.t_rank}</td>
+                <td class="border-right">${t.t_phone}</td>
+                <td class="border-right">${t.t_college}</td>
                 <td>
                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">删除</button>
@@ -93,33 +97,38 @@
                                     <div class="input-group-prepend">
                                         <label for="teacherId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
                                     </div>
-                                    <input type="text" class="form-control" name="t_id" id="teacherId" value="${t.teacher.t_id}">
+                                    <input type="text" class="form-control" name="t_id" id="teacherId" value="${t.t_id}">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label for="teacherName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
                                     </div>
-                                    <input type="text" class="form-control" name="t_name" id="teacherName" value="${t.teacher.t_name}">
+                                    <input type="text" class="form-control" name="t_name" id="teacherName" value="${t.t_name}">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label for="teacherRank" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
                                     </div>
-                                    <input type="text" class="form-control" name="t_rank" id="teacherRank" value="${t.teacher.t_rank}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherPhone" class="input-group-text">联系方式</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="t_phone" id="teacherPhone" value="${t.teacher.t_phone}">
+                                    <input type="text" class="form-control" name="t_rank" id="teacherRank" value="${t.t_rank}">
                                 </div>
                                 <div class="input-group mb-3">
                                     <div class="input-group-prepend">
                                         <label for="teacherCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
                                     </div>
-                                    <input type="text" class="form-control" name="t_college" id="teacherCollege" value="${t.teacher.t_college}">
+                                    <select class="form-control" id="teacherCollege" name="t_college">
+                                        <option style="display: none;"></option>
+                                        <option>计算机学院</option>
+                                        <option>电机学院</option>
+                                        <option>传媒艺术学院</option>
+                                        <option>外语学院</option>
+                                    </select>
                                 </div>
-
+                                <div class="input-group mb-3">
+                                    <div class="input-group-prepend">
+                                        <label for="teacherPhone" class="input-group-text">联系方式</label>
+                                    </div>
+                                    <input type="text" class="form-control" name="t_phone" id="teacherPhone" value="${t.t_phone}">
+                                </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                     <button type="submit" class="btn btn-primary">提交</button>
@@ -140,7 +149,7 @@
                         <div class="modal-body">
                             <p>数据不可恢复，你确定要删除此条记录吗？</p>
                             <form action="deleteTeacherInformation" method="post" >
-                                <input style="display: none" type="text" class="form-control" name="t_id" value="${t.teacher.t_id}">
+                                <input style="display: none" type="text" class="form-control" name="t_id" value="${t.t_id}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                     <button type="submit" class="btn btn-danger">删除</button>
@@ -156,7 +165,7 @@
         </tbody>
     </table>
 </div>
-<%--添加学生的模态框--%>
+<%--添加教师的模态框--%>
 <div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">

@@ -14,33 +14,33 @@ import java.util.List;
 public interface AdminService {
 
     //查询所有学生信息
-    public List<Student> findAllStudent();
+    List<Student> findAllStudent();
 
     //添加学生信息
-    public int addStudent(Student student);
+    int addStudent(Student student);
 
     //添加学生登录信息
-    public int addLogin(String userName, Integer authority);
+    int addLogin(String userName, Integer authority);
 
     //更新学生信息
-    public int updateStudent(Student student);
+    int updateStudent(Student student);
 
     //删除学生信息
-    public int deleteStudent(String sid);
+    int deleteStudent(String sid);
 
 
 
     //查询所有教师信息
-    public List<Teacher> findAllTeacher();
+    List<Teacher> findAllTeacher();
 
     //添加教师信息
-    public int addTeacher(Teacher teacher);
+    int addTeacher(Teacher teacher);
 
     //更新教师信息
-    public int updateTeacher(Teacher teacher);
+    int updateTeacher(Teacher teacher);
 
     //删除教师信息
-    public int deleteTeacher(String tid);
+    int deleteTeacher(String tid);
 
 
 

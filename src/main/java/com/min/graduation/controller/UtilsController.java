@@ -48,13 +48,15 @@ public class UtilsController {
 
         /*匹配班级ID*/
         Grade gradeInfo = studentService.findGradeInfo(c_name);
-
-        /*匹配公司ID*/
-        Company company = adminService.findCompanyByName(company_name);
-
         loginService.update(s_id,pwd);
-        Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college,company.getCompany_id());
-        adminService.addStudent(student);
+        if (company_name.length()==0){
+            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college);
+            adminService.addStudent(student);
+
+        }else {
+            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college,company_name);
+            adminService.addStudent(student);
+        }
 
         return "student/home";
     }
@@ -72,7 +74,7 @@ public class UtilsController {
 
 
         loginService.update(t_id,t_pwd);
-        Teacher teacher = new Teacher(t_id,t_name,t_rank,t_phone,t_college);
+        Teacher teacher = new Teacher(t_id,t_name,t_rank,t_college,t_phone);
         adminService.addTeacher(teacher);
 
         return "teacher/home";

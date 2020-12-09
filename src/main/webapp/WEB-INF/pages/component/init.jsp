@@ -95,6 +95,7 @@
                             <label for="addStudentCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
                         </div>
                         <select class="form-control" id="addStudentCollege" name="s_college">
+                            <option style="display: none;"></option>
                             <option>计算机学院</option>
                             <option>电机学院</option>
                             <option>传媒艺术学院</option>
@@ -150,6 +151,7 @@
                                 <label for="addTeacherRank" class="input-group-text">&nbsp;&nbsp;&nbsp;职&nbsp;称&nbsp;&nbsp;&nbsp;</label>
                             </div>
                             <select class="form-control" id="addTeacherRank" name="t_rank">
+                                <option style="display: none;"></option>
                                 <option>教授</option>
                                 <option>副教授</option>
                                 <option>讲师</option>
@@ -159,21 +161,22 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherPhone" class="input-group-text">联系方式</label>
-                            </div>
-                            <input type="text" class="form-control" name="t_phone" id="addTeacherPhone">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
                                 <label for="addTeacherCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
                             </div>
                             <select class="form-control" id="addTeacherCollege" name="t_college">
+                                <option style="display: none;"></option>
                                 <option>计算机学院</option>
                                 <option>电机学院</option>
                                 <option>传媒艺术学院</option>
                                 <option>外语学院</option>
                             </select>
+                        </div>
+                        <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
+                                <label for="addTeacherPhone" class="input-group-text">联系方式</label>
+                            </div>
+                            <input type="text" class="form-control" name="t_phone" id="addTeacherPhone">
                         </div>
                         <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>
                         <div class="modal-footer">

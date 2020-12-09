@@ -1,12 +1,12 @@
 package com.min.graduation.controller;
 
 
+import com.min.graduation.entity.Admin;
 import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
-import com.min.graduation.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -37,12 +37,8 @@ public class AdminColntroller {
 
     //更新学生信息
     @RequestMapping("updateStudentsInformation")
-    public String updateStudentsInformation(Model model, Student student, HttpServletRequest request) {
-        //通过查询名字得到公司信息，配合修改学生的信息
-        String company_name = request.getParameter("company_name");
-        Company company = adminService.findCompanyByName(company_name);
+    public String updateStudentsInformation(Model model, Student student) {
 
-        student.setCompany_id(company.getCompany_id());
         adminService.updateStudent(student);
         List<Student> allStudent = adminService.findAllStudent();
         model.addAttribute("allStudent",allStudent);
@@ -129,12 +125,52 @@ public class AdminColntroller {
     }
 
     //查询公司信息
-    @RequestMapping("companysInformation")
-    public String companysInformation(Model model) {
+    @RequestMapping("companyManagement")
+    public String companyManagement(Model model) {
 
         List<Company> allCompany = adminService.findAllCompany();
         model.addAttribute("allCompany",allCompany);
 
-        return "admin/companyInformation";
+        return "admin/empManagement";
     }
+
+    //更新公司信息
+    @RequestMapping("updateCompanyInformation")
+    public String updateCompanyInformation(Model model, Company company) {
+
+        adminService.updateCompany(company);
+        List<Company> allCompany = adminService.findAllCompany();
+        model.addAttribute("allCompany",allCompany);
+
+        return "admin/empManagement";
+    }
+
+    //添加公司信息
+    @RequestMapping("addCompanyInformation")
+    public String addCompanyInformation(Model model,Company company) {
+        try{
+            adminService.addLogin(company.getCompany_person_id(), 3);
+            model.addAttribute("ok_addC","添加成功！");
+        }catch (Exception exception){
+            model.addAttribute("addCompanyError","该用户已存在！");
+        }finally {
+            List<Company> allCompany = adminService.findAllCompany();
+            model.addAttribute("allCompany",allCompany);
+            return "admin/empManagement";
+        }
+    }
+
+    //删除公司信息
+    @RequestMapping("deleteCompanyInformation")
+    public String deleteCompanyInformation(Model model, HttpServletRequest request) {
+
+        String company_person_id = request.getParameter("company_person_id");
+        adminService.deleteCompany(company_person_id);
+        loginService.reset(company_person_id);
+        List<Company> allCompany = adminService.findAllCompany();
+        model.addAttribute("allCompany",allCompany);
+
+        return "admin/empManagement";
+    }
+
 }

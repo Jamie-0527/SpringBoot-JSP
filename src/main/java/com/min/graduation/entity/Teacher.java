@@ -16,8 +16,11 @@ public class Teacher implements Serializable {
     private String t_college;    //所属学院
     private String t_phone;      //联系方式
 
-    private Grade grade;
-    private Student student;
+//    private Grade grade;
+//    private Student student;
+
+
+    public Teacher() {}
 
     public Teacher(String t_id, String t_name, String t_rank, String t_college, String t_phone) {
         this.t_id = t_id;
