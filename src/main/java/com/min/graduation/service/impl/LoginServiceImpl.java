@@ -5,7 +5,6 @@ import com.min.graduation.entity.Login;
 import com.min.graduation.service.LoginService;
 
 import com.min.graduation.utils.Md5Encryption;
-import org.apache.tomcat.jni.Mmap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,12 +20,6 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public Login login(String username) {
         return loginDao.login(username);
-    }
-
-    @Override
-    public int register(Login login) {
-        System.out.println("Service运行了");
-        return loginDao.register(login);
     }
 
     @Override

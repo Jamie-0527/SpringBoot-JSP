@@ -9,17 +9,13 @@
         <result property="authority" column="authority"/>
         <result property="createTime" column="create_time"/>
         <result property="modifyTime" column="modify_time"/>
+        <result property="status" column="status"/>
     </resultMap>
 
 
     <select id="login" parameterType="String" resultMap="LoginMapper">
-        select user_name,password,authority from login where user_name=#{uname}
+        select user_name,password,authority,status from login where user_name=#{uname}
     </select>
-
-    <insert id="register" parameterType="Login">
-        insert into login (user_name,password,authority,create_time,modify_time)
-        values (#{userName},#{password},#{authority},#{createTime},#{modifyTime})
-    </insert>
 
     <update id="update" parameterType="String">
         update login set password = #{password},modify_time = now() where user_name = #{uname}

@@ -16,6 +16,7 @@ public class Login implements Serializable {
     private Integer authority;      //权限
     private Date createTime;        //用户创建时间
     private Date modifyTime;        //修改时间
+    private Integer status;         //账号状态
 
 //    /*注入学生对象*/
 //    private Student student;

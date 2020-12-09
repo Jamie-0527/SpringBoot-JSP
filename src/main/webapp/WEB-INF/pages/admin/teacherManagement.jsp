@@ -53,7 +53,7 @@
         <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">用户管理</span>
         <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加教师</button>
     </div>
-    <!--打印学生信息-->
+    <%--打印教师信息--%>
     <table class="table table-striped">
         <thead>
         <tr align="center">

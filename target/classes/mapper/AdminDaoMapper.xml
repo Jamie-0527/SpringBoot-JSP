@@ -9,6 +9,7 @@
         <collection property="teacher" resultMap="TeacherMapper"/>
         <collection property="grade" resultMap="GradeMapper"/>
         <collection property="company" resultMap="CompanyMapper"/>
+        <collection property="login" resultMap="LoginMapper"/>
     </resultMap>
     <!--学生-->
     <resultMap id="StudentMapper" type="Student">
@@ -44,7 +45,15 @@
         <result property="company_person" column="company_person"/>
         <result property="company_phone" column="company_phone"/>
     </resultMap>
-
+    <!--登录类-->
+    <resultMap id="LoginMapper" type="Login">
+        <id property="userName" column="user_name"/>
+        <result property="password" column="password"/>
+        <result property="authority" column="authority"/>
+        <result property="createTime" column="create_time"/>
+        <result property="modifyTime" column="modify_time"/>
+        <result property="status" column="status"/>
+    </resultMap>
 
     <!--查询所有学生信息-->
     <select id="findAllStudent" resultMap="StudentMapper">
@@ -81,13 +90,11 @@
     <select id="findAllTeacher" resultMap="TeacherMapper">
         select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone from teacher t
     </select>
-
     <!--添加教师-->
     <insert id="addTeacher" parameterType="Teacher">
         insert into teacher (t_id,t_name,t_rank,t_college,t_phone)
         values (#{t_id},#{t_name},#{t_rank},#{t_college},#{t_phone})
     </insert>
-
     <!--更新教师信息-->
     <update id="updateTeacher" parameterType="Teacher">
         update teacher
@@ -98,7 +105,6 @@
             <if test="t_phone != null and t_phone != ''">t_phone=#{t_phone},</if>
         </trim>
     </update>
-
     <!--删除教师-->
     <delete id="deleteTeacher" parameterType="String">
         delete from teacher where t_id = #{tid}
@@ -108,13 +114,11 @@
     <select id="findAllCompany" resultMap="CompanyMapper">
         select * from company
     </select>
-    
     <!--添加公司-->
     <insert id="addCompany" parameterType="Company">
         insert into company (company_id,company_name,company_address,company_person_id,company_person,company_phone)
         values (#{company_id},#{company_name},#{company_address},#{company_person_id},#{company_person},#{company_phone})
     </insert>
-
     <!--更新公司信息-->
     <update id="updateCompany" parameterType="Company">
         update company
@@ -125,16 +129,39 @@
             <if test="company_phone != null and company_phone != ''">company_phone=#{company_phone},</if>
         </trim>
     </update>
-
     <!--删除公司-->
     <delete id="deleteCompany" parameterType="String">
         delete from company where company_id=#{company_id}
     </delete>
-
     <!--根据名字查询公司信息-->
     <select id="findCompanyByName" parameterType="String" resultMap="CompanyMapper">
         select company_id,company_name,company_address,company_person_id,company_person,company_phone from company
         where company_name = #{company_name}
+    </select>
+
+    <!--查询学生账户信息-->
+    <select id="findStudentAccount" resultMap="AdminMapper">
+        select
+            l.user_name,l.authority,l.create_time,l.modify_time,l.status,s.s_name
+        from login l
+        left join student s on s.s_id = l.user_name
+        where l.authority = 1
+    </select>
+    <!--查询教师账户信息-->
+    <select id="findTeacherAccount" resultMap="AdminMapper">
+        select
+            l.user_name,l.authority,l.create_time,l.modify_time,l.status,t.t_name
+        from login l
+        left join teacher t on t.t_id = l.user_name
+        where l.authority = 2
+    </select>
+    <!--查询企业员工账户信息-->
+    <select id="findCompanyAccount" resultMap="AdminMapper">
+        select
+            l.user_name,l.authority,l.create_time,l.modify_time,l.status,c.company_person
+        from login l
+        left join company c on c.company_person_id = l.user_name
+        where l.authority = 3
     </select>
 
 

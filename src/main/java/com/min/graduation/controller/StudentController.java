@@ -1,6 +1,5 @@
 package com.min.graduation.controller;
 
-import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Student;
 import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
@@ -9,10 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
 import java.util.List;
 
 /**

@@ -97,5 +97,18 @@ $(document).ready(function(){
             return true;
         }
     });
+
+    /*添加企业人员*/
+    $("#addPerson").click(function(){
+        var addComPersonId= $("#addComPersonId").val()
+        var addComPerson = $("#addComPerson").val()
+
+        if(addComPersonId.length==0 || addComPerson.length==0){
+            alert("输入信息不能为空！");
+            return false;
+        }else {
+            return true;
+        }
+    });
 });
 

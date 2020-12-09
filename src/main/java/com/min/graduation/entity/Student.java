@@ -6,6 +6,7 @@ import java.io.Serializable;
 
 /**
  * 该类为学生实体类
+ * https://wenku.baidu.com/view/15b3495f14fc700abb68a98271fe910ef12daeb6.html
  */
 @Data
 public class Student implements Serializable {

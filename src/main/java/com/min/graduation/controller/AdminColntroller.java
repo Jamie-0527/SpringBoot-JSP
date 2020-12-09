@@ -131,7 +131,7 @@ public class AdminColntroller {
         List<Company> allCompany = adminService.findAllCompany();
         model.addAttribute("allCompany",allCompany);
 
-        return "admin/empManagement";
+        return "admin/CompanyManagement";
     }
 
     //更新公司信息
@@ -142,7 +142,7 @@ public class AdminColntroller {
         List<Company> allCompany = adminService.findAllCompany();
         model.addAttribute("allCompany",allCompany);
 
-        return "admin/empManagement";
+        return "admin/CompanyManagement";
     }
 
     //添加公司信息
@@ -156,7 +156,7 @@ public class AdminColntroller {
         }finally {
             List<Company> allCompany = adminService.findAllCompany();
             model.addAttribute("allCompany",allCompany);
-            return "admin/empManagement";
+            return "admin/CompanyManagement";
         }
     }
 
@@ -170,7 +170,21 @@ public class AdminColntroller {
         List<Company> allCompany = adminService.findAllCompany();
         model.addAttribute("allCompany",allCompany);
 
-        return "admin/empManagement";
+        return "admin/CompanyManagement";
+    }
+
+    //查询学生账户信息
+    @RequestMapping("studentAccountManagement")
+    public String studentAccountManagement(Model model) {
+
+        List<Admin> studentAccount = adminService.findStudentAccount();
+        model.addAttribute("studentAccount",studentAccount);
+
+        for (Admin a : studentAccount){
+            System.out.println(a);
+        }
+
+        return "admin/studentAccountManagement";
     }
 
 }

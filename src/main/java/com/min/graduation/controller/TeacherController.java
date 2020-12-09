@@ -1,6 +1,5 @@
 package com.min.graduation.controller;
 
-import com.min.graduation.dao.TeacherDao;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.TeacherService;

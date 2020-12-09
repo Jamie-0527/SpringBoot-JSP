@@ -14,9 +14,6 @@ public interface LoginDao {
     //用户登录
     Login login(@Param("uname") String username);
 
-    //用户注册
-    int register(Login login);
-
     //初始化密码
     int update(@Param("uname") String username, @Param("password") String password);
 

@@ -1,6 +1,7 @@
 package com.min.graduation.service.impl;
 
 import com.min.graduation.dao.AdminDao;
+import com.min.graduation.entity.Admin;
 import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
@@ -92,4 +93,21 @@ public class AdminServiceImpl implements AdminService {
     public Company findCompanyByName(String company_name) {
         return adminDao.findCompanyByName(company_name);
     }
+
+    @Override
+    public List<Admin> findStudentAccount() {
+        return adminDao.findStudentAccount();
+    }
+
+    @Override
+    public List<Admin> findTeacherAccount() {
+        return adminDao.findTeacherAccount();
+    }
+
+    @Override
+    public List<Admin> findCompanyAccount() {
+        return adminDao.findCompanyAccount();
+    }
+
+
 }

@@ -1,6 +1,7 @@
 package com.min.graduation.service;
 
 
+import com.min.graduation.entity.Admin;
 import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
@@ -58,5 +59,16 @@ public interface AdminService {
 
     //根据名字查询公司信息
     Company findCompanyByName(String company_name);
+
+
+
+    //查询学生账户信息
+    List<Admin> findStudentAccount();
+
+    //查询教师账户信息
+    List<Admin> findTeacherAccount();
+
+    //查询企业员工账户信息
+    List<Admin> findCompanyAccount();
 
 }

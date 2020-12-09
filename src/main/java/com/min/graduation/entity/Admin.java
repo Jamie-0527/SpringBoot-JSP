@@ -14,4 +14,5 @@ public class Admin implements Serializable {
     private Teacher teacher;
     private Company company;
     private Grade grade;
+    private Login login;
 }
