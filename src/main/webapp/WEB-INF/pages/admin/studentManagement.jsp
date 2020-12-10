@@ -46,7 +46,7 @@
 <%--导航条--%>
 <%--<%@include file="../component/top.jsp"%>--%>
 <%--侧边栏--%>
-<%@include file="../component/left.jsp"%>
+<%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">

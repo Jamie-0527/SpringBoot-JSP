@@ -54,6 +54,7 @@ public class LoginController {
                             if (l.getAuthority() == 0){
                                 String userName = l.getUserName();
                                 model.addAttribute("userName",userName);
+
                                 return "admin/home";
 
                             }else if (l.getAuthority() == 1){
@@ -62,6 +63,7 @@ public class LoginController {
                                 //获取学生对象的信息，便于前端设值session
                                 Student student = studentService.personInformation(userName);
                                 model.addAttribute("student",student);
+
                                 return "student/home";
 
                             }else if (l.getAuthority() == 2) {
@@ -71,6 +73,7 @@ public class LoginController {
                                 //获取学生对象的信息，便于前端设值session
                                 Teacher teacher = teacherService.personInformation(userName);
                                 model.addAttribute("teacher",teacher);
+
                                 return "teacher/home";
 
                             }else if (l.getAuthority() == 3) {
@@ -80,7 +83,8 @@ public class LoginController {
                                 //获取学生对象的信息，便于前端设值session
                                 Teacher teacher = teacherService.personInformation(userName);
                                 model.addAttribute("teacher",teacher);
-                                return "teacher/home";
+
+                                return "company/home";
 
                             }
                         }

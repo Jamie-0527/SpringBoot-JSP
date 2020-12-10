@@ -22,7 +22,7 @@
 <%--导航条--%>
 <%@include file="../component/top.jsp"%>
 <%--侧边栏,此数报红也能正常访问--%>
-<%@include file="../component/left.jsp"%>
+<%@include file="../component/studentLeft.jsp"%>
 
 </body>
 </html>
