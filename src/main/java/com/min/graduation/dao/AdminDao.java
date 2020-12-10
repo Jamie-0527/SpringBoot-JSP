@@ -74,4 +74,10 @@ public interface AdminDao {
     //查询企业员工账户信息
     List<Admin> findCompanyAccount();
 
+    //禁用账户
+    int disableAccount(String user_name);
+
+    //启用账户
+    int enableAccount(String user_name);
+
 }

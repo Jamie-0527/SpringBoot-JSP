@@ -89,7 +89,7 @@ public class LoginController {
                             return "login";
                         }
                     }else {
-                        model.addAttribute("error", "账号被禁用，请联系管理员解决");
+                        model.addAttribute("error", "此账号被禁用，请联系管理员解决");
                         return "login";
                     }
                 }

@@ -53,8 +53,8 @@
     </div>
     <div style="background-color: rgb(22,24,29); ">
         <a href="studentAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b1">学生账户</div></a>
-        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">教师账户</div></a>
-        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
+        <a href="teacherAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">教师账户</div></a>
+        <a href="companyAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
     </div>
     <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">论文管理</a>
     <a id="personalCenter" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">

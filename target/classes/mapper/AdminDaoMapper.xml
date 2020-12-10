@@ -141,28 +141,30 @@
 
     <!--查询学生账户信息-->
     <select id="findStudentAccount" resultMap="AdminMapper">
-        select
-            l.user_name,l.authority,l.create_time,l.modify_time,l.status,s.s_name
-        from login l
+        select * from login l
         left join student s on s.s_id = l.user_name
         where l.authority = 1
     </select>
     <!--查询教师账户信息-->
     <select id="findTeacherAccount" resultMap="AdminMapper">
-        select
-            l.user_name,l.authority,l.create_time,l.modify_time,l.status,t.t_name
-        from login l
+        select * from login l
         left join teacher t on t.t_id = l.user_name
         where l.authority = 2
     </select>
     <!--查询企业员工账户信息-->
     <select id="findCompanyAccount" resultMap="AdminMapper">
-        select
-            l.user_name,l.authority,l.create_time,l.modify_time,l.status,c.company_person
-        from login l
+        select * from login l
         left join company c on c.company_person_id = l.user_name
         where l.authority = 3
     </select>
+    <!--禁用账户-->
+    <update id="disableAccount" parameterType="String">
+        update login set `status` = 1 where user_name = #{user_name}
+    </update>
+    <!--启用账户-->
+    <update id="enableAccount" parameterType="String">
+        update login set `status` = 0 where user_name = #{user_name}
+    </update>
 
 
 </mapper>

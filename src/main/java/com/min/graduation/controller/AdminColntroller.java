@@ -13,7 +13,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class AdminColntroller {
@@ -180,11 +182,73 @@ public class AdminColntroller {
         List<Admin> studentAccount = adminService.findStudentAccount();
         model.addAttribute("studentAccount",studentAccount);
 
-        for (Admin a : studentAccount){
-            System.out.println(a);
-        }
-
         return "admin/studentAccountManagement";
+    }
+
+    //查询学生账户信息
+    @RequestMapping("teacherAccountManagement")
+    public String teacherAccountManagement(Model model) {
+
+        List<Admin> teacherAccount = adminService.findTeacherAccount();
+        model.addAttribute("teacherAccount",teacherAccount);
+
+        return "admin/teacherAccountManagement";
+    }
+
+    //查询学生账户信息
+    @RequestMapping("companyAccountManagement")
+    public String companyAccountManagement(Model model) {
+
+        List<Admin> companyAccount = adminService.findCompanyAccount();
+        model.addAttribute("companyAccount",companyAccount);
+
+        return "admin/companyAccountManagement";
+    }
+
+    //禁用账户信息
+    @RequestMapping("disableAccount")
+    public String disableAccount(Model model, String user_name, int authority) {
+
+        adminService.disableAccount(user_name);
+        if (authority==1){
+            List<Admin> studentAccount = adminService.findStudentAccount();
+            model.addAttribute("studentAccount",studentAccount);
+
+            return "admin/studentAccountManagement";
+        }else if (authority==2){
+            List<Admin> teacherAccount = adminService.findTeacherAccount();
+            model.addAttribute("teacherAccount",teacherAccount);
+
+            return "admin/teacherAccountManagement";
+        }else {
+            List<Admin> companyAccount = adminService.findCompanyAccount();
+            model.addAttribute("companyAccount",companyAccount);
+
+            return "admin/companyAccountManagement";
+        }
+    }
+
+    //禁用账户信息
+    @RequestMapping("enableAccount")
+    public String enableAccount(Model model, String user_name, int authority) {
+
+        adminService.enableAccount(user_name);
+        if (authority==1){
+            List<Admin> studentAccount = adminService.findStudentAccount();
+            model.addAttribute("studentAccount",studentAccount);
+
+            return "admin/studentAccountManagement";
+        }else if (authority==2){
+            List<Admin> teacherAccount = adminService.findTeacherAccount();
+            model.addAttribute("teacherAccount",teacherAccount);
+
+            return "admin/teacherAccountManagement";
+        }else {
+            List<Admin> companyAccount = adminService.findCompanyAccount();
+            model.addAttribute("companyAccount",companyAccount);
+
+            return "admin/companyAccountManagement";
+        }
     }
 
 }

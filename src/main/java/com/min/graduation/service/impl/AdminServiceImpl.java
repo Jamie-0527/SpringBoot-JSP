@@ -10,6 +10,8 @@ import com.min.graduation.service.AdminService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,7 +98,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Admin> findStudentAccount() {
-        return adminDao.findStudentAccount();
+        List<Admin> studentAccount = adminDao.findStudentAccount();
+        for (Admin admin : studentAccount){
+
+        }
+        return studentAccount;
     }
 
     @Override
@@ -107,6 +113,16 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Admin> findCompanyAccount() {
         return adminDao.findCompanyAccount();
+    }
+
+    @Override
+    public int disableAccount(String user_name) {
+        return adminDao.disableAccount(user_name);
+    }
+
+    @Override
+    public int enableAccount(String user_name) {
+        return adminDao.enableAccount(user_name);
     }
 
 

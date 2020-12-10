@@ -67,12 +67,12 @@
         </thead>
 
         <tbody>
-        <c:forEach items="${studentAccount}" var="s" varStatus="status">
+        <c:forEach items="${companyAccount}" var="s" varStatus="status">
             <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
             <tr align="center" id="lastLine">
                 <th class="border-right" scope="row">${status.index+1}</th>
                 <td class="border-right">${s.login.userName}</td>
-                <td class="border-right">${s.student.s_name}</td>
+                <td class="border-right">${s.company.company_name}</td>
                 <td class="border-right">${s.login.createTime}</td>
                 <td class="border-right">${s.login.modifyTime}</td>
                 <c:set var="nowStatus" value="${s.login.status}" scope="page"></c:set>
