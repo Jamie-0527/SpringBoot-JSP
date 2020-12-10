@@ -9,7 +9,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <html>
 <head>
-    <title>用户管理</title>
+    <title>账户管理</title>
 </head>
 <%
     //初始化一个int i，用于回去列表每行ID
@@ -50,8 +50,7 @@
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">用户管理</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加学生</button>
+        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">账户管理</span>
     </div>
     <%--打印账户信息--%>
     <table class="table table-striped">
@@ -60,153 +59,97 @@
             <th class="border-right" scope="col">编号</th>
             <th class="border-right" scope="col">用户名</th>
             <th class="border-right" scope="col">姓名</th>
-            <th class="border-right" scope="col">班级</th>
-            <th class="border-right" scope="col">联系电话</th>
-            <th class="border-right" scope="col">学院</th>
-            <th class="border-right" scope="col">实习公司</th>
+            <th class="border-right" scope="col">账号创建时间</th>
+            <th class="border-right" scope="col">密码修改时间</th>
+            <th class="border-right" scope="col">状态</th>
             <th scope="col">操作</th>
         </tr>
         </thead>
 
         <tbody>
-        <c:forEach items="${allStudent}" var="s" varStatus="status">
+        <c:forEach items="${teacherAccount}" var="s" varStatus="status">
             <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
             <tr align="center" id="lastLine">
                 <th class="border-right" scope="row">${status.index+1}</th>
-                <td class="border-right">${s.s_id}</td>
-                <td class="border-right">${s.s_name}</td>
-                <td class="border-right">${s.grade.c_name}</td>
-                <td class="border-right">${s.s_phone}</td>
-                <td class="border-right">${s.s_college}</td>
-                <td class="border-right">${s.company_name}</td>
+                <td class="border-right">${s.login.userName}</td>
+                <td class="border-right">${s.teacher.t_name}</td>
+                <td class="border-right">${s.login.createTime}</td>
+                <td class="border-right">${s.login.modifyTime}</td>
+                <c:set var="nowStatus" value="${s.login.status}" scope="page"></c:set>
+                <%
+                    int checkStatus = (int)pageContext.getAttribute("nowStatus");
+                    if (checkStatus==0){
+                %>
+                <td class="border-right">
+                    <span class="badge badge-success">有效</span>
+                </td>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">删除</button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">禁用</button>
                 </td>
             </tr>
-            <%--修改信息模态框--%>
-            <div class="modal fade" id="myModify<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                        </div>
-                        <div class="modal-body">
-                            <!--此处是修改表单-->
-                            <form action="updateStudentsInformation" method="post">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="s_id" id="studentId" value="${s.s_id}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="s_name" id="studentName" value="${s.s_name}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentGrade" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="c_name" id="studentGrade" value="${s.grade.c_name}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentPhone" class="input-group-text">联系方式</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="s_phone" id="studentPhone" value="${s.s_phone}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <select class="form-control" id="studentCollege" name="s_college">
-                                        <option style="display: none;"></option>
-                                        <option>计算机学院</option>
-                                        <option>电机学院</option>
-                                        <option>传媒艺术学院</option>
-                                        <option>外语学院</option>
-                                    </select>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentCompany" class="input-group-text">实训公司</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="company_name" id="studentCompany" value="${s.company_name}">
-                                </div>
 
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-primary">提交</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <%--删除学生模态框--%>
-            <div class="modal fade" id="modalDel<%=i%>" tabindex="-1" role="dialog" aria-labelledby="del" aria-hidden="true">
+            <%--禁用账户模态框--%>
+            <div class="modal fade" id="modalDel<%=i%>" tabindex="-1" role="dialog" aria-labelledby="disableAccount" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="del">confirm</h3>
+                            <h3 class="modal-title" id="disableAccount">confirm</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <p>数据不可恢复，你确定要删除此条记录吗？</p>
-                            <form action="deleteStudentsInformation" method="post" >
-                                <input style="display: none" type="text" class="form-control" name="s_id" value="${s.s_id}">
+                            <p>你确定要禁用此账户吗？</p>
+                            <form action="disableAccount" method="post" >
+                                <input style="display: none" type="text" class="form-control" name="user_name" value="${s.login.userName}">
+                                <input style="display: none" type="text" class="form-control" name="authority" value="${s.login.authority}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-danger">删除</button>
+                                    <button type="submit" class="btn btn-danger">禁用</button>
                                 </div>
                             </form>
 
                         </div>
-
                     </div>
                 </div>
             </div>
+                <%} else {%>
+                <td class="border-right">
+                    <span class="badge badge-danger">禁用</span>
+                </td>
+                <td>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">启用</button>
+                </td>
+            </tr>
+
+            <%--启用账户模态框--%>
+            <div class="modal fade" id="modalDel<%=i%>" tabindex="-1" role="dialog" aria-labelledby="enableAccount" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h3 class="modal-title" id="enableAccount">confirm</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <p>你确定要启用此账户吗？</p>
+                            <form action="enableAccount" method="post" >
+                                <input style="display: none" type="text" class="form-control" name="user_name" value="${s.login.userName}">
+                                <input style="display: none" type="text" class="form-control" name="authority" value="${s.login.authority}">
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="submit" class="btn btn-success">启用</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <%}%>
+
+
         </c:forEach>
         </tbody>
     </table>
 </div>
-<%--添加学生的模态框--%>
-<div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" id="add">添加学生</h4>
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-            </div>
-            <div class="modal-body">
-                <form action="addStudentsInformation" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
-                        </div>
-                        <input type="text" class="form-control" name="s_id" id="addStudentId">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
-                        </div>
-                        <input type="text" class="form-control" name="s_name" id="addStudentName">
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary" id="addStudent">提交</button>
-                    </div>
-                </form>
-            </div>
-
-        </div>
-    </div>
-</div>
-
 
 </body>
 </html>
