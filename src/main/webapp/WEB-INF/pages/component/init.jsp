@@ -211,7 +211,7 @@
                         <div class="input-group mb-3">
                             <div class="input-group-prepend">
                                 <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyId" class="input-group-text">公司ID</label>
+                                <label for="addCompanyId" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>
                             </div>
                             <input type="text" class="form-control" name="company_id" id="addCompanyId">
                         </div>

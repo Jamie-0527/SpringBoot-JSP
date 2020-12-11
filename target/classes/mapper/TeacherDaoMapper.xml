@@ -31,8 +31,8 @@
     </resultMap>
 
     <!--查询个人信息-->
-    <select id="personInformation" resultMap="TeacherMapper" parameterType="String">
-        select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone,g.c_name from teacher t left join grade g on t.t_id=g.t_id where t.t_id = '${tid}'
+    <select id="personInformation" resultType="Teacher" parameterType="String">
+        select * from teacher where t_id = '${tid}'
     </select>
 
     <!--查询班级学生信息-->

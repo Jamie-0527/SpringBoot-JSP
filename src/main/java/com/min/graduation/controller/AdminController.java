@@ -2,10 +2,7 @@ package com.min.graduation.controller;
 
 
 import com.min.graduation.entity.*;
-import com.min.graduation.service.AdminService;
-import com.min.graduation.service.LoginService;
-import com.min.graduation.service.StudentService;
-import com.min.graduation.service.TeacherService;
+import com.min.graduation.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +13,7 @@ import javax.servlet.http.HttpSession;
 import java.util.List;
 
 @Controller
-public class AdminColntroller {
+public class AdminController {
 
     @Autowired
     private AdminService adminService;
@@ -29,6 +26,9 @@ public class AdminColntroller {
 
     @Autowired
     private TeacherService teacherService;
+
+    @Autowired
+    private CompanyService companyService;
 
 
     //查询学生信息
@@ -162,10 +162,11 @@ public class AdminColntroller {
     public String updateCompanyInformation(Model model, Company company) {
 
         adminService.updateCompany(company);
-        List<Company> allCompany = adminService.findAllCompany();
-        model.addAttribute("allCompany",allCompany);
+        Company result = companyService.personInformation(company.getCompany_person_id());
+        model.addAttribute("company",result);
+        model.addAttribute("ok_update","更新成功！");
 
-        return "admin/CompanyManagement";
+        return "company/companyInformation";
     }
 
     //添加公司信息
@@ -249,7 +250,7 @@ public class AdminColntroller {
         }
     }
 
-    //禁用账户信息
+    //启用账户信息
     @RequestMapping("enableAccount")
     public String enableAccount(Model model, String user_name, int authority) {
 

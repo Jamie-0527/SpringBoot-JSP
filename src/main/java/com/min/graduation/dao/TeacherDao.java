@@ -17,13 +17,13 @@ import java.util.List;
 public interface TeacherDao {
 
     //查询个人信息
-    public Teacher personInformation(@Param("tid") String tid);
+    Teacher personInformation(@Param("tid") String tid);
 
     //查询班级所有学生信息
-    public List<Student> findClassStudent(@Param("name") String name);
+    List<Student> findClassStudent(@Param("name") String name);
 
     //更新教师信息
-    public int updateTeacher(Teacher teacher);
+    int updateTeacher(Teacher teacher);
 
 
 }

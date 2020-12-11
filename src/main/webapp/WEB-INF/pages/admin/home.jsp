@@ -14,7 +14,7 @@
 
 <%
     String username = (String) request.getAttribute("userName");
-    String authority = (String) request.getAttribute("Authority");
+    int authority = (int) request.getAttribute("Authority");
     if (username == null || username == ""){
        request.getRequestDispatcher("../login.jsp").forward(request,response);
     }

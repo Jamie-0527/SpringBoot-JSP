@@ -56,7 +56,7 @@ public interface AdminDao {
     int updateCompany(Company company);
 
     //删除公司信息
-    int deleteCompany(String company_id);
+    int deleteCompany(String company_person_id);
 
     //根据名字查询公司信息
     Company findCompanyByName(String company_name);

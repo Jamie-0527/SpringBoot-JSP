@@ -47,7 +47,7 @@
         <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">个人信息</div></a>
+        <a href="companyPersonInformation"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">个人信息</div></a>
         <a href="adminToUpdatePassword"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b5">修改密码</div></a>
     </div>
 

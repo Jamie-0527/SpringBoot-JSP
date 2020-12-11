@@ -33,7 +33,7 @@
 <body>
 
 <%--侧边栏--%>
-<%@include file="../component/teacherLeft.jsp"%>
+<%@include file="../component/companyLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
@@ -43,39 +43,39 @@
         <form>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label for="s_id" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                    <label for="s_id" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="s_id" value="${student.s_id}">
+                <input type="text" class="form-control" readonly="readonly" id="s_id" value="${company.company_person_id}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <label for="s_name" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="s_name" value="${student.s_name}">
+                <input type="text" class="form-control" readonly="readonly" id="s_name" value="${company.company_person}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label for="c_name" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
+                    <label for="c_name" class="input-group-text">联系方式</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="c_name" value="${student.grade.c_name}">
+                <input type="text" class="form-control" readonly="readonly" id="c_name" value="${company.company_phone}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label for="s_college" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
+                    <label for="s_college" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="s_college" value="${student.s_college}">
+                <input type="text" class="form-control" readonly="readonly" id="s_college" value="${company.company_id}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label for="s_phone" class="input-group-text">联系方式</label>
+                    <label for="s_phone1" class="input-group-text">公司名称</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="s_phone" value="${student.s_phone}">
+                <input type="text" class="form-control" readonly="readonly" id="s_phone1" value="${company.company_name}">
             </div>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
-                    <label for="company_name" class="input-group-text">实训公司</label>
+                    <label for="s_phone" class="input-group-text">公司地址</label>
                 </div>
-                <input type="text" class="form-control" readonly="readonly" id="company_name" value="${student.company_name}">
+                <input type="text" class="form-control" readonly="readonly" id="s_phone" value="${company.company_address}">
             </div>
         </form>
         <div class="modal-footer">
@@ -92,42 +92,42 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="updateStudentInformation" method="post">
+                <form action="updateCompanyInformation" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateS_id" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                            <label for="company_person_id" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
                         </div>
-                        <input type="text" class="form-control" readonly="readonly" name="s_id" id="updateS_id" value="${student.s_id}">
+                        <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="company_person_id" value="${company.company_person_id}">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateS_name" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                            <label for="company_person" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
                         </div>
-                        <input type="text" class="form-control" name="s_name" id="updateS_name" value="${student.s_name}">
+                        <input type="text" class="form-control" name="company_person" id="company_person" value="${company.company_person}">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateC_name" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
+                            <label for="company_phone" class="input-group-text">联系方式</label>
                         </div>
-                        <input type="text" class="form-control" readonly="readonly" name="c_name" id="updateC_name" value="${student.grade.c_name}">
+                        <input type="text" class="form-control" name="company_phone" id="company_phone" value="${company.company_phone}">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateS_college" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
+                            <label for="company_id" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>
                         </div>
-                        <input type="text" class="form-control" readonly="readonly" name="s_college" id="updateS_college" value="${student.s_college}">
+                        <input type="text" class="form-control" name="company_id" id="company_id" value="${company.company_id}">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateS_phone" class="input-group-text">联系方式</label>
+                            <label for="company_name" class="input-group-text">公司名称</label>
                         </div>
-                        <input type="text" class="form-control" name="s_phone" id="updateS_phone" value="${student.s_phone}">
+                        <input type="text" class="form-control" name="company_name" id="company_name" value="${company.company_name}">
                     </div>
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
-                            <label for="updateCompany_name" class="input-group-text">实训公司</label>
+                            <label for="company_address" class="input-group-text">公司地址</label>
                         </div>
-                        <input type="text" class="form-control" name="company_name" id="updateCompany_name" value="${student.company_name}">
+                        <input type="text" class="form-control" name="company_address" id="company_address" value="${company.company_address}">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -135,7 +135,6 @@
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>

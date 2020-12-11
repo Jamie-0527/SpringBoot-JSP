@@ -52,7 +52,7 @@ public interface AdminService {
     public int updateCompany(Company company);
 
     //删除公司信息
-    public int deleteCompany(String company_id);
+    public int deleteCompany(String company_person_id);
 
     //根据名字查询公司信息
     Company findCompanyByName(String company_name);

@@ -82,8 +82,8 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public int deleteCompany(String company_id) {
-        return adminDao.deleteTeacher(company_id);
+    public int deleteCompany(String company_person_id) {
+        return adminDao.deleteTeacher(company_person_id);
     }
 
     @Override

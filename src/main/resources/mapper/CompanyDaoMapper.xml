@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.min.graduation.dao.CompanyDao">
+
+    <!--查询公司信息-->
+    <select id="personInformation" resultType="Company" parameterType="String">
+        select * from company where company_person_id = #{company_person_id}
+    </select>
+</mapper>
