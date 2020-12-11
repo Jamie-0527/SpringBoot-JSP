@@ -19,10 +19,12 @@
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <%
     String username = (String) request.getAttribute("userName");
+    String authority = (String) request.getAttribute("Authority");
     if (username == null || username == ""){
         request.getRequestDispatcher("../login.jsp").forward(request,response);
     }
     session.setAttribute("userName",username);
+    session.setAttribute("Authority",authority);
 
 %>
 

@@ -55,6 +55,7 @@ public class LoginController {
                             if (l.getAuthority() == 0){
                                 String userName = l.getUserName();
                                 model.addAttribute("userName",userName);
+                                model.addAttribute("Authority",l.getAuthority());
 
                                 return "admin/home";
 
@@ -62,6 +63,7 @@ public class LoginController {
                                 /*获得用户名*/
                                 String userName = l.getUserName();
                                 model.addAttribute("userName",userName);
+                                model.addAttribute("Authority",l.getAuthority());
 
                                 return "student/home";
 
@@ -70,6 +72,7 @@ public class LoginController {
                                 /*获得用户名*/
                                 String userName = l.getUserName();
                                 model.addAttribute("userName",userName);
+                                model.addAttribute("Authority",l.getAuthority());
 
                                 return "teacher/home";
 
@@ -78,6 +81,7 @@ public class LoginController {
                                 /*获得用户名*/
                                 String userName = l.getUserName();
                                 model.addAttribute("userName",userName);
+                                model.addAttribute("Authority",l.getAuthority());
 
                                 return "company/home";
 

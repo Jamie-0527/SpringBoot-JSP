@@ -1,5 +1,6 @@
 package com.min.graduation.controller;
 
+import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Student;
 import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
@@ -8,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -70,12 +72,17 @@ public class StudentController {
 
     //查询个人信息
     @RequestMapping("studentPersonInformation")
-    public String studentPersonInformation(Model model,String sid) {
+    public String studentPersonInformation(Model model, HttpSession session) {
 
-        Student student = studentService.personInformation(sid);
-        model.addAttribute("studentInfo",student);
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            Student student = studentService.personInformation(userName);
+            model.addAttribute("student",student);
+            return "student/studentInformation";
 
-        return "student/information";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
     }
 
 

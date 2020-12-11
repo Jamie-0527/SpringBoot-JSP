@@ -32,9 +32,19 @@
 </script>
 
 <body>
-
-<%--侧边栏--%>
+<%
+    int Authority = (int) session.getAttribute("Authority");
+    if (Authority==0) {
+%>
 <%@include file="adminLeft.jsp"%>
+<%}else if (Authority==1){%>
+<%@include file="studentLeft.jsp"%>
+<%}else if (Authority==2){%>
+<%@include file="teacherLeft.jsp"%>
+<%}else{%>
+<%@include file="companyLeft.jsp"%>
+<%}%>
+
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
@@ -54,20 +64,20 @@
                 </div>
                 <c:set var="getAuthority" value="${login.authority}" scope="page"></c:set>
                 <%
-                    int authority = (int) pageContext.getAttribute("getAuthority");
-                    if (authority==0){
+                    int checkAuthority = (int) pageContext.getAttribute("getAuthority");
+                    if (checkAuthority==0){
                 %>
                 <input type="text" class="form-control" readonly="readonly" id="Roles" value="管理员">
                 <%
-                }else if (authority==1){
+                }else if (checkAuthority==1){
                 %>
                 <input type="text" class="form-control" readonly="readonly" id="Roles" value="学生">
                 <%
-                }else if (authority==2){
+                }else if (checkAuthority==2){
                 %>
                 <input type="text" class="form-control" readonly="readonly" id="Roles" value="教师">
                 <%
-                }else if (authority==3){
+                }else if (checkAuthority==3){
                 %>
                 <input type="text" class="form-control" readonly="readonly" id="Roles" value="企业人员">
                 <%

@@ -4,6 +4,8 @@ package com.min.graduation.controller;
 import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
+import com.min.graduation.service.StudentService;
+import com.min.graduation.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,12 @@ public class AdminColntroller {
     @Autowired
     private LoginService loginService;
 
+    @Autowired
+    private StudentService studentService;
+
+    @Autowired
+    private TeacherService teacherService;
+
 
     //查询学生信息
     @RequestMapping("studentManagement")
@@ -34,14 +42,30 @@ public class AdminColntroller {
     }
 
     //更新学生信息
-    @RequestMapping("updateStudentsInformation")
-    public String updateStudentsInformation(Model model, Student student) {
+    @RequestMapping("updateStudentInformation")
+    public String updateStudentInformation(Model model, HttpServletRequest request) {
+        //获取前端传来的数据
+        String s_id = request.getParameter("s_id");
+        String s_name = request.getParameter("s_name");
+        String c_name = request.getParameter("c_name");
+        String s_phone = request.getParameter("s_phone");
+        String s_college = request.getParameter("s_college");
+        String company_name = request.getParameter("company_name");
 
-        adminService.updateStudent(student);
-        List<Student> allStudent = adminService.findAllStudent();
-        model.addAttribute("allStudent",allStudent);
+        /*匹配班级ID*/
+        Grade gradeInfo = studentService.findGradeInfo(c_name);
+        if (company_name.length()==0){
+            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college);
+            adminService.updateStudent(student);
 
-        return "admin/studentManagement";
+        }else {
+            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college,company_name);
+            adminService.updateStudent(student);
+        }
+        Student student = studentService.personInformation(s_id);
+        model.addAttribute("student",student);
+        model.addAttribute("ok_update","更新成功！");
+        return "student/studentInformation";
     }
 
     //添加学生信息
@@ -88,10 +112,11 @@ public class AdminColntroller {
     public String updateTeacherInformation(Model model, Teacher teacher) {
 
         adminService.updateTeacher(teacher);
-        List<Teacher> allTeacher = adminService.findAllTeacher();
-        model.addAttribute("allTeacher",allTeacher);
+        Teacher result = teacherService.personInformation(teacher.getT_id());
+        model.addAttribute("teacher",result);
+        model.addAttribute("ok_update","更新成功！");
 
-        return "admin/teacherManagement";
+        return "teacher/teacherInformation";
     }
 
     //添加教师信息
@@ -181,7 +206,7 @@ public class AdminColntroller {
         return "admin/studentAccountManagement";
     }
 
-    //查询学生账户信息
+    //查询教师账户信息
     @RequestMapping("teacherAccountManagement")
     public String teacherAccountManagement(Model model) {
 
@@ -191,7 +216,7 @@ public class AdminColntroller {
         return "admin/teacherAccountManagement";
     }
 
-    //查询学生账户信息
+    //查询企业员工账户信息
     @RequestMapping("companyAccountManagement")
     public String companyAccountManagement(Model model) {
 
@@ -258,7 +283,7 @@ public class AdminColntroller {
             return "component/updatePassword";
 
         }
-        model.addAttribute("error","身份信息过期请重新登录！");
+        model.addAttribute("error","身份信息过期，请重新登录！");
         return "login";
     }
 

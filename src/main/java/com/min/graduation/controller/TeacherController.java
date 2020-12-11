@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -26,12 +27,17 @@ public class TeacherController {
 
     //查询个人信息
     @RequestMapping("teacherPersonInformation")
-    public String teacherPersonInformation(Model model, String tid) {
+    public String teacherPersonInformation(Model model, HttpSession session) {
 
-        Teacher teacher = teacherService.personInformation(tid);
-        model.addAttribute("teacher",teacher);
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            Teacher teacher = teacherService.personInformation(userName);
+            model.addAttribute("teacher",teacher);
+            return "teacher/teacherInformation";
 
-        return "teacher/information";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
     }
 
     //查询班级学生信息
