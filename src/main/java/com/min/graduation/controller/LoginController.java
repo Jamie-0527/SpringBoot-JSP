@@ -4,6 +4,7 @@ package com.min.graduation.controller;
 import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
+import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class LoginController {
 
+    @Autowired
+    private AdminService adminService;
     @Autowired
     private LoginService loginService;
     @Autowired
@@ -110,6 +113,32 @@ public class LoginController {
         model.addAttribute("error", "账号或密码错误！请重新输入");
         return "login";
 
+    }
+
+    //更改账户密码
+    @RequestMapping("updatePassword")
+    public String updatePassword(Model model, String oldPassword, String user_name, String password) {
+
+        //校验旧密码
+        Login login = adminService.findAccountByUserName(user_name);
+        String old_pwd = md5Encryption.setEncryption(oldPassword);
+        if (old_pwd.equals(login.getPassword())){
+            loginService.updatePassword(user_name, password);
+            model.addAttribute("ok_update","更新成功！请重新登录");
+            return "login";
+        }else {
+            model.addAttribute("fail_update","密码错误，更新失败！");
+            model.addAttribute("login",login);
+            if (login.getAuthority()==0){
+                return "admin/adminUpdatePassword";
+            }else if (login.getAuthority()==1){
+                return "student/studentUpdatePassword";
+            }else if (login.getAuthority()==2){
+                return "teacher/teacherUpdatePassword";
+            }else {
+                return "company/companyUpdatePassword";
+            }
+        }
     }
 
 }

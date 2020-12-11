@@ -159,7 +159,7 @@
     </select>
     <!--根据用户名查询账户信息-->
     <select id="findAccountByUserName" resultMap="LoginMapper">
-        select user_name,authority,modify_time,`status` from login
+        select * from login
         where user_name = #{user_name}
     </select>
     <!--禁用账户-->

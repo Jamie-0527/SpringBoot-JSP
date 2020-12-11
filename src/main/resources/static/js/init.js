@@ -122,14 +122,18 @@ $(document).ready(function(){
 
     /*更新账户密码*/
     $("#updatePassword").click(function(){
+        var old_pwd= $("#old_pwd").val()
         var s_pwd= $("#s_pwd").val()
         var s_pwdConfirm = $("#s_pwdConfirm").val()
 
-        if(s_pwd.length==0 || s_pwdConfirm.length==0){
-            alert("密码不能为空！");
+        if(old_pwd.length==0 ){
+            alert("新密码不能为空！");
+            return false;
+        }else if(s_pwd.length==0 || s_pwdConfirm.length==0){
+            alert("新密码不能为空！");
             return false;
         }else if (s_pwd.length<6){
-            alert("密码过短！");
+            alert("新密码过短！");
             return false;
         }else if (s_pwd != s_pwdConfirm){
             alert("输入的两次密码不一致！");

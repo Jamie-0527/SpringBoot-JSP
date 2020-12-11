@@ -255,19 +255,11 @@ public class AdminColntroller {
         if (userName != null && userName != ""){
             Login login = adminService.findAccountByUserName(userName);
             model.addAttribute("login",login);
-            return "component/updatePassword";
+            return "admin/adminUpdatePassword";
         }
         model.addAttribute("error","身份信息过期请重新登录！");
         return "login";
     }
 
-    //更改账户密码
-    @RequestMapping("updatePassword")
-    public String updatePassword(Model model, String user_name, String password) {
-
-        loginService.updatePassword(user_name, password);
-        model.addAttribute("ok_update","更新成功！请重新登录");
-        return "login";
-    }
 
 }
