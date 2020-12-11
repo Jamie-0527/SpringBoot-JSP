@@ -1,10 +1,7 @@
 package com.min.graduation.controller;
 
 
-import com.min.graduation.entity.Admin;
-import com.min.graduation.entity.Company;
-import com.min.graduation.entity.Student;
-import com.min.graduation.entity.Teacher;
+import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,9 +10,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
+import javax.servlet.http.HttpSession;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 public class AdminColntroller {
@@ -249,6 +245,29 @@ public class AdminColntroller {
 
             return "admin/companyAccountManagement";
         }
+    }
+
+    //获取账户信息
+    @RequestMapping("adminToUpdatePassword")
+    public String adminToUpdatePassword(HttpSession session, Model model){
+
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            Login login = adminService.findAccountByUserName(userName);
+            model.addAttribute("login",login);
+            return "component/updatePassword";
+        }
+        model.addAttribute("error","身份信息过期请重新登录！");
+        return "login";
+    }
+
+    //更改账户密码
+    @RequestMapping("updatePassword")
+    public String updatePassword(Model model, String user_name, String password) {
+
+        loginService.updatePassword(user_name, password);
+        model.addAttribute("ok_update","更新成功！请重新登录");
+        return "login";
     }
 
 }

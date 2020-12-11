@@ -8,4 +8,9 @@ $(document).ready(function(){
         $("#b1,#b2,#b3").slideToggle();
         $("#userManagement").toggleClass("active");
     });
+
+    $("#personalCenter").click(function(){
+        $("#b4").slideToggle();
+        $("#personalCenter").toggleClass("active");
+    });
 });

@@ -1,10 +1,7 @@
 package com.min.graduation.service;
 
 
-import com.min.graduation.entity.Admin;
-import com.min.graduation.entity.Company;
-import com.min.graduation.entity.Student;
-import com.min.graduation.entity.Teacher;
+import com.min.graduation.entity.*;
 
 import java.util.List;
 
@@ -71,10 +68,14 @@ public interface AdminService {
     //查询企业员工账户信息
     List<Admin> findCompanyAccount();
 
+    //根据用户名查询账户信息
+    Login findAccountByUserName(String user_name);
+
     //禁用账户
     int disableAccount(String user_name);
 
     //启用账户
     int enableAccount(String user_name);
+
 
 }

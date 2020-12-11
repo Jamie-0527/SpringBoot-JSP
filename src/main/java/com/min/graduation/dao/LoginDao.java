@@ -20,4 +20,7 @@ public interface LoginDao {
     //重置账号
     int reset(@Param("uname") String username);
 
+    //更改密码
+    int updatePassword(String user_name, String password);
+
 }

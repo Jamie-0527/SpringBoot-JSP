@@ -17,4 +17,7 @@ public interface LoginService {
     //重置账号
     int reset(String username);
 
+    //更改密码
+    int updatePassword(String user_name, String password);
+
 }

@@ -32,4 +32,10 @@ public class LoginServiceImpl implements LoginService {
     public int reset(String username) {
         return loginDao.reset(username);
     }
+
+    @Override
+    public int updatePassword(String user_name, String password) {
+        String cipherText = md5Encryption.setEncryption(password);
+        return loginDao.updatePassword(user_name, cipherText);
+    }
 }

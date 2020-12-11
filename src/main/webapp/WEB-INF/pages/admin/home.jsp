@@ -13,17 +13,18 @@
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <%
-//    Object username = session.getAttribute("username");
-//    if (username == null || username ==""){
-//       request.getRequestDispatcher("../login.jsp").forward(request,response);
-//    }
+    String username = (String) request.getAttribute("userName");
+    if (username == null || username == ""){
+       request.getRequestDispatcher("../login.jsp").forward(request,response);
+    }
+    session.setAttribute("userName",username);
 
 %>
 
 <body>
 <%--导航条--%>
 <%@include file="../component/top.jsp"%>
-<%--侧边栏,此数报红也能正常访问--%>
+<%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
 <i class="fa fa-arrow-right" title="Submit My Tax Return"></i>

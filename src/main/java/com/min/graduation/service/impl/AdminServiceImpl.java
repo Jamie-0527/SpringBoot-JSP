@@ -1,17 +1,12 @@
 package com.min.graduation.service.impl;
 
 import com.min.graduation.dao.AdminDao;
-import com.min.graduation.entity.Admin;
-import com.min.graduation.entity.Company;
-import com.min.graduation.entity.Student;
-import com.min.graduation.entity.Teacher;
+import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.text.ParsePosition;
-import java.text.SimpleDateFormat;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -98,11 +93,7 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Admin> findStudentAccount() {
-        List<Admin> studentAccount = adminDao.findStudentAccount();
-        for (Admin admin : studentAccount){
-
-        }
-        return studentAccount;
+        return adminDao.findStudentAccount();
     }
 
     @Override
@@ -113,6 +104,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public List<Admin> findCompanyAccount() {
         return adminDao.findCompanyAccount();
+    }
+
+    @Override
+    public Login findAccountByUserName(String user_name) {
+        return adminDao.findAccountByUserName(user_name);
     }
 
     @Override

@@ -42,7 +42,7 @@
     <div class="form-group">
         <label for="password">Password</label>
         <input type="password" class="form-control" id="password" name="password">
-        <small class="form-text text-danger">${error}</small>
+        <small class="form-text text-danger">${error}</small><small class="form-text text-success">${ok_update}</small>
     </div>
     <button type="submit" class="btn btn-primary">Submit</button>
 </form>

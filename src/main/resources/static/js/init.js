@@ -11,6 +11,9 @@ $(document).ready(function(){
         if(s_pwd.length==0 || s_pwdConfirm.length==0){
             alert("密码不能为空！");
             return false;
+        }else if (s_pwd.length<6){
+            alert("密码过短！");
+            return false;
         }else if (s_pwd != s_pwdConfirm){
             alert("输入的两次密码不一致！");
             return false;
@@ -34,6 +37,9 @@ $(document).ready(function(){
 
         if(t_pwd.length==0 || t_pwdConfirm.length==0){
             alert("密码不能为空！");
+            return false;
+        }else if (t_pwd.length<6){
+            alert("密码过短！");
             return false;
         }else if (t_pwd != t_pwdConfirm){
             alert("输入的两次密码不一致！");
@@ -59,6 +65,9 @@ $(document).ready(function(){
 
         if(c_pwd.length==0 || c_pwdConfirm.length==0){
             alert("密码不能为空！");
+            return false;
+        }else if (c_pwd.length<6){
+            alert("密码过短！");
             return false;
         }else if (c_pwd != c_pwdConfirm){
             alert("输入的两次密码不一致！");
@@ -105,6 +114,25 @@ $(document).ready(function(){
 
         if(addComPersonId.length==0 || addComPerson.length==0){
             alert("输入信息不能为空！");
+            return false;
+        }else {
+            return true;
+        }
+    });
+
+    /*更新账户密码*/
+    $("#updatePassword").click(function(){
+        var s_pwd= $("#s_pwd").val()
+        var s_pwdConfirm = $("#s_pwdConfirm").val()
+
+        if(s_pwd.length==0 || s_pwdConfirm.length==0){
+            alert("密码不能为空！");
+            return false;
+        }else if (s_pwd.length<6){
+            alert("密码过短！");
+            return false;
+        }else if (s_pwd != s_pwdConfirm){
+            alert("输入的两次密码不一致！");
             return false;
         }else {
             return true;

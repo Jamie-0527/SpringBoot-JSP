@@ -1,9 +1,6 @@
 package com.min.graduation.dao;
 
-import com.min.graduation.entity.Admin;
-import com.min.graduation.entity.Company;
-import com.min.graduation.entity.Student;
-import com.min.graduation.entity.Teacher;
+import com.min.graduation.entity.*;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -73,6 +70,9 @@ public interface AdminDao {
 
     //查询企业员工账户信息
     List<Admin> findCompanyAccount();
+
+    //根据用户名查询账户信息
+    Login findAccountByUserName(String user_name);
 
     //禁用账户
     int disableAccount(String user_name);

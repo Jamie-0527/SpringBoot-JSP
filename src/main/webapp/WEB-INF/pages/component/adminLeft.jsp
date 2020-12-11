@@ -14,11 +14,11 @@
         border-radius: 0 !important;
         border: none;
     }
-    #a1,#a2,#a3,#b1,#b2,#b3{margin: 0px; display:none; font-size: 18px;}
+    #a1,#a2,#a3,#b1,#b2,#b3,#b4{margin: 0px; display:none; font-size: 18px;}
     a:hover{text-decoration: none}
 
-    #paperManagement,#personalCenter{color: rgb(108,117,125)}
-    #paperManagement:hover,#personalCenter:hover{color: white;}
+    #paperManagement{color: rgb(108,117,125)}
+    #paperManagement:hover{color: white;}
 
     .tail{
         position: fixed;
@@ -57,9 +57,13 @@
         <a href="companyAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
     </div>
     <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
-    <a id="personalCenter" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+
+    <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="personalCenter">
         <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
-    </a>
+    </div>
+    <div style="background-color: rgb(22,24,29); ">
+        <a href="adminToUpdatePassword"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">修改密码</div></a>
+    </div>
 
     <div class="tail text-wrap" style="width: 15%;">
         <p>Copyright &copy; 2020-2021 by 张家民 ALL Rights Reserved</p>
