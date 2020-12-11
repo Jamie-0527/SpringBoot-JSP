@@ -15,10 +15,11 @@
         border: none;
     }
 
+    #b4,#b5{margin: 0px; display:none; font-size: 18px;}
     a:hover{text-decoration: none}
 
-    #paperManagement,#personalCenter,#studentManagement{color: rgb(108,117,125)}
-    #paperManagement:hover,#personalCenter:hover,#studentManagement:hover{color: white;}
+    #paperManagement,#studentManagement{color: rgb(108,117,125)}
+    #paperManagement:hover,#studentManagement:hover{color: white;}
 
     .tail{
         position: fixed;
@@ -40,12 +41,15 @@
     <a class="navbar-brand" href="#">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
-
     <a id="studentManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">学生信息</a>
     <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
-    <a id="personalCenter" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+    <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="companyPersonalCenter">
         <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
-    </a>
+    </div>
+    <div style="background-color: rgb(22,24,29); ">
+        <a href="#"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">个人信息</div></a>
+        <a href="adminToUpdatePassword"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b5">修改密码</div></a>
+    </div>
 
     <div class="tail text-wrap" style="width: 15%;">
         <p>Copyright &copy; 2020-2021 by 张家民 ALL Rights Reserved</p>

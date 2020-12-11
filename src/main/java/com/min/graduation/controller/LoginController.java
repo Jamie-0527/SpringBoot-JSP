@@ -2,8 +2,6 @@ package com.min.graduation.controller;
 
 
 import com.min.graduation.entity.Login;
-import com.min.graduation.entity.Student;
-import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
@@ -63,9 +61,7 @@ public class LoginController {
                             }else if (l.getAuthority() == 1){
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                //获取学生对象的信息，便于前端设值session
-                                Student student = studentService.personInformation(userName);
-                                model.addAttribute("student",student);
+                                model.addAttribute("userName",userName);
 
                                 return "student/home";
 
@@ -73,9 +69,7 @@ public class LoginController {
 
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                //获取学生对象的信息，便于前端设值session
-                                Teacher teacher = teacherService.personInformation(userName);
-                                model.addAttribute("teacher",teacher);
+                                model.addAttribute("userName",userName);
 
                                 return "teacher/home";
 
@@ -83,9 +77,7 @@ public class LoginController {
 
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                //获取学生对象的信息，便于前端设值session
-                                Teacher teacher = teacherService.personInformation(userName);
-                                model.addAttribute("teacher",teacher);
+                                model.addAttribute("userName",userName);
 
                                 return "company/home";
 
@@ -129,15 +121,8 @@ public class LoginController {
         }else {
             model.addAttribute("fail_update","密码错误，更新失败！");
             model.addAttribute("login",login);
-            if (login.getAuthority()==0){
-                return "admin/adminUpdatePassword";
-            }else if (login.getAuthority()==1){
-                return "student/studentUpdatePassword";
-            }else if (login.getAuthority()==2){
-                return "teacher/teacherUpdatePassword";
-            }else {
-                return "company/companyUpdatePassword";
-            }
+            return "component/updatePassword";
+
         }
     }
 

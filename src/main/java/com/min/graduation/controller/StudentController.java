@@ -22,10 +22,6 @@ public class StudentController {
     @Autowired
     private LoginService loginService;
 
-    @RequestMapping("studentUpdate")
-    public String studentUpdate(){
-        return "student/update";
-    }
 
 //    //查询所有
 //    @RequestMapping("studentFindAll")

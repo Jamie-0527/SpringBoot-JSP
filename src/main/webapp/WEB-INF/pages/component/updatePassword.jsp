@@ -33,10 +33,8 @@
 
 <body>
 
-<%--导航条--%>
-<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
-<%@include file="../component/adminLeft.jsp"%>
+<%@include file="adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
@@ -60,6 +58,18 @@
                     if (authority==0){
                 %>
                 <input type="text" class="form-control" readonly="readonly" id="Roles" value="管理员">
+                <%
+                }else if (authority==1){
+                %>
+                <input type="text" class="form-control" readonly="readonly" id="Roles" value="学生">
+                <%
+                }else if (authority==2){
+                %>
+                <input type="text" class="form-control" readonly="readonly" id="Roles" value="教师">
+                <%
+                }else if (authority==3){
+                %>
+                <input type="text" class="form-control" readonly="readonly" id="Roles" value="企业人员">
                 <%
                 }else{
                 %>

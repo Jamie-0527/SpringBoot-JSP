@@ -13,4 +13,19 @@ $(document).ready(function(){
         $("#b4").slideToggle();
         $("#personalCenter").toggleClass("active");
     });
+
+    $("#studentPersonalCenter").click(function(){
+        $("#b4,#b5").slideToggle();
+        $("#studentPersonalCenter").toggleClass("active");
+    });
+
+    $("#teacherPersonalCenter").click(function(){
+        $("#b4,#b5").slideToggle();
+        $("#teacherPersonalCenter").toggleClass("active");
+    });
+
+    $("#companyPersonalCenter").click(function(){
+        $("#b4,#b5").slideToggle();
+        $("#companyPersonalCenter").toggleClass("active");
+    });
 });

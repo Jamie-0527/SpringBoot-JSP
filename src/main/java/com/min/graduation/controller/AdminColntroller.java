@@ -255,7 +255,8 @@ public class AdminColntroller {
         if (userName != null && userName != ""){
             Login login = adminService.findAccountByUserName(userName);
             model.addAttribute("login",login);
-            return "admin/adminUpdatePassword";
+            return "component/updatePassword";
+
         }
         model.addAttribute("error","身份信息过期请重新登录！");
         return "login";
