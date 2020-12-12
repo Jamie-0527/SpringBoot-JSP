@@ -32,14 +32,14 @@
 
     <!--查询个人信息-->
     <select id="personInformation" resultType="Teacher" parameterType="String">
-        select * from teacher where t_id = '${tid}'
+        select * from teacher where t_id = #{t_id}
     </select>
 
     <!--查询班级学生信息-->
     <select id="findClassStudent" resultMap="TeacherMapper" parameterType="String">
         select s.s_id,s.s_name,g.c_name,s.s_phone from teacher t left join grade g on t.t_id=g.t_id
 												left join student s on s.s_class_no=g.c_id
-												where t.t_name = '${name}'
+												where t.t_id = #{t_id}
     </select>
 
     <!--更新个人信息-->
@@ -50,6 +50,16 @@
             <if test="t_rank != null and t_rank != ''">t_rank=#{t_rank},</if>
             <if test="t_college != null and t_college != ''">t_college=#{t_college},</if>
             <if test="t_phone != null and t_phone != ''">t_phone=#{t_phone},</if>
+        </trim>
+    </update>
+
+    <!--更新班级学生信息-->
+    <update id="t_updateInfo" parameterType="Student">
+        update student
+        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
+            <if test="s_name != null and s_name != ''">s_name=#{s_name},</if>
+            <if test="s_class_no != null and s_class_no != ''">s_class_no=#{s_class_no},</if>
+            <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
         </trim>
     </update>
     

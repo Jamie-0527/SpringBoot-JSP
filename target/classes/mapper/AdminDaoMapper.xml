@@ -132,7 +132,7 @@
     </update>
     <!--删除公司-->
     <delete id="deleteCompany" parameterType="String">
-        delete from company where company_id=#{company_id}
+        delete from company where company_person_id=#{company_person_id}
     </delete>
     <!--根据名字查询公司信息-->
     <select id="findCompanyByName" parameterType="String" resultMap="CompanyMapper">
