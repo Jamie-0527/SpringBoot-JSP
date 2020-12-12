@@ -42,8 +42,8 @@ public class AdminController {
     }
 
     //更新学生信息
-    @RequestMapping("updateStudentInformation")
-    public String updateStudentInformation(Model model, HttpServletRequest request) {
+    @RequestMapping("updateStudentsInformation")
+    public String updateStudentsInformation(Model model, HttpServletRequest request) {
         //获取前端传来的数据
         String s_id = request.getParameter("s_id");
         String s_name = request.getParameter("s_name");
@@ -70,7 +70,7 @@ public class AdminController {
 
     //添加学生信息
     @RequestMapping("addStudentsInformation")
-    public String addStudentsInformation(Model model,Student student) {
+    public String addStudentsInformation(Model model, Student student, HttpSession session) {
 
         try{
             adminService.addLogin(student.getS_id(), 1);
@@ -78,9 +78,24 @@ public class AdminController {
         }catch (Exception exception){
             model.addAttribute("addStudentError","该用户已存在！");
         }finally {
-            List<Student> allStudent = adminService.findAllStudent();
-            model.addAttribute("allStudent",allStudent);
-            return "admin/studentManagement";
+            Integer Authority = (Integer) session.getAttribute("Authority");
+            String userName = (String) session.getAttribute("userName");
+            if (Authority != null) {
+                if (Authority==0){
+                    List<Student> allStudent = adminService.findAllStudent();
+                    model.addAttribute("allStudent", allStudent);
+                    return "admin/studentManagement";
+                }else if (userName != null && userName != ""){
+                    List<Teacher> classStudent = teacherService.findClassStudent(userName);
+                    model.addAttribute("classStudent",classStudent);
+                    return "teacher/studentManagement";
+                }else {
+                    model.addAttribute("error","身份信息过期，请重新登录！");
+                    return "login";
+                }
+            }
+            model.addAttribute("error","身份信息过期，请重新登录！");
+            return "login";
         }
     }
 

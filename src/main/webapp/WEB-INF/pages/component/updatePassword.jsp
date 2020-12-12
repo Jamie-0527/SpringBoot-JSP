@@ -33,7 +33,7 @@
 
 <body>
 <%
-    int Authority = (int) session.getAttribute("Authority");
+    Integer Authority = (Integer) session.getAttribute("Authority");
     if (Authority==0) {
 %>
 <%@include file="adminLeft.jsp"%>

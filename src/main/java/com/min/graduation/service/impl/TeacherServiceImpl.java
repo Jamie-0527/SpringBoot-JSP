@@ -21,18 +21,23 @@ public class TeacherServiceImpl implements TeacherService {
     private TeacherDao teacherDao;
 
     @Override
-    public Teacher personInformation(String tid) {
-        return teacherDao.personInformation(tid);
+    public Teacher personInformation(String t_id) {
+        return teacherDao.personInformation(t_id);
     }
 
     @Override
-    public List<Student> findClassStudent(String name) {
-        return teacherDao.findClassStudent(name);
+    public List<Teacher> findClassStudent(String t_id) {
+        return teacherDao.findClassStudent(t_id);
     }
 
     @Override
     public int updateTeacher(Teacher teacher) {
         return teacherDao.updateTeacher(teacher);
+    }
+
+    @Override
+    public int t_updateInfo(Student student) {
+        return teacherDao.t_updateInfo(student);
     }
 
 }

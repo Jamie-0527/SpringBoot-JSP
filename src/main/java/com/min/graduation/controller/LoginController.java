@@ -23,10 +23,6 @@ public class LoginController {
     @Autowired
     private LoginService loginService;
     @Autowired
-    private StudentService studentService;
-    @Autowired
-    private TeacherService teacherService;
-    @Autowired
     private Md5Encryption md5Encryption;
 
 

@@ -3,7 +3,6 @@ package com.min.graduation.dao;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 
-import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 
@@ -17,13 +16,15 @@ import java.util.List;
 public interface TeacherDao {
 
     //查询个人信息
-    Teacher personInformation(@Param("tid") String tid);
+    Teacher personInformation(String t_id);
 
     //查询班级所有学生信息
-    List<Student> findClassStudent(@Param("name") String name);
+    List<Teacher> findClassStudent(String t_id);
 
     //更新教师信息
     int updateTeacher(Teacher teacher);
 
+    //更新班级学生信息
+    int t_updateInfo(Student student);
 
 }

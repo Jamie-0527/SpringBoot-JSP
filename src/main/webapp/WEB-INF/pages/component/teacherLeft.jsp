@@ -41,7 +41,7 @@
     <a class="navbar-brand" href="#">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
-    <a id="studentManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">学生管理</a>
+    <a id="studentManagement" href="teacherGradeInformation" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">学生管理</a>
     <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="teacherPersonalCenter">
         <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心

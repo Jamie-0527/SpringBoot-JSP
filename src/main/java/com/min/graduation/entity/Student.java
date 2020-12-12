@@ -20,6 +20,7 @@ public class Student implements Serializable {
 
     public Student() {}
 
+    //初始化和管理员角色
     public Student(String s_id, String s_name, String s_class_no, String s_phone, String s_college, String company_name) {
         this.s_id = s_id;
         this.s_name = s_name;
@@ -34,6 +35,13 @@ public class Student implements Serializable {
         this.s_class_no = s_class_no;
         this.s_phone = s_phone;
         this.s_college = s_college;
+    }
+    //教师角色管理
+    public Student(String s_id, String s_name, String s_class_no, String s_phone) {
+        this.s_id = s_id;
+        this.s_name = s_name;
+        this.s_class_no = s_class_no;
+        this.s_phone = s_phone;
     }
     /*引入Grade对象*/
     private Grade grade;

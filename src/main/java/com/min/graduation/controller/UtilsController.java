@@ -9,6 +9,7 @@ import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,7 +37,7 @@ public class UtilsController {
 
     //初始化学生个人信息
     @RequestMapping("initStudent")
-    public String initStudent(HttpServletRequest request){
+    public String initStudent(Model model, HttpServletRequest request){
         //获取前端传来的数据
         String s_id = request.getParameter("s_id");
         String pwd = request.getParameter("s_pwd");
@@ -58,12 +59,13 @@ public class UtilsController {
             adminService.addStudent(student);
         }
 
+        model.addAttribute("ok_init","初始化成功！欢迎使用本系统。");
         return "student/home";
     }
 
     //初始化教师个人信息
     @RequestMapping("initTeacher")
-    public String initTeacher(HttpServletRequest request){
+    public String initTeacher(Model model, HttpServletRequest request){
         //获取前端传来的数据
         String t_id = request.getParameter("t_id");
         String t_pwd = request.getParameter("t_pwd");
@@ -77,12 +79,13 @@ public class UtilsController {
         Teacher teacher = new Teacher(t_id,t_name,t_rank,t_college,t_phone);
         adminService.addTeacher(teacher);
 
+        model.addAttribute("ok_init","初始化成功！欢迎使用本系统。");
         return "teacher/home";
     }
 
     //初始化公司个人信息
     @RequestMapping("initCompany")
-    public String initCompany(HttpServletRequest request){
+    public String initCompany(Model model, HttpServletRequest request){
         //获取前端传来的数据
         String company_person_id = request.getParameter("company_person_id");
         String c_pwd = request.getParameter("c_pwd");
@@ -96,6 +99,7 @@ public class UtilsController {
         Company company = new Company(company_id,company_name,company_address,company_person_id,company_person,company_phone);
         adminService.addCompany(company);
 
+        model.addAttribute("ok_init","初始化成功！欢迎使用本系统。");
         return "company/home";
     }
 
