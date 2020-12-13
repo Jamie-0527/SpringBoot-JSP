@@ -12,25 +12,84 @@
 </head>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
 
 <script src="js/jquery-3.5.1.min.js"></script>
 <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+
+
 
 <body>
 
 <form class="needs-validation" action="test" novalidate>
     <div class="form-row">
         <div class="col-md-6 mb-3">
-            <label for="validationCustom01">学号</label>
-            <input type="text" class="form-control" id="validationCustom01" value="Mark" required>
+            <label for="s_id">学号</label>
+            <input type="text" class="form-control" name="s_id" id="s_id" required>
             <div class="invalid-feedback">
                 请输入学号
             </div>
         </div>
         <div class="col-md-6 mb-3">
-            <label for="validationCustom02">姓名</label>
-            <input type="text" class="form-control" id="validationCustom02" value="Otto" required>
+            <label for="s_name">姓名</label>
+            <input type="text" class="form-control" name="s_name" id="s_name" required>
+            <div class="invalid-feedback">
+                请输入姓名
+            </div>
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="c_name">班级</label>
+            <input type="text" class="form-control" name="c_name" id="c_name" required>
+            <div class="invalid-feedback">
+                请输入班级
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="s_college">学院</label>
+            <input type="text" class="form-control" name="s_college" id="s_college" required>
+            <div class="invalid-feedback">
+                请输入学院
+            </div>
+        </div>
+    </div>
+
+    <div style="margin: 20px">
+
+        123<input type="text" value="2012-05-15 21:05" id="datetimepicker">
+        <script>
+            $('#datetimepicker').datetimepicker({
+                format: 'yyyy-mm-dd hh:ii'
+            });
+        </script>
+
+    </div>
+
+    <div class="form-row">
+        <div class="col-md-6 mb-3">
+            <label for="begin_time">开始时间</label>
+            <input type="text" class="form-control" name="begin_time" id="begin_time" required>
+            <div class="invalid-feedback">
+                请输入开始时间
+            </div>
+        </div>
+        <div class="col-md-6 mb-3">
+            <label for="end_time">结束时间</label>
+            <input type="text" class="form-control" name="end_time" id="end_time" required>
+            <div class="invalid-feedback">
+                请输入结束时间
+            </div>
+        </div>
+    </div>
+    <div class="mb-3">
+        <label for="report_context">实训内容</label>
+        <textarea class="form-control is-invalid" name="report_context" id="report_context" required></textarea>
+        <div class="invalid-feedback">
+            请输入实训内容
         </div>
     </div>
     <div class="form-row">
