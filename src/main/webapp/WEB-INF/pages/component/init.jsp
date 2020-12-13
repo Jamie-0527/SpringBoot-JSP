@@ -46,69 +46,68 @@
             <div class="modal-body">
                 <%--学生端初始化--%>
                 <%if (authority==1){%>
-                <form action="initStudent" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="addStudentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                <form action="initStudent" method="post" class="needs-validation" novalidate>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="addStudentId">学号</label>
+                            <input type="text" class="form-control" readonly="readonly" name="s_id" id="addStudentId" value="${init.userName}" required>
+                            <div class="invalid-feedback">
+                                请输入学号
+                            </div>
                         </div>
-                        <input type="text" class="form-control" readonly="readonly" name="s_id" id="addStudentId" value="${init.userName}">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="s_pwd" class="input-group-text">&nbsp;&nbsp;&nbsp;密&nbsp;码&nbsp;&nbsp;&nbsp;</label>
+                        <div class="col-md-6 mb-3">
+                            <label for="addStudentName">姓名</label>
+                            <input type="text" class="form-control" name="s_name" id="addStudentName" required>
+                            <div class="invalid-feedback">
+                                请输入姓名
+                            </div>
                         </div>
-                        <input type="password" class="form-control" name="s_pwd" id="s_pwd">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="s_pwdConfirm" class="input-group-text">确认密码</label>
+                    <div class="form-row">
+                        <div class="col-md-6 mb-3">
+                            <label for="s_pwd">密码</label>
+                            <input type="password" class="form-control" name="s_pwd" id="s_pwd" required>
+                            <div class="invalid-feedback">
+                                请输入密码
+                            </div>
                         </div>
-                        <input type="password" class="form-control" name="s_pwdConfirm" id="s_pwdConfirm">
-                    </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="addStudentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                        <div class="col-md-6 mb-3">
+                            <label for="s_pwdConfirm">确认密码</label>
+                            <input type="password" class="form-control" name="s_pwdConfirm" id="s_pwdConfirm" required>
+                            <div class="invalid-feedback">
+                                请输入密码
+                            </div>
                         </div>
-                        <input type="text" class="form-control" name="s_name" id="addStudentName">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="addStudentGrade" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
-                        </div>
-                        <input type="text" class="form-control" name="c_name" id="addStudentGrade">
+
+                    <label for="addStudentGrade">班级</label>
+                    <input type="text" class="form-control" name="c_name" id="addStudentGrade" required>
+                    <div class="invalid-feedback">
+                        请输入班级
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="addStudentPhone" class="input-group-text">联系方式</label>
-                        </div>
-                        <input type="text" class="form-control" name="s_phone" id="addStudentPhone">
+
+                    <label for="addStudentCollege">学院</label>
+                    <select class="custom-select" id="addStudentCollege" name="s_college" required>
+                        <option selected disabled></option>
+                        <option>计算机学院</option>
+                        <option>电机学院</option>
+                        <option>传媒艺术学院</option>
+                        <option>外语学院</option>
+                    </select>
+                    <div class="invalid-feedback">
+                        请选择学院
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                            <label for="addStudentCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
-                        </div>
-                        <select class="form-control" id="addStudentCollege" name="s_college">
-                            <option style="display: none;"></option>
-                            <option>计算机学院</option>
-                            <option>电机学院</option>
-                            <option>传媒艺术学院</option>
-                            <option>外语学院</option>
-                        </select>
+
+                    <label for="addStudentPhone">联系方式</label>
+                    <input type="text" class="form-control" name="s_phone" id="addStudentPhone" required>
+                    <div class="invalid-feedback">
+                        请输入联系方式
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentCompany" class="input-group-text">实训公司</label>
-                        </div>
-                        <input type="text" class="form-control" name="company_name" id="addStudentCompany">
-                    </div>
-                    <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>
+
+                    <label for="addStudentCompany">实训公司&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <span class="font-italic" style="color: #c6c8ca">注：此处可选填</span>
+                    </label>
+                    <input type="text" class="form-control" name="company_name" id="addStudentCompany"><br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         <button type="submit" class="btn btn-primary" id="initStudent">提交</button>
@@ -116,69 +115,69 @@
                 </form>
                 <%}else if (authority==2){%>
                     <%--教师端初始化--%>
-                    <form action="initTeacher" method="post">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                    <form action="initTeacher" method="post" class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="addTeacherId">工号</label>
+                                <input type="text" class="form-control" readonly="readonly" name="t_id" id="addTeacherId" value="${init.userName}" required>
+                                <div class="invalid-feedback">
+                                    请输入工号
+                                </div>
                             </div>
-                            <input type="text" class="form-control" readonly="readonly" name="t_id" id="addTeacherId" value="${init.userName}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="t_pwd" class="input-group-text">&nbsp;&nbsp;&nbsp;密&nbsp;码&nbsp;&nbsp;&nbsp;</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="addTeacherName">姓名</label>
+                                <input type="text" class="form-control" name="t_name" id="addTeacherName" required>
+                                <div class="invalid-feedback">
+                                    请输入姓名
+                                </div>
                             </div>
-                            <input type="password" class="form-control" name="t_pwd" id="t_pwd">
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="t_pwdConfirm" class="input-group-text">确认密码</label>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="t_pwd">密码</label>
+                                <input type="password" class="form-control" name="t_pwd" id="t_pwd" required>
+                                <div class="invalid-feedback">
+                                    请输入密码
+                                </div>
                             </div>
-                            <input type="password" class="form-control" name="t_pwdConfirm" id="t_pwdConfirm">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="t_pwdConfirm">确认密码</label>
+                                <input type="password" class="form-control" name="t_pwdConfirm" id="t_pwdConfirm" required>
+                                <div class="invalid-feedback">
+                                    请输入密码
+                                </div>
                             </div>
-                            <input type="text" class="form-control" name="t_name" id="addTeacherName">
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherRank" class="input-group-text">&nbsp;&nbsp;&nbsp;职&nbsp;称&nbsp;&nbsp;&nbsp;</label>
-                            </div>
-                            <select class="form-control" id="addTeacherRank" name="t_rank">
-                                <option style="display: none;"></option>
-                                <option>教授</option>
-                                <option>副教授</option>
-                                <option>讲师</option>
-                                <option>助教</option>
-                            </select>
+
+                        <label for="addTeacherRank">职称</label>
+                        <select class="custom-select" id="addTeacherRank" name="t_rank" required>
+                            <option selected disabled></option>
+                            <option>教授</option>
+                            <option>副教授</option>
+                            <option>讲师</option>
+                            <option>助教</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            请选择职称
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
-                            </div>
-                            <select class="form-control" id="addTeacherCollege" name="t_college">
-                                <option style="display: none;"></option>
-                                <option>计算机学院</option>
-                                <option>电机学院</option>
-                                <option>传媒艺术学院</option>
-                                <option>外语学院</option>
-                            </select>
+
+                        <label for="addTeacherCollege">学院</label>
+                        <select class="custom-select" id="addTeacherCollege" name="t_college" required>
+                            <option selected disabled></option>
+                            <option>计算机学院</option>
+                            <option>电机学院</option>
+                            <option>传媒艺术学院</option>
+                            <option>外语学院</option>
+                        </select>
+                        <div class="invalid-feedback">
+                            请选择学院
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addTeacherPhone" class="input-group-text">联系方式</label>
-                            </div>
-                            <input type="text" class="form-control" name="t_phone" id="addTeacherPhone">
-                        </div>
-                        <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>
+
+                        <label for="addTeacherPhone">联系方式</label>
+                        <input type="text" class="form-control" name="t_phone" id="addTeacherPhone" required>
+                        <div class="invalid-feedback">
+                            请输入联系方式
+                        </div><br>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="submit" class="btn btn-primary" id="initTeacher">提交</button>
@@ -186,64 +185,120 @@
                     </form>
                 <%}else if (authority==3){%>
                     <%--企业员工初始化--%>
-                    <form action="initCompany" method="post">
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyPersonId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                    <form action="test" method="post" class="needs-validation" novalidate>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="addCompanyPersonId">工号</label>
+                                <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="addCompanyPersonId" value="${init.userName}" required>
+                                <div class="invalid-feedback">
+                                    请输入工号
+                                </div>
                             </div>
-                            <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="addCompanyPersonId" value="${init.userName}">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="c_pwd" class="input-group-text">&nbsp;&nbsp;&nbsp;密&nbsp;码&nbsp;&nbsp;&nbsp;</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="addCompanyPerson">姓名</label>
+                                <input type="text" class="form-control" name="company_person" id="addCompanyPerson" required>
+                                <div class="invalid-feedback">
+                                    请输入姓名
+                                </div>
                             </div>
-                            <input type="password" class="form-control" name="c_pwd" id="c_pwd">
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="c_pwdConfirm" class="input-group-text">确认密码</label>
+                        <div class="form-row">
+                            <div class="col-md-6 mb-3">
+                                <label for="c_pwd">密码</label>
+                                <input type="password" class="form-control" name="c_pwd" id="c_pwd" required>
+                                <div class="invalid-feedback">
+                                    请输入密码
+                                </div>
                             </div>
-                            <input type="password" class="form-control" name="c_pwdConfirm" id="c_pwdConfirm">
-                        </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyId" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>
+                            <div class="col-md-6 mb-3">
+                                <label for="c_pwdConfirm">确认密码</label>
+                                <input type="password" class="form-control" name="c_pwdConfirm" id="c_pwdConfirm" required>
+                                <div class="invalid-feedback">
+                                    请输入密码
+                                </div>
                             </div>
-                            <input type="text" class="form-control" name="company_id" id="addCompanyId">
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyName" class="input-group-text">公司名字</label>
-                            </div>
-                            <input type="text" class="form-control" name="company_name" id="addCompanyName">
+
+                        <label for="addCompanyPhone">联系方式</label>
+                        <input type="text" class="form-control" name="company_phone" id="addCompanyPhone" required>
+                        <div class="invalid-feedback">
+                            请输入联系方式
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyAddress" class="input-group-text">公司地址</label>
-                            </div>
-                            <input type="text" class="form-control" name="company_address" id="addCompanyAddress">
+
+                        <label for="addCompanyId">公司ID</label>
+                        <input type="text" class="form-control" name="company_id" id="addCompanyId" required>
+                        <div class="invalid-feedback">
+                            请输入公司ID
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyPerson" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
-                            </div>
-                            <input type="text" class="form-control" name="company_person" id="addCompanyPerson">
+
+                        <label for="addCompanyName">公司名称</label>
+                        <input type="text" class="form-control" name="company_name" id="addCompanyName" required>
+                        <div class="invalid-feedback">
+                            请输入公司名称
                         </div>
-                        <div class="input-group mb-3">
-                            <div class="input-group-prepend">
-                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>
-                                <label for="addCompanyPhone" class="input-group-text">联系方式</label>
-                            </div>
-                            <input type="text" class="form-control" name="company_phone" id="addCompanyPhone">
-                        </div>
-                        <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>
+
+                        <label for="addCompanyAddress">公司地址</label>
+                        <input type="text" class="form-control" name="company_address" id="addCompanyAddress" required>
+                        <div class="invalid-feedback">
+                            请输入公司地址
+                        </div><br>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyPersonId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="addCompanyPersonId" value="${init.userName}">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="c_pwd" class="input-group-text">&nbsp;&nbsp;&nbsp;密&nbsp;码&nbsp;&nbsp;&nbsp;</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="password" class="form-control" name="c_pwd" id="c_pwd">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="c_pwdConfirm" class="input-group-text">确认密码</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="password" class="form-control" name="c_pwdConfirm" id="c_pwdConfirm">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyId" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" name="company_id" id="addCompanyId">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyName" class="input-group-text">公司名字</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" name="company_name" id="addCompanyName">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyAddress" class="input-group-text">公司地址</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" name="company_address" id="addCompanyAddress">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyPerson" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" name="company_person" id="addCompanyPerson">--%>
+<%--                        </div>--%>
+<%--                        <div class="input-group mb-3">--%>
+<%--                            <div class="input-group-prepend">--%>
+<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
+<%--                                <label for="addCompanyPhone" class="input-group-text">联系方式</label>--%>
+<%--                            </div>--%>
+<%--                            <input type="text" class="form-control" name="company_phone" id="addCompanyPhone">--%>
+<%--                        </div>--%>
+<%--                        <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>--%>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="submit" class="btn btn-primary" id="initCompany">提交</button>
@@ -254,6 +309,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 </body>
 </html>

@@ -30,8 +30,8 @@ public class UtilsController {
     @RequestMapping("")
     public String login2(){return "login";}
 
-    @RequestMapping("index")
-    public String index(){return "admin/home";}
+    @RequestMapping("studentTrainingReport")
+    public String index(){return "student/trainingReport";}
 
 
 

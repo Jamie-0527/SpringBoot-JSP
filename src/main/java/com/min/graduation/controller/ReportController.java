@@ -1,6 +1,7 @@
 package com.min.graduation.controller;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
  * @author zhangjiamin
@@ -8,4 +9,9 @@ import org.springframework.stereotype.Controller;
  */
 @Controller
 public class ReportController {
+
+    @RequestMapping("test")
+    public void test01(){
+        System.out.println("访问了");
+    }
 }

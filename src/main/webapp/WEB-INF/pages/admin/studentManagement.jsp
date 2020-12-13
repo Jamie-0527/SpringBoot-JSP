@@ -93,50 +93,52 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <!--此处是修改表单-->
-                            <form action="updateStudentsInformation" method="post">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                            <%--此处是修改表单--%>
+                            <form action="test" method="post" class="needs-validation" novalidate>
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="studentId">学号</label>
+                                        <input type="text" class="form-control" name="s_id" id="studentId" value="${s.s_id}" required>
+                                        <div class="invalid-feedback">
+                                            请输入学号
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="s_id" id="studentId" value="${s.s_id}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                                    <div class="col-md-6 mb-3">
+                                        <label for="studentName">姓名</label>
+                                        <input type="text" class="form-control" name="s_name" id="studentName" value="${s.s_name}" required>
+                                        <div class="invalid-feedback">
+                                            请输入姓名
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="s_name" id="studentName" value="${s.s_name}">
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentGrade" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="c_name" id="studentGrade" value="${s.grade.c_name}">
+
+                                <label for="studentGrade">班级</label>
+                                <input type="text" class="form-control" name="c_name" id="studentGrade" value="${s.grade.c_name}" required>
+                                <div class="invalid-feedback">
+                                    请输入班级
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentPhone" class="input-group-text">联系方式</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="s_phone" id="studentPhone" value="${s.s_phone}">
+
+                                <label for="studentCollege">学院</label>
+                                <select class="custom-select" id="studentCollege" name="s_college" required>
+                                    <option selected disabled></option>
+                                    <option>计算机学院</option>
+                                    <option>电机学院</option>
+                                    <option>传媒艺术学院</option>
+                                    <option>外语学院</option>
+                                </select>
+                                <div class="invalid-feedback">
+                                    请选择学院
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <select class="form-control" id="studentCollege" name="s_college">
-                                        <option style="display: none;"></option>
-                                        <option>计算机学院</option>
-                                        <option>电机学院</option>
-                                        <option>传媒艺术学院</option>
-                                        <option>外语学院</option>
-                                    </select>
+
+                                <label for="studentPhone">联系方式</label>
+                                <input type="text" class="form-control" name="s_phone" id="studentPhone" value="${s.s_phone}" required>
+                                <div class="invalid-feedback">
+                                    请输入联系方式
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="studentCompany" class="input-group-text">实训公司</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="company_name" id="studentCompany" value="${s.company_name}">
-                                </div>
+
+                                <label for="studentCompany">实训公司
+                                </label>
+                                <input type="text" class="form-control" name="company_name" id="studentCompany" value="${s.company_name}"><br>
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
@@ -164,9 +166,7 @@
                                     <button type="submit" class="btn btn-danger">删除</button>
                                 </div>
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -183,22 +183,24 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="addStudentsInformation" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                <form action="addStudentsInformation" method="post" class="needs-validation" novalidate>
+                    <div class="col-md-6 mb-3">
+                        <label for="addStudentId">学号</label>
+                        <input type="text" class="form-control" name="s_id" id="addStudentId" required>
+                        <div class="invalid-feedback">
+                            请输入学号
                         </div>
-                        <input type="text" class="form-control" name="s_id" id="addStudentId">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                    <div class="col-md-6 mb-3">
+                        <label for="addStudentName">姓名</label>
+                        <input type="text" class="form-control" name="s_name" id="addStudentName" required>
+                        <div class="invalid-feedback">
+                            请输入姓名
                         </div>
-                        <input type="text" class="form-control" name="s_name" id="addStudentName">
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary" id="addStudent">提交</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
                     </div>
                 </form>
             </div>
@@ -206,6 +208,27 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 
 </body>
