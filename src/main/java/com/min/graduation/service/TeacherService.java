@@ -2,6 +2,8 @@ package com.min.graduation.service;
 
 
 
+import com.min.graduation.entity.Grade;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 
@@ -24,5 +26,11 @@ public interface TeacherService {
 
     //更新班级学生信息
     int t_updateInfo(Student student);
+
+    //通过teacherID获取授课班级名称
+    List<Grade> getGradeName(String t_id);
+
+    //查询授课班级提交的实训报告
+    List<Report> getGradeReport(String c_name);
 
 }

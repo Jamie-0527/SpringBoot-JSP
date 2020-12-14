@@ -34,7 +34,7 @@
     <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" role="button">点击修改</button>
 </div>
 
-<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
@@ -242,63 +242,6 @@
                         <div class="invalid-feedback">
                             请输入公司地址
                         </div><br>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyPersonId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="addCompanyPersonId" value="${init.userName}">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="c_pwd" class="input-group-text">&nbsp;&nbsp;&nbsp;密&nbsp;码&nbsp;&nbsp;&nbsp;</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="password" class="form-control" name="c_pwd" id="c_pwd">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="c_pwdConfirm" class="input-group-text">确认密码</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="password" class="form-control" name="c_pwdConfirm" id="c_pwdConfirm">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyId" class="input-group-text">&nbsp;&nbsp;公司ID&nbsp;&nbsp;</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" name="company_id" id="addCompanyId">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyName" class="input-group-text">公司名字</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" name="company_name" id="addCompanyName">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyAddress" class="input-group-text">公司地址</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" name="company_address" id="addCompanyAddress">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyPerson" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" name="company_person" id="addCompanyPerson">--%>
-<%--                        </div>--%>
-<%--                        <div class="input-group mb-3">--%>
-<%--                            <div class="input-group-prepend">--%>
-<%--                                <span style="color: red; font-size: 20px; margin-top: 5px">*</span>--%>
-<%--                                <label for="addCompanyPhone" class="input-group-text">联系方式</label>--%>
-<%--                            </div>--%>
-<%--                            <input type="text" class="form-control" name="company_phone" id="addCompanyPhone">--%>
-<%--                        </div>--%>
-<%--                        <p style="font-size: 10px"><span style="color: red;">*&nbsp;&nbsp;</span>标注的为必填项</p>--%>
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                             <button type="submit" class="btn btn-primary" id="initCompany">提交</button>

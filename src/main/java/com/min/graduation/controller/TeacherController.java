@@ -1,6 +1,7 @@
 package com.min.graduation.controller;
 
 import com.min.graduation.entity.Grade;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.StudentService;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -90,15 +92,30 @@ public class TeacherController {
 
     }
 
-    //更新教师信息
-    @RequestMapping("teacherUpdateInformation")
-    public String teacherUpdateInformation(Model model, Teacher teacher) {
+    //获取学生的实训报告
+    @RequestMapping("teacherGetReport")
+    public String teacherGetReport(Model model, HttpSession session) {
 
-        teacherService.updateTeacher(teacher);
-        Teacher t = teacherService.personInformation(teacher.getT_id());
-        model.addAttribute("teacher",t);
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> result = new ArrayList<>();
+            //获取班级学生实训报告
+            List<Grade> gradeList = teacherService.getGradeName(userName);
+            for (Grade grade : gradeList){
+                List<Report> gradeReport= teacherService.getGradeReport(grade.getC_name());
+                for (Report report : gradeReport){
+                    result.add(report);
+                }
+            }
+            //获取教师个人信息，提高用户体验
+            Teacher teacher = teacherService.personInformation(userName);
+            model.addAttribute("teacher",teacher);
+            model.addAttribute("gradeReport",result);
+            return "teacher/reportManagement";
+        }
 
-        return "teacher/loginSuccess";
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
     }
 
 }

@@ -85,7 +85,7 @@
                 </td>
             </tr>
             <%--修改信息模态框--%>
-            <div class="modal fade" id="myModify<%=i%>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -94,7 +94,7 @@
                         </div>
                         <div class="modal-body">
                             <%--此处是修改表单--%>
-                            <form action="test" method="post" class="needs-validation" novalidate>
+                            <form action="updateStudentsInformation" method="post" class="needs-validation" novalidate>
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="studentId">学号</label>
@@ -150,7 +150,7 @@
                 </div>
             </div>
             <%--删除学生模态框--%>
-            <div class="modal fade" id="modalDel<%=i%>" tabindex="-1" role="dialog" aria-labelledby="del" aria-hidden="true">
+            <div class="modal fade" id="modalDel<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="del" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
@@ -175,7 +175,7 @@
     </table>
 </div>
 <%--添加学生的模态框--%>
-<div class="modal fade" id="modalAdd" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+<div class="modal fade" id="modalAdd" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

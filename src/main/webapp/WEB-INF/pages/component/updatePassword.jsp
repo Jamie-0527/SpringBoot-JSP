@@ -119,7 +119,7 @@
     </div>
 </div>
 <%--修改信息的模态框--%>
-<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+<div class="modal fade" id="modalUpdate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

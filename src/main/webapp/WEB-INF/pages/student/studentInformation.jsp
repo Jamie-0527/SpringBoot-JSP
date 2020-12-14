@@ -33,7 +33,7 @@
 <body>
 
 <%--侧边栏--%>
-<%@include file="../component/teacherLeft.jsp"%>
+<%@include file="../component/studentLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
@@ -84,7 +84,7 @@
     </div>
 </div>
 <%--修改信息的模态框--%>
-<div class="modal fade" id="modalUpdate" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
+<div class="modal fade" id="modalUpdate" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">

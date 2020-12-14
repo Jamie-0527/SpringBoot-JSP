@@ -1,6 +1,8 @@
 package com.min.graduation.service.impl;
 
 import com.min.graduation.dao.TeacherDao;
+import com.min.graduation.entity.Grade;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.TeacherService;
@@ -38,6 +40,16 @@ public class TeacherServiceImpl implements TeacherService {
     @Override
     public int t_updateInfo(Student student) {
         return teacherDao.t_updateInfo(student);
+    }
+
+    @Override
+    public List<Grade> getGradeName(String t_id) {
+        return teacherDao.getGradeName(t_id);
+    }
+
+    @Override
+    public List<Report> getGradeReport(String c_name) {
+        return teacherDao.getGradeReport(c_name);
     }
 
 }

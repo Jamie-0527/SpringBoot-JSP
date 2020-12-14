@@ -1,6 +1,9 @@
 package com.min.graduation.service.impl;
 
+import com.min.graduation.dao.ReportDao;
+import com.min.graduation.entity.Report;
 import com.min.graduation.service.ReportService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +12,17 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class ReportServiceImpl implements ReportService {
+
+    @Autowired
+    private ReportDao reportDao;
+
+    @Override
+    public int submitReport(Report report) {
+        return reportDao.submitReport(report);
+    }
+
+    @Override
+    public int teacherReviewReport(Report report) {
+        return reportDao.teacherReviewReport(report);
+    }
 }

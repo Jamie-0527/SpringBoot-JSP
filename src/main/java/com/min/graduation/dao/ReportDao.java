@@ -1,5 +1,6 @@
 package com.min.graduation.dao;
 
+import com.min.graduation.entity.Report;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -8,4 +9,10 @@ import org.springframework.stereotype.Repository;
  */
 @Repository
 public interface ReportDao {
+
+    //学生提交报告
+    int submitReport(Report report);
+
+    //教师审批报告
+    int teacherReviewReport(Report report);
 }

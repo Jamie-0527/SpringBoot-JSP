@@ -3,4 +3,22 @@
 
 <mapper namespace="com.min.graduation.dao.ReportDao">
 
+    <!--提交实训报告-->
+    <insert id="submitReport" parameterType="Report">
+        insert into training_report (s_id,s_name,c_name,s_college,report_context,report_experience,company_name,begin_time,end_time,commit_time,report_status)
+        values (#{s_id},#{s_name},#{c_name},#{s_college},#{report_context},#{report_experience},#{company_name},#{begin_time},#{end_time},now(),0)
+    </insert>
+
+    <!--教师审批报告-->
+    <update id="teacherReviewReport" parameterType="Report">
+        update training_report
+        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
+            <if test="t_id != null and t_id != ''">t_id=#{t_id},</if>
+            <if test="t_name != null and t_name != ''">t_name=#{t_name},</if>
+            <if test="t_review_score != null and t_review_score != ''">t_review_score=#{t_review_score},</if>
+            <if test="t_review_opinion != null and t_review_opinion != ''">t_review_opinion=#{t_review_opinion},</if>
+            <if test="1==1">t_review_time=now(),</if>
+            <if test="1==1">report_status=1,</if>
+        </trim>
+    </update>
 </mapper>

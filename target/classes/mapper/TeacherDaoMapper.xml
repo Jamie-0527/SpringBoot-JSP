@@ -62,5 +62,17 @@
             <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
         </trim>
     </update>
-    
+
+    <!--通过teacherID获取授课班级的名称-->
+    <select id="getGradeName" parameterType="String" resultMap="GradeMapper">
+        select * from grade g left join teacher t on g.t_id=t.t_id
+        where t.t_id = #{t_id}
+    </select>
+
+    <!--查询授课班级提交的实训报告-->
+    <select id="getGradeReport" parameterType="String" resultType="Report">
+        select * from training_report
+        where c_name = #{c_name}
+    </select>
+
 </mapper>
