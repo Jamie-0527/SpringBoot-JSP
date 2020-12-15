@@ -1,8 +1,8 @@
 package com.min.graduation.controller;
 
-import com.min.graduation.entity.Login;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
-import com.min.graduation.service.LoginService;
+import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,54 +21,6 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
-    @Autowired
-    private LoginService loginService;
-
-
-//    //查询所有
-//    @RequestMapping("studentFindAll")
-//    public String findAll(Model model){
-//        System.out.println("findAll已运行...");
-//
-//        List<Student> students = service.findAll();
-//        model.addAttribute("list",students);
-//
-//        return "student/findAll";
-//    }
-//
-//    //根据姓名模糊查询
-//    @RequestMapping("studentFindByName")
-//    public String findByName(Model model, HttpServletRequest request){
-//        System.out.println("FindByName已运行...");
-//
-//        String name = request.getParameter("");
-//        List<Student> students = service.findByName(name);
-//        model.addAttribute("list",students);
-//
-//        return "student/findAll";
-//    }
-//
-//    //根据学号查询信息
-//    @RequestMapping("studentFindById")
-//    public String findById(Model model, HttpServletRequest request){
-//        System.out.println("FindById已运行...");
-//
-//        String id = request.getParameter("");
-//        Student student = service.findById(id);
-//        model.addAttribute("list",student);
-//
-//        return "student/findAll";
-//    }
-//
-//    //根据学号查询信息
-//    @RequestMapping("saveStudent")
-//    public void saveStudent(Student student, HttpServletRequest request, HttpServletResponse response) throws IOException{
-//        System.out.println("saveStudent已运行...");
-//
-//        service.addStudent(student);
-//        /*重定向到查询页面，将存入的信息打印出来*/
-//        response.sendRedirect(request.getContextPath() + "/studentFindAll");
-//    }
 
     //查询个人信息
     @RequestMapping("studentPersonInformation")
@@ -109,5 +61,20 @@ public class StudentController {
         model.addAttribute("studentCompany",company);
 
         return "student/companyInformation";
+    }
+
+    //查询我提交的实训报告
+    @RequestMapping("findMyReport")
+    public String findMyReport(Model model, HttpSession session){
+
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> myReport = studentService.myReport(userName);
+            model.addAttribute("myReport",myReport);
+            return "student/trainingReport";
+
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
     }
 }

@@ -12,7 +12,6 @@
     <title>实训报告</title>
 </head>
 
-
 <style>
     #lastLine:last-child td,#lastLine:last-child th{border-bottom: 1px solid rgb(222,226,230);}
 </style>
@@ -73,16 +72,50 @@
                     <td class="border-right">
                         <span class="badge badge-info">待审核</span>
                     </td>
+                    <td>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                    </td>
+                    <%} else if (checkStatus==4){%>
+                    <td class="border-right">
+                        <span class="badge badge-secondary">已打回</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                    </td>
                     <%} else {%>
                     <td class="border-right">
                         <span class="badge badge-success">审核通过</span>
                     </td>
-                    <%}%>
                     <td>
                         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reDo<%=i%>">打回重做</button>
                     </td>
+                    <%}%>
                 </tr>
-                <%--修改信息模态框--%>
+                <%--打回重做模态框--%>
+                <div class="modal fade" id="reDo<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="reDoLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="reDoLabel">审核实训报告</h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                <p>你确定要将此份实训报告打回重做吗？</p>
+                                <form action="backReDo" method="post" >
+                                    <input style="display: none" type="text" class="form-control" name="s_id" value="${r.s_id}">
+                                    <input style="display: none" type="number" class="form-control" name="id" value="${r.id}">
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                        <button type="submit" class="btn btn-danger">打回重做</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <%--教师审核模态框--%>
                 <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                         <div class="modal-content">
@@ -91,9 +124,10 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
-                                    <%--此处是修改表单--%>
-                                <form action="teacherReviewReport" method="post" class="needs-validation" novalidate>
+                                <%--此处是修改表单--%>
+                                <form action="teacherReviewReport" method="post">
                                     <div class="form-row">
+                                        <input type="number" style="display: none;" name="id" value="${r.id}">
                                         <div class="col-md-3 mb-3">
                                             <label for="studentId">学号</label>
                                             <input type="text" class="form-control" readonly="readonly" name="s_id" id="studentId" value="${r.s_id}" required>
@@ -152,9 +186,10 @@
                                         <label for="t_review_opinion">审核意见</label>
                                         <textarea type="text" rows="10" class="form-control" name="t_review_opinion" id="t_review_opinion" style="resize: none" required></textarea>
                                     </div>
+                                    <p style="color: #c6c8ca">上一次审核提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_review_time}</span></p>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="submit" class="btn btn-primary">提交</button>
+                                        <button type="submit" class="btn btn-primary">提交审核</button>
                                     </div>
                                 </form>
                             </div>

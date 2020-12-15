@@ -2,6 +2,7 @@ package com.min.graduation.service;
 
 
 import com.min.graduation.entity.Grade;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import org.apache.ibatis.annotations.Param;
 
@@ -42,5 +43,8 @@ public interface StudentService {
 
     //根据班级名字查询班级信息
     Grade findGradeInfo(String className);
+
+    //查询我提交的实训报告
+    List<Report> myReport(String s_id);
 
 }

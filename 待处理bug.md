@@ -4,3 +4,6 @@
 
 #### 2、如果修改表单全部为空，后台处理会不会报错
 
+#### 解决方案1
+使用浏览器的默认反馈===>去掉from标签中的class="needs-validation" novalidate即可
+

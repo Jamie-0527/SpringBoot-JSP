@@ -6,6 +6,8 @@ import com.min.graduation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Map;
+
 /**
  * @author zhangjiamin
  * @date 2020/12/12 21:19
@@ -24,5 +26,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public int teacherReviewReport(Report report) {
         return reportDao.teacherReviewReport(report);
+    }
+
+    @Override
+    public int backReDo(Map<String, Object> map) {
+        return reportDao.backReDo(map);
     }
 }

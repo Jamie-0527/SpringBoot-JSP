@@ -30,11 +30,6 @@ public class UtilsController {
     @RequestMapping("")
     public String login2(){return "login";}
 
-    @RequestMapping("studentTrainingReport")
-    public String index(){return "student/trainingReport";}
-
-
-
     //初始化学生个人信息
     @RequestMapping("initStudent")
     public String initStudent(Model model, HttpServletRequest request){

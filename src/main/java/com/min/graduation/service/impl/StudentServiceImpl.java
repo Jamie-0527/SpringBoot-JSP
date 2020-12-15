@@ -2,6 +2,7 @@ package com.min.graduation.service.impl;
 
 import com.min.graduation.dao.StudentDao;
 import com.min.graduation.entity.Grade;
+import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +66,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public Grade findGradeInfo(String className) {
         return studentDao.findGradeInfo(className);
+    }
+
+    @Override
+    public List<Report> myReport(String s_id) {
+        return studentDao.myReport(s_id);
     }
 
 }
