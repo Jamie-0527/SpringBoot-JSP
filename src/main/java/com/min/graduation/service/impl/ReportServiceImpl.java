@@ -30,6 +30,11 @@ public class ReportServiceImpl implements ReportService {
     }
 
     @Override
+    public int companyReviewReport(Report report) {
+        return reportDao.companyReviewReport(report);
+    }
+
+    @Override
     public int backReDo(Map<String, Object> map) {
         return reportDao.backReDo(map);
     }

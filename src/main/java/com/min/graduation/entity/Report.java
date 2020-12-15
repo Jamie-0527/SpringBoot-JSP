@@ -27,7 +27,7 @@ public class Report implements Serializable {
     private LocalDate t_review_time;    //教师审核提交时间
     private String company_person;      //企业负责人姓名
     private String emp_review_opinion;  //企业负责人审核意见
-    private String emp_review_score;    //企业负责人审核分数
+    private Integer emp_review_score;    //企业负责人审核分数
     private LocalDate emp_review_time;  //企业负责人审核提交时间
     private String company_name;        //企业名称
     private LocalDate begin_time;   //实训开始时间

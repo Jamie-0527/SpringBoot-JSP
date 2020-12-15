@@ -9,7 +9,7 @@
         values (#{s_id},#{s_name},#{c_name},#{s_college},#{report_context},#{report_experience},#{company_name},#{begin_time},#{end_time},now(),0)
     </insert>
 
-    <!--教师审批报告-->
+    <!--教师审核报告-->
     <update id="teacherReviewReport" parameterType="Report">
         update training_report
         <trim prefix="set" suffix="where s_id=#{s_id} and id=#{id}" suffixOverrides=",">
@@ -18,6 +18,19 @@
             <if test="t_review_opinion != null and t_review_opinion != ''">t_review_opinion=#{t_review_opinion},</if>
             <if test="1==1">t_review_time=now(),</if>
             <if test="1==1">report_status=1,</if>
+        </trim>
+    </update>
+
+    <!--企业人员审核报告-->
+    <update id="companyReviewReport" parameterType="Report">
+        update training_report
+        <trim prefix="set" suffix="where s_id=#{s_id} and id=#{id}" suffixOverrides=",">
+            <if test="company_person != null and company_person != ''">company_person=#{company_person},</if>
+            <if test="emp_review_score != null and emp_review_score != ''">emp_review_score=#{emp_review_score},</if>
+            <if test="emp_review_opinion != null and emp_review_opinion != ''">emp_review_opinion=#{emp_review_opinion},</if>
+            <if test="1==1">emp_review_time=now(),</if>
+            <if test="report_status==0">report_status=1,</if>
+            <if test="report_status==1">report_status=3,</if>
         </trim>
     </update>
 

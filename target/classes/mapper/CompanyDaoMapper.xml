@@ -7,4 +7,29 @@
     <select id="personInformation" resultType="Company" parameterType="String">
         select * from company where company_person_id = #{company_person_id}
     </select>
+
+    <!--查询公司实训学生信息-->
+    <select id="findCompanyStudent" parameterType="String" resultType="Student">
+        select s.s_id,s.s_name,s_phone from student s
+         left join company c
+         on s.company_name=c.company_name
+         where c.company_person_id=#{company_person_id}
+    </select>
+
+    <!--更新实训学生信息-->
+    <update id="c_updateInfo" parameterType="Student">
+        update student
+        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
+            <if test="s_name != null and s_name != ''">s_name=#{s_name},</if>
+            <if test="s_phone != null and s_phone != ''">s_phone=#{s_phone},</if>
+        </trim>
+    </update>
+
+    <!--查询实训学生提交的实训报告-->
+    <select id="getCompanyReport" parameterType="String" resultType="Report">
+        select * from training_report t
+        left join company c on t.company_name=c.company_name
+        where c.company_person_id=#{company_person_id}
+    </select>
+
 </mapper>

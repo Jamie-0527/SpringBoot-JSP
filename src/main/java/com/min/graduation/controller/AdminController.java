@@ -86,9 +86,16 @@ public class AdminController {
                     model.addAttribute("allStudent", allStudent);
                     return "admin/studentManagement";
                 }else if (userName != null && userName != ""){
-                    List<Teacher> classStudent = teacherService.findClassStudent(userName);
-                    model.addAttribute("classStudent",classStudent);
-                    return "teacher/studentManagement";
+                    if (Authority==2){
+                        List<Teacher> classStudent = teacherService.findClassStudent(userName);
+                        model.addAttribute("classStudent",classStudent);
+                        return "teacher/studentManagement";
+                    }else {
+                        List<Student> companyStudent = companyService.findCompanyStudent(userName);
+                        model.addAttribute("companyStudent",companyStudent);
+                        return "company/studentManagement";
+                    }
+
                 }else {
                     model.addAttribute("error","身份信息过期，请重新登录！");
                     return "login";

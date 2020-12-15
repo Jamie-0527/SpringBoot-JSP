@@ -46,10 +46,24 @@ public class ReportController {
 
     //教师审核实训报告
     @RequestMapping("teacherReviewReport")
-    public String teacherReviewReport(Model model, Report report){
-        model.addAttribute("ok_submit","提交成功！");
+    public String teacherReviewReport(Model model, Report report, HttpServletRequest request){
+        //数据类型转换
+        String t_review_score = request.getParameter("t_review_score");
+        report.setEmp_review_score(Integer.parseInt(t_review_score));
         reportService.teacherReviewReport(report);
+        model.addAttribute("ok_submit","提交成功！");
         return "forward:teacherGetReport";
+    }
+
+    //企业人员审核实训报告
+    @RequestMapping("companyReviewReport")
+    public String companyReviewReport(Model model, Report report, HttpServletRequest request){
+        //数据类型转换
+        String emp_review_score = request.getParameter("emp_review_score");
+        report.setEmp_review_score(Integer.parseInt(emp_review_score));
+        reportService.companyReviewReport(report);
+        model.addAttribute("ok_submit","提交成功！");
+        return "forward:getCompanyReport";
     }
 
     //打回实训报告重做
