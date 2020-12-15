@@ -19,10 +19,16 @@
 <%
     //初始化一个int i，用于回去列表每行ID
     int i=1;
-    String error = (String) request.getAttribute("addStudentError");
-    String ok = (String) request.getAttribute("ok_addS");
+    String ok = (String) request.getAttribute("ok_submit");
 %>
-
+<script>
+    window.onload=function () {
+        var ok = '<%=ok%>'
+        if (ok != 'null'){
+            alert(ok);
+        }
+    }
+</script>
 <body>
 
 <%--侧边栏--%>
@@ -31,8 +37,14 @@
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
         <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">实训报告</span>
+        <div style="float:right;  padding-right: 20px">
+            <form class="form-inline my-2 my-lg-0" action="findReportById" method="post">
+                <span>查询实训报告&nbsp;&nbsp;</span>
+                <input class="form-control mr-sm-2" name="s_id" type="search" placeholder="请输入学号..." aria-label="Search">
+                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
     </div>
-
     <table class="table table-striped">
         <thead>
         <tr align="center">

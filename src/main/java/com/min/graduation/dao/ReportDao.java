@@ -3,6 +3,7 @@ package com.min.graduation.dao;
 import com.min.graduation.entity.Report;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Map;
 
 /**

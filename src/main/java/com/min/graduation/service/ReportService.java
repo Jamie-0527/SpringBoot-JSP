@@ -2,6 +2,7 @@ package com.min.graduation.service;
 
 import com.min.graduation.entity.Report;
 
+import java.util.List;
 import java.util.Map;
 
 /**

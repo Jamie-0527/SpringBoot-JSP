@@ -12,8 +12,7 @@
     <!--教师审批报告-->
     <update id="teacherReviewReport" parameterType="Report">
         update training_report
-        <trim prefix="set" suffix="where s_id=#{s_id}" suffixOverrides=",">
-            <if test="t_id != null and t_id != ''">t_id=#{t_id},</if>
+        <trim prefix="set" suffix="where s_id=#{s_id} and id=#{id}" suffixOverrides=",">
             <if test="t_name != null and t_name != ''">t_name=#{t_name},</if>
             <if test="t_review_score != null and t_review_score != ''">t_review_score=#{t_review_score},</if>
             <if test="t_review_opinion != null and t_review_opinion != ''">t_review_opinion=#{t_review_opinion},</if>
@@ -21,4 +20,10 @@
             <if test="1==1">report_status=1,</if>
         </trim>
     </update>
+
+    <!--实训报告打回重做-->
+    <update id="backReDo" parameterType="Map">
+        update training_report set report_status=4,t_review_time=now() where id=#{id} and s_id=#{s_id}
+    </update>
+
 </mapper>

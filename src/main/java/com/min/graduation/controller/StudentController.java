@@ -4,6 +4,7 @@ import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.StudentService;
+import com.min.graduation.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,6 +22,8 @@ public class StudentController {
 
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private TeacherService teacherService;
 
     //查询个人信息
     @RequestMapping("studentPersonInformation")
@@ -73,6 +76,23 @@ public class StudentController {
             model.addAttribute("myReport",myReport);
             return "student/trainingReport";
 
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
+    }
+
+    //根据学号查询实训报告
+    @RequestMapping("findReportById")
+    public String findReportById(Model model, String s_id, HttpSession session){
+
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> reportById = studentService.myReport(s_id);
+            model.addAttribute("gradeReport",reportById);
+            //获取教师个人信息，提高用户体验
+            Teacher teacher = teacherService.personInformation(userName);
+            model.addAttribute("teacher",teacher);
+            return "teacher/reportManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         return "login";

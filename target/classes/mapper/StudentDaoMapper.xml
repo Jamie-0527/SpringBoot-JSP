@@ -88,4 +88,10 @@
         select * from grade where c_name = #{className}
     </select>
 
+    <!--查询我提交的实训报告-->
+    <select id="myReport" parameterType="String" resultType="Report">
+        select * from training_report
+        where s_id = #{s_id}
+    </select>
+
 </mapper>
