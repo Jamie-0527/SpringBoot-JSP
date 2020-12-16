@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -20,6 +23,26 @@ public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
+
+
+    //主页
+    @RequestMapping("companyToHome")
+    public String teacherToHome(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> companyReport = companyService.getCompanyReport(userName);
+            for (Report report : companyReport){
+                Date now = new Date();
+                long time = now.getTime()-report.getCommit_time().getTime();
+                report.setUpdatedOn(time/(1000*60*60));
+            }
+            Collections.reverse(companyReport);
+            model.addAttribute("news",companyReport);
+            return "company/home";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
+    }
 
     //查询公司信息
     @RequestMapping("companyPersonInformation")

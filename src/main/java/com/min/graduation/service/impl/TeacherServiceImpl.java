@@ -59,4 +59,9 @@ public class TeacherServiceImpl implements TeacherService {
         return reports;
     }
 
+    @Override
+    public List<Report> getGradeReportNoFormat(String c_name) {
+        return teacherDao.getGradeReport(c_name);
+    }
+
 }

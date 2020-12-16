@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 
 @Controller
@@ -27,7 +28,7 @@ public class LoginController {
 
 
     @RequestMapping("login")
-    public String loginUser(HttpServletRequest request, Model model){
+    public String loginUser(HttpServletRequest request, HttpSession session, Model model){
 
         try {
             //获得用户输入的密码，进行md5算法换算后与数据匹配
@@ -50,36 +51,32 @@ public class LoginController {
                             //密码正确则判断权限 超级管理员0、学生1、教师2、企业员工3
                             if (l.getAuthority() == 0){
                                 String userName = l.getUserName();
-                                model.addAttribute("userName",userName);
-                                model.addAttribute("Authority",l.getAuthority());
-
-                                return "admin/home";
+                                session.setAttribute("userName",userName);
+                                session.setAttribute("Authority",l.getAuthority());
+                                return "forward:adminToHome";
 
                             }else if (l.getAuthority() == 1){
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                model.addAttribute("userName",userName);
-                                model.addAttribute("Authority",l.getAuthority());
-
-                                return "student/home";
+                                session.setAttribute("userName",userName);
+                                session.setAttribute("Authority",l.getAuthority());
+                                return "forward:studentToHome";
 
                             }else if (l.getAuthority() == 2) {
 
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                model.addAttribute("userName",userName);
-                                model.addAttribute("Authority",l.getAuthority());
-
-                                return "teacher/home";
+                                session.setAttribute("userName",userName);
+                                session.setAttribute("Authority",l.getAuthority());
+                                return "forward:teacherToHome";
 
                             }else if (l.getAuthority() == 3) {
 
                                 /*获得用户名*/
                                 String userName = l.getUserName();
-                                model.addAttribute("userName",userName);
-                                model.addAttribute("Authority",l.getAuthority());
-
-                                return "company/home";
+                                session.setAttribute("userName",userName);
+                                session.setAttribute("Authority",l.getAuthority());
+                                return "forward:companyToHome";
 
                             }
                         }

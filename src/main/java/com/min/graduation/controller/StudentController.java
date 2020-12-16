@@ -29,6 +29,18 @@ public class StudentController {
     @Autowired
     private CompanyService companyService;
 
+
+    //主页
+    @RequestMapping("studentToHome")
+    public String studentToHome(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            return "student/home";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
+    }
+
     //查询个人信息
     @RequestMapping("studentPersonInformation")
     public String studentPersonInformation(Model model, HttpSession session) {

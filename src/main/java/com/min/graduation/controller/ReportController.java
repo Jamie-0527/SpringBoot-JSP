@@ -27,14 +27,6 @@ public class ReportController {
     @Autowired
     private AdminService adminService;
 
-    @RequestMapping("test")
-    public void test01(){
-//        List<Report> allReport = adminService.findAllReport();
-//        Date commit_time = allReport.get(0).getCommit_time();
-//        Date now = new Date();
-//        long result = now.getTime()-commit_time.getTime();
-//        System.out.println(result/60000);
-    }
 
     //学生提交实训报告
     @RequestMapping("studentSubmitReport")

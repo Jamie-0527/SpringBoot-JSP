@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -27,9 +29,30 @@ public class TeacherController {
     @Autowired
     private StudentService studentService;
 
-    @RequestMapping("teacherUpdate")
-    public String teacherUpdate(){
-        return "teacher/update";
+
+    //主页
+    @RequestMapping("teacherToHome")
+    public String teacherToHome(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> result = new ArrayList<>();
+            //获取班级学生实训报告
+            List<Grade> gradeList = teacherService.getGradeName(userName);
+            for (Grade grade : gradeList){
+                List<Report> gradeReport= teacherService.getGradeReportNoFormat(grade.getC_name());
+                for (Report report : gradeReport){
+                    Date now = new Date();
+                    long time = now.getTime()-report.getCommit_time().getTime();
+                    report.setUpdatedOn(time/(1000*60*60));
+                    result.add(report);
+                }
+            }
+            Collections.reverse(result);
+            model.addAttribute("news",result);
+            return "teacher/home";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
     }
 
     //查询个人信息

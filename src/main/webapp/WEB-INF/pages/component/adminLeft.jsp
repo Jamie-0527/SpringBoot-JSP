@@ -27,6 +27,7 @@
         font-size: 8px;
         text-align: center;
     }
+    html,body{height:100%;}
 </style>
 
 
@@ -35,10 +36,11 @@
 <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
-<body>
+
+<body >
 <%--侧边栏--%>
-<div style="background-color:rgb(32,34,42);  height: 100%; float: left; width: 15%">
-    <a class="navbar-brand" href="#">
+<div style="background-color:rgb(32,34,42); min-height: 100%; float: left; width: 15%">
+    <a class="navbar-brand" href="adminToHome">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="infoManagement">
