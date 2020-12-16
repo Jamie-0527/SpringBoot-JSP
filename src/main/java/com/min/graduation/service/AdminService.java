@@ -77,5 +77,8 @@ public interface AdminService {
     //启用账户
     int enableAccount(String user_name);
 
+    //查询所有实训报告
+    List<Report> findAllReport();
+
 
 }

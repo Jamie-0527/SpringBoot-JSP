@@ -17,7 +17,12 @@
             <if test="t_review_score != null and t_review_score != ''">t_review_score=#{t_review_score},</if>
             <if test="t_review_opinion != null and t_review_opinion != ''">t_review_opinion=#{t_review_opinion},</if>
             <if test="1==1">t_review_time=now(),</if>
-            <if test="1==1">report_status=1,</if>
+            <if test="report_status != null and report_status != ''">
+                <if test="report_status==0">report_status=1,</if>
+                <if test="report_status==1">report_status=1,</if>
+                <if test="report_status==2">report_status=3,</if>
+                <if test="report_status==3">report_status=3,</if>
+            </if>
         </trim>
     </update>
 
@@ -29,8 +34,12 @@
             <if test="emp_review_score != null and emp_review_score != ''">emp_review_score=#{emp_review_score},</if>
             <if test="emp_review_opinion != null and emp_review_opinion != ''">emp_review_opinion=#{emp_review_opinion},</if>
             <if test="1==1">emp_review_time=now(),</if>
-            <if test="report_status==0">report_status=1,</if>
-            <if test="report_status==1">report_status=3,</if>
+            <if test="report_status != null and report_status != ''">
+                <if test="report_status==0">report_status=2,</if>
+                <if test="report_status==1">report_status=3,</if>
+                <if test="report_status==2">report_status=2,</if>
+                <if test="report_status==3">report_status=3,</if>
+            </if>
         </trim>
     </update>
 

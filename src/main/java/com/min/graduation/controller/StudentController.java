@@ -1,8 +1,10 @@
 package com.min.graduation.controller;
 
+import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
+import com.min.graduation.service.CompanyService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,8 @@ public class StudentController {
     private StudentService studentService;
     @Autowired
     private TeacherService teacherService;
+    @Autowired
+    private CompanyService companyService;
 
     //查询个人信息
     @RequestMapping("studentPersonInformation")
@@ -86,13 +90,25 @@ public class StudentController {
     public String findReportById(Model model, String s_id, HttpSession session){
 
         String userName = (String) session.getAttribute("userName");
+        int authority = (int) session.getAttribute("Authority");
         if (userName != null && userName != ""){
             List<Report> reportById = studentService.myReport(s_id);
-            model.addAttribute("gradeReport",reportById);
-            //获取教师个人信息，提高用户体验
-            Teacher teacher = teacherService.personInformation(userName);
-            model.addAttribute("teacher",teacher);
-            return "teacher/reportManagement";
+            if (authority==0){
+                model.addAttribute("allReport",reportById);
+                return "admin/reportManagement";
+            }else if (authority==2){
+                model.addAttribute("gradeReport",reportById);
+                //获取教师个人信息，提高用户体验
+                Teacher teacher = teacherService.personInformation(userName);
+                model.addAttribute("teacher",teacher);
+                return "teacher/reportManagement";
+            }else if (authority==3){
+                model.addAttribute("companyReport",reportById);
+                //获取教师个人信息，提高用户体验
+                Company company = companyService.personInformation(userName);
+                model.addAttribute("company",company);
+                return "company/reportManagement";
+            }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         return "login";

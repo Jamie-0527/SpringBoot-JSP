@@ -121,5 +121,10 @@ public class AdminServiceImpl implements AdminService {
         return adminDao.enableAccount(user_name);
     }
 
+    @Override
+    public List<Report> findAllReport() {
+        return adminDao.findAllReport();
+    }
+
 
 }

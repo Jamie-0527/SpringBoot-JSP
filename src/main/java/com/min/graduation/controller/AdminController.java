@@ -310,5 +310,19 @@ public class AdminController {
         return "login";
     }
 
+    //查询所有提交的实训报告
+    @RequestMapping("findAllReport")
+    public String findAllReport(Model model, HttpSession session){
+
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Report> allReport = adminService.findAllReport();
+            model.addAttribute("allReport",allReport);
+            return "admin/reportManagement";
+
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
+    }
 
 }

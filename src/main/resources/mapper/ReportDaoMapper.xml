@@ -17,14 +17,16 @@
             <if test="t_review_score != null and t_review_score != ''">t_review_score=#{t_review_score},</if>
             <if test="t_review_opinion != null and t_review_opinion != ''">t_review_opinion=#{t_review_opinion},</if>
             <if test="1==1">t_review_time=now(),</if>
-            <if test="1==1">report_status=1,</if>
+            <if test="report_status != null and report_status != ''">
+                <if test="report_status==0">report_status=1,</if>
+                <if test="report_status==1">report_status=1,</if>
+                <if test="report_status==2">report_status=3,</if>
+                <if test="report_status==3">report_status=3,</if>
+            </if>
         </trim>
     </update>
 
-    <!--企业人员审核报告
-    用嵌套if来实现
-    在service，
-    -->
+    <!--企业人员审核报告-->
     <update id="companyReviewReport" parameterType="Report">
         update training_report
         <trim prefix="set" suffix="where s_id=#{s_id} and id=#{id}" suffixOverrides=",">
@@ -33,9 +35,11 @@
             <if test="emp_review_opinion != null and emp_review_opinion != ''">emp_review_opinion=#{emp_review_opinion},</if>
             <if test="1==1">emp_review_time=now(),</if>
             <if test="report_status != null and report_status != ''">
-                <if test="report_status==1"></if>
+                <if test="report_status==0">report_status=2,</if>
+                <if test="report_status==1">report_status=3,</if>
+                <if test="report_status==2">report_status=2,</if>
+                <if test="report_status==3">report_status=3,</if>
             </if>
-            <if test="report_status==1">report_status=3,</if>
         </trim>
     </update>
 

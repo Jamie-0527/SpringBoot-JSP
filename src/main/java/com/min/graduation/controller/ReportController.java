@@ -27,8 +27,8 @@ public class ReportController {
     private ReportService reportService;
 
     @RequestMapping("test")
-    public void test01(HttpServletRequest request){
-        System.out.println("访问了");
+    public void test01(Report report){
+        System.out.println(report);
     }
 
     //学生提交实训报告

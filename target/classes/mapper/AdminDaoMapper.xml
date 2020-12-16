@@ -172,6 +172,10 @@
         update login set `status` = 0 where user_name = #{user_name}
     </update>
 
+    <!--查询所有实训报告-->
+    <select id="findAllReport" resultType="Report">
+        select * from training_report
+    </select>
 
 
 </mapper>

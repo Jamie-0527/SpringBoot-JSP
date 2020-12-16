@@ -19,20 +19,20 @@
 <%
     //初始化一个int i，用于回去列表每行ID
     int i=1;
-    String ok = (String) request.getAttribute("ok_submit");
+    //String ok = (String) request.getAttribute("ok_submit");
 %>
-<script>
-    window.onload=function () {
-        var ok = '<%=ok%>'
-        if (ok != 'null'){
-            alert(ok);
-        }
-    }
-</script>
+<%--<script>--%>
+<%--    window.onload=function () {--%>
+<%--        var ok = '<%=ok%>'--%>
+<%--        if (ok != 'null'){--%>
+<%--            alert(ok);--%>
+<%--        }--%>
+<%--    }--%>
+<%--</script>--%>
 <body>
 
 <%--侧边栏--%>
-<%@include file="../component/teacherLeft.jsp"%>
+<%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
@@ -61,7 +61,7 @@
         </tr>
         </thead>
         <tbody>
-            <c:forEach items="${gradeReport}" var="r" varStatus="status">
+            <c:forEach items="${allReport}" var="r" varStatus="status">
                 <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
                 <tr align="center" id="lastLine">
                     <th class="border-right" scope="row">${status.index+1}</th>
@@ -79,10 +79,24 @@
                     <c:set var="nowStatus" value="${r.report_status}" scope="page"></c:set>
                     <%
                         int checkStatus = (int)pageContext.getAttribute("nowStatus");
-                        if (checkStatus==0 || checkStatus==2){
+                        if (checkStatus==0){
                     %>
                     <td class="border-right">
                         <span class="badge badge-info">待审核</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                    </td>
+                    <%} else if (checkStatus==1){%>
+                    <td class="border-right">
+                        <span class="badge badge-primary">待企业审核</span>
+                    </td>
+                    <td>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                    </td>
+                    <%} else if (checkStatus==2){%>
+                    <td class="border-right">
+                        <span class="badge badge-primary">待教师审核</span>
                     </td>
                     <td>
                         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
@@ -92,7 +106,7 @@
                         <span class="badge badge-secondary">已打回</span>
                     </td>
                     <td>
-                        <span class="badge badge-info">待重新提交</span>
+                        <span class="badge badge-dark">待重新提交</span>
 <%--                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>--%>
                     </td>
                     <%} else {%>
@@ -101,34 +115,34 @@
                     </td>
                     <td>
                         <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
-                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reDo<%=i%>">打回重做</button>
+<%--                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reDo<%=i%>">打回重做</button>--%>
                     </td>
                     <%}%>
                 </tr>
                 <%--打回重做模态框--%>
-                <div class="modal fade" id="reDo<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="reDoLabel" aria-hidden="true">
-                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h4 class="modal-title" id="reDoLabel">审核实训报告</h4>
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            </div>
-                            <div class="modal-body">
-                                <p>你确定要将此份实训报告打回重做吗？</p>
-                                <form action="backReDo" method="post" >
-                                    <input style="display: none" type="text" class="form-control" name="s_id" value="${r.s_id}">
-                                    <input style="display: none" type="number" class="form-control" name="id" value="${r.id}">
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="submit" class="btn btn-danger">打回重做</button>
-                                    </div>
-                                </form>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+<%--                <div class="modal fade" id="reDo<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="reDoLabel" aria-hidden="true">--%>
+<%--                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">--%>
+<%--                        <div class="modal-content">--%>
+<%--                            <div class="modal-header">--%>
+<%--                                <h4 class="modal-title" id="reDoLabel">审核实训报告</h4>--%>
+<%--                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>--%>
+<%--                            </div>--%>
+<%--                            <div class="modal-body">--%>
+<%--                                <p>你确定要将此份实训报告打回重做吗？</p>--%>
+<%--                                <form action="backReDo" method="post" >--%>
+<%--                                    <input style="display: none" type="text" class="form-control" name="s_id" value="${r.s_id}">--%>
+<%--                                    <input style="display: none" type="number" class="form-control" name="id" value="${r.id}">--%>
+<%--                                    <div class="modal-footer">--%>
+<%--                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+<%--                                        <button type="submit" class="btn btn-danger">打回重做</button>--%>
+<%--                                    </div>--%>
+<%--                                </form>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
 
-                <%--教师审核模态框--%>
+                <%--管理员查看详情模态框--%>
                 <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                         <div class="modal-content">
@@ -138,7 +152,7 @@
                             </div>
                             <div class="modal-body">
                                 <%--此处是修改表单--%>
-                                <form action="teacherReviewReport" method="post">
+                                <form>
                                     <div class="form-row">
                                         <input type="number" style="display: none;" name="id" value="${r.id}">
                                         <input type="number" style="display: none;" name="report_status" value="${r.report_status}">
@@ -181,30 +195,11 @@
                                                 ${r.report_experience}
                                         </textarea>
                                     </div>
-                                    <hr>
-                                    <div class="form-row">
-                                        <div class="col-md-4 mb-4">
-                                            <label for="teacherId">工号</label>
-                                            <input type="text" class="form-control" readonly="readonly" name="t_id" id="teacherId" value="${teacher.t_id}" required>
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <label for="teacherName">姓名</label>
-                                            <input type="text" class="form-control" readonly="readonly" name="t_name" id="teacherName" value="${teacher.t_name}" required>
-                                        </div>
-                                        <div class="col-md-4 mb-4">
-                                            <label for="t_review_score">审核分数<span style="color: #c6c8ca">(0-100)</span></label>
-                                            <input type="number" class="form-control checkNumber" name="t_review_score" id="t_review_score" onkeyup="check(this.value)" required>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <label for="t_review_opinion">审核意见</label>
-                                        <textarea type="text" rows="10" class="form-control" name="t_review_opinion" id="t_review_opinion" style="resize: none" required></textarea>
-                                    </div>
                                     <p style="color: #c6c8ca">上一次审核提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_review_time}</span></p>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                        <button type="submit" class="btn btn-primary">提交审核</button>
-                                    </div>
+<%--                                    <div class="modal-footer">--%>
+<%--                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+<%--                                        <button type="submit" class="btn btn-primary">提交审核</button>--%>
+<%--                                    </div>--%>
                                 </form>
                             </div>
                         </div>

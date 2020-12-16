@@ -29,8 +29,9 @@
     }
 </style>
 
-<script src="js/modify.js"></script>
+
 <script src="js/jquery-3.5.1.min.js"></script>
+<script src="js/modify.js"></script>
 <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
@@ -56,7 +57,7 @@
         <a href="teacherAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">教师账户</div></a>
         <a href="companyAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
     </div>
-    <a id="paperManagement" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
+    <a id="paperManagement" href="findAllReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
 
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="personalCenter">
         <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
