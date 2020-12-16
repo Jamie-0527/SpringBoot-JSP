@@ -30,7 +30,10 @@ public interface TeacherService {
     //通过teacherID获取授课班级名称
     List<Grade> getGradeName(String t_id);
 
-    //查询授课班级提交的实训报告
+    //查询授课班级提交的实训报告---格式修正
     List<Report> getGradeReport(String c_name);
+
+    //查询授课班级提交的实训报告---无格式修正
+    List<Report> getGradeReportNoFormat(String c_name);
 
 }

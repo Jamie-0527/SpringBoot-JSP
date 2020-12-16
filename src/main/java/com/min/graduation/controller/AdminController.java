@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -32,6 +30,17 @@ public class AdminController {
     @Autowired
     private CompanyService companyService;
 
+
+    //主页
+    @RequestMapping("adminToHome")
+    public String adminToHome(Model model, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            return "admin/home";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        return "login";
+    }
 
     //查询学生信息
     @RequestMapping("studentManagement")

@@ -37,7 +37,7 @@
 <body>
 <%--侧边栏--%>
 <div style="background-color:rgb(32,34,42);  height: 100%; float: left; width: 15%">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand" href="companyToHome">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
     <a id="studentManagement" href="companyStudentInformation" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">学生信息</a>

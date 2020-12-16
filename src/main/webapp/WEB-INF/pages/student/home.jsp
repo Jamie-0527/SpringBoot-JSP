@@ -18,14 +18,10 @@
 <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <%
-    String username = (String) request.getAttribute("userName");
-    Integer authority = (Integer) request.getAttribute("Authority");
+    String username = (String) session.getAttribute("userName");
     if (username == null || username == ""){
         request.getRequestDispatcher("../login.jsp").forward(request,response);
     }
-    session.setAttribute("userName",username);
-    session.setAttribute("Authority",authority);
-
     String ok = (String) request.getAttribute("ok_init");
 %>
 <script>
@@ -37,8 +33,17 @@
     }
 </script>
 <body>
+
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/studentLeft.jsp"%>
+
+<div style="width: 85%;float:right;">
+    <div class="text-center text-muted" style="margin-top:20%;">
+       <h3>暂时没有新的消息~</h3>
+    </div>
+</div>
 
 </body>
 </html>

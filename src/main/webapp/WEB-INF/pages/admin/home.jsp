@@ -13,13 +13,10 @@
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 
 <%
-    String username = (String) request.getAttribute("userName");
-    int authority = (int) request.getAttribute("Authority");
+    String username = (String) session.getAttribute("userName");
     if (username == null || username == ""){
        request.getRequestDispatcher("../login.jsp").forward(request,response);
     }
-    session.setAttribute("userName",username);
-    session.setAttribute("Authority",authority);
 
 %>
 
@@ -29,24 +26,11 @@
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
-<i class="fa fa-arrow-right" title="Submit My Tax Return"></i>
-<i class="fa fa-envelope" aria-hidden=”true”></i>
-<i class="icon-camera-retro"></i>
-<i class="fa fa-address-book" aria-hidden="true"></i>
+
 <div style="width: 85%;float:right;">
-    <ul class="list-group">
-        <a class="list-group-item active"> 我的帖子 </a>
-        <div class="list-group-item">
-            <a href="#" style="color:grey">
-                <h4 class="list-group-item-heading" style="color:black">
-                    主论坛标题</h4>帖子标题
-            </a> <a href="#" style="float: right">编辑</a>
-            <a href="#" style="float: right">申请精华贴&nbsp;</a>
-            <p style="float: right;margin-right: 50px">
-                浏览量:&nbsp;评论量:&nbsp;发表日期:</p>
-        </div>
-    </ul>
-    <button class="btn btn-outline-info btn-lg btn-block " >Action</button>
+    <div class="text-center text-muted" style="margin-top:20%;">
+        <h3>暂时没有新的消息~</h3>
+    </div>
 </div>
 
 
