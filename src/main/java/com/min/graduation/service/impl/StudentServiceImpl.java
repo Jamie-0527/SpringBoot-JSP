@@ -5,6 +5,7 @@ import com.min.graduation.entity.Grade;
 import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.service.StudentService;
+import com.min.graduation.utils.ChangeFormat;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +21,8 @@ public class StudentServiceImpl implements StudentService {
 
     @Autowired
     private StudentDao studentDao;
+    @Autowired
+    private ChangeFormat changeFormat;
 
     public List<Student> findAll() {
         return studentDao.findAll();
@@ -70,7 +73,11 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public List<Report> myReport(String s_id) {
-        return studentDao.myReport(s_id);
+        List<Report> reports = studentDao.myReport(s_id);
+        for (Report report : reports){
+            report.setCommit_time(changeFormat.setFormat(report.getCommit_time()));
+        }
+        return reports;
     }
 
 }

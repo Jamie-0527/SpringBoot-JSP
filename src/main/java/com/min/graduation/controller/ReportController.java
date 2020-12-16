@@ -1,6 +1,7 @@
 package com.min.graduation.controller;
 
 import com.min.graduation.entity.Report;
+import com.min.graduation.service.AdminService;
 import com.min.graduation.service.ReportService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.servlet.http.HttpServletRequest;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author zhangjiamin
@@ -25,10 +24,16 @@ public class ReportController {
 
     @Autowired
     private ReportService reportService;
+    @Autowired
+    private AdminService adminService;
 
     @RequestMapping("test")
-    public void test01(Report report){
-        System.out.println(report);
+    public void test01(){
+//        List<Report> allReport = adminService.findAllReport();
+//        Date commit_time = allReport.get(0).getCommit_time();
+//        Date now = new Date();
+//        long result = now.getTime()-commit_time.getTime();
+//        System.out.println(result/60000);
     }
 
     //学生提交实训报告

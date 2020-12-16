@@ -4,6 +4,8 @@ import com.min.graduation.dao.AdminDao;
 import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 
+import com.min.graduation.utils.ChangeFormat;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -14,9 +16,10 @@ import java.util.Map;
 @Service
 public class AdminServiceImpl implements AdminService {
 
-    /*注入AdminDao对象*/
-    @Resource
+    @Autowired
     private AdminDao adminDao;
+    @Autowired
+    private ChangeFormat changeFormat;
 
     @Override
     public List<Student> findAllStudent() {
@@ -123,7 +126,11 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<Report> findAllReport() {
-        return adminDao.findAllReport();
+        List<Report> reports = adminDao.findAllReport();
+        for (Report report : reports){
+            report.setCommit_time(changeFormat.setFormat(report.getCommit_time()));
+        }
+        return reports;
     }
 
 
