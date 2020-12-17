@@ -32,6 +32,9 @@
 </script>
 
 <body>
+
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%
     Integer Authority = (Integer) session.getAttribute("Authority");
     if (Authority==0) {
@@ -48,7 +51,9 @@
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">个人中心</span>
+        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">
+            <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;修改密码
+        </span>
     </div>
     <div style="width: 30%; margin: 0px auto; margin-top: 200px;">
         <form>
@@ -123,7 +128,7 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="add">修改密码</h4>
+                <h4 class="modal-title" id="add"><i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;修改密码</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">

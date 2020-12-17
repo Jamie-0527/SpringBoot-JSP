@@ -28,6 +28,7 @@
 
 
 <div style="width: 85%;float:right;">
+
     <div class="text-center text-muted" style="margin-top:20%;">
         <h3>暂时没有新的消息~</h3>
     </div>

@@ -32,12 +32,14 @@
 
 <body>
 
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/studentLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">个人中心</span>
+        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;个人中心</span>
     </div>
     <div style="width: 30%; margin: 0px auto; margin-top: 200px;">
         <form>
@@ -88,11 +90,11 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="add">修改信息</h4>
+                <h4 class="modal-title" id="add"><i class="fa fa-user" aria-hidden="true"></i>&nbsp;修改信息</h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="updateStudentsInformation" method="post">
+                <form action="studentUpdateInformation" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label for="updateS_id" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>

@@ -73,10 +73,8 @@ public class AdminController {
             Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college,company_name);
             adminService.updateStudent(student);
         }
-        Student student = studentService.personInformation(s_id);
-        model.addAttribute("student",student);
         model.addAttribute("ok_update","更新成功！");
-        return "student/studentInformation";
+        return "forward:studentManagement";
     }
 
     //添加学生信息
@@ -146,10 +144,9 @@ public class AdminController {
 
         adminService.updateTeacher(teacher);
         Teacher result = teacherService.personInformation(teacher.getT_id());
-        model.addAttribute("teacher",result);
         model.addAttribute("ok_update","更新成功！");
 
-        return "teacher/teacherInformation";
+        return "forward:teacherManagement";
     }
 
     //添加教师信息
@@ -196,10 +193,9 @@ public class AdminController {
 
         adminService.updateCompany(company);
         Company result = companyService.personInformation(company.getCompany_person_id());
-        model.addAttribute("company",result);
         model.addAttribute("ok_update","更新成功！");
 
-        return "company/companyInformation";
+        return "forward:companyManagement";
     }
 
     //添加公司信息

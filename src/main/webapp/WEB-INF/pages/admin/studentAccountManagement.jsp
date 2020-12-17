@@ -44,13 +44,15 @@
 <body>
 
 <%--导航条--%>
-<%--<%@include file="../component/top.jsp"%>--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">账户管理</span>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;学生账户管理
+        </span>
     </div>
     <%--打印账户信息--%>
     <table class="table table-striped">
@@ -84,7 +86,9 @@
                     <span class="badge badge-success">有效</span>
                 </td>
                 <td>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">禁用</button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">
+                        <i class="fa fa-remove" aria-hidden="true"></i>&nbsp;禁用
+                    </button>
                 </td>
             </tr>
 
@@ -93,7 +97,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="disableAccount">confirm</h3>
+                            <h3 class="modal-title" id="disableAccount">
+                                <i class="fa fa-remove" aria-hidden="true"></i>&nbsp;Confirm
+                            </h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -103,7 +109,9 @@
                                 <input style="display: none" type="text" class="form-control" name="authority" value="${s.login.authority}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-danger">禁用</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-remove" aria-hidden="true"></i>&nbsp;禁用
+                                    </button>
                                 </div>
                             </form>
 
@@ -116,7 +124,9 @@
                     <span class="badge badge-danger">禁用</span>
                 </td>
                 <td>
-                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">启用</button>
+                    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">
+                        <i class="fa fa-check" aria-hidden="true"></i>&nbsp;启用
+                    </button>
                 </td>
             </tr>
 
@@ -125,7 +135,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="enableAccount">confirm</h3>
+                            <h3 class="modal-title" id="enableAccount">
+                                <i class="fa fa-check" aria-hidden="true"></i>&nbsp;Confirm
+                            </h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -135,7 +147,9 @@
                                 <input style="display: none" type="text" class="form-control" name="authority" value="${s.login.authority}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-success">启用</button>
+                                    <button type="submit" class="btn btn-success">
+                                        <i class="fa fa-check" aria-hidden="true"></i>&nbsp;启用
+                                    </button>
                                 </div>
                             </form>
 
@@ -144,7 +158,6 @@
                 </div>
             </div>
                 <%}%>
-
 
         </c:forEach>
         </tbody>

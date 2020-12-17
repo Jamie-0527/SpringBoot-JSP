@@ -31,15 +31,21 @@
 <%--</script>--%>
 <body>
 
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">实训报告</span>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-file-text" aria-hidden="true"></i>&nbsp;实训报告
+        </span>
         <div style="float:right;  padding-right: 20px">
             <form class="form-inline my-2 my-lg-0" action="findReportById" method="post">
-                <span>查询实训报告&nbsp;&nbsp;</span>
+                <span>
+                    <i class="fa fa-search" aria-hidden="true"></i>&nbsp;查询实训报告&nbsp;&nbsp;
+                </span>
                 <input class="form-control mr-sm-2" name="s_id" type="search" placeholder="请输入学号..." aria-label="Search">
                 <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
             </form>
@@ -85,21 +91,27 @@
                         <span class="badge badge-info">待审核</span>
                     </td>
                     <td>
-                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看详情
+                        </button>
                     </td>
                     <%} else if (checkStatus==1){%>
                     <td class="border-right">
                         <span class="badge badge-primary">待企业审核</span>
                     </td>
                     <td>
-                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看详情
+                        </button>
                     </td>
                     <%} else if (checkStatus==2){%>
                     <td class="border-right">
-                        <span class="badge badge-primary">待教师审核</span>
+                        <span class="badge badge-warning">待教师审核</span>
                     </td>
                     <td>
-                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看详情
+                        </button>
                     </td>
                     <%} else if (checkStatus==4){%>
                     <td class="border-right">
@@ -114,7 +126,9 @@
                         <span class="badge badge-success">审核通过</span>
                     </td>
                     <td>
-                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                        <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                            <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看详情
+                        </button>
 <%--                        <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#reDo<%=i%>">打回重做</button>--%>
                     </td>
                     <%}%>
@@ -147,7 +161,9 @@
                     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h4 class="modal-title" id="myModalLabel">审核实训报告</h4>
+                                <h4 class="modal-title" id="myModalLabel">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看实训报告
+                                </h4>
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
@@ -195,7 +211,7 @@
                                                 ${r.report_experience}
                                         </textarea>
                                     </div>
-                                    <p style="color: #c6c8ca">上一次审核提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_review_time}</span></p>
+                                    <p style="color: #c6c8ca">提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span></p>
 <%--                                    <div class="modal-footer">--%>
 <%--                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
 <%--                                        <button type="submit" class="btn btn-primary">提交审核</button>--%>

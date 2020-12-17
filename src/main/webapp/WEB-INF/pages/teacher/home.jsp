@@ -44,10 +44,9 @@
 <%@include file="../component/teacherLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
-
     <div class="form-row" style="margin: 10px" >
-        <c:forEach items="${news}" var="n" end="1">
-            <div class="col-md-6 mb-6">
+        <c:forEach items="${news}" var="n">
+            <div class="col-md-4 mb-4">
                 <div class="card text-center text-white bg-dark">
                     <div class="card-header">
                         实训报告
@@ -56,50 +55,6 @@
                         <h5 class="card-title">${n.s_id}&nbsp;&nbsp;${n.s_name}</h5>
                         <p class="card-text d-inline-block text-truncate" style="width: 100%">${n.report_context}</p>
                         <a href="teacherGetReport" class="btn btn-outline-light">查看</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        更新于
-                        <fmt:formatNumber maxFractionDigits="0" value="${n.updatedOn/24}"/>
-                        天${n.updatedOn%24}小时前
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-
-    <div class="form-row" style="margin: 10px" >
-        <c:forEach items="${news}" begin="2" end="4" var="n">
-            <div class="col-md-4 mb-4">
-                <div class="card text-center text-white bg-secondary">
-                    <div class="card-header">
-                        实训报告
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${n.s_id}&nbsp;&nbsp;${n.s_name}</h5>
-                        <p class="card-text d-inline-block text-truncate" style="width: 100%">${n.report_context}</p>
-                        <a href="teacherGetReport" class="btn btn-outline-light">查看</a>
-                    </div>
-                    <div class="card-footer text-muted">
-                        更新于
-                        <fmt:formatNumber maxFractionDigits="0" value="${n.updatedOn/24}"/>
-                        天${n.updatedOn%24}小时前
-                    </div>
-                </div>
-            </div>
-        </c:forEach>
-    </div>
-
-    <div class="form-row" style="margin: 10px" >
-        <c:forEach items="${news}" begin="4" var="n">
-            <div class="col-md-3 mb-3">
-                <div class="card text-center bg-light">
-                    <div class="card-header">
-                        实训报告
-                    </div>
-                    <div class="card-body">
-                        <h5 class="card-title">${n.s_id}&nbsp;&nbsp;${n.s_name}</h5>
-                        <p class="card-text d-inline-block text-truncate" style="width: 100%">${n.report_context}</p>
-                        <a href="teacherGetReport" class="btn btn-outline-dark">查看</a>
                     </div>
                     <div class="card-footer text-muted">
                         更新于

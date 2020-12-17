@@ -4,6 +4,7 @@ import com.min.graduation.entity.Grade;
 import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
+import com.min.graduation.service.AdminService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class TeacherController {
     private TeacherService teacherService;
     @Autowired
     private StudentService studentService;
+    @Autowired
+    private AdminService adminService;
 
 
     //主页
@@ -68,6 +71,18 @@ public class TeacherController {
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         return "login";
+    }
+
+    //更新教师信息
+    @RequestMapping("teacherUpdateInformation")
+    public String teacherUpdateInformation(Model model, Teacher teacher) {
+
+        adminService.updateTeacher(teacher);
+        Teacher result = teacherService.personInformation(teacher.getT_id());
+        model.addAttribute("teacher",result);
+        model.addAttribute("ok_update","更新成功！");
+
+        return "teacher/teacherInformation";
     }
 
     //查询班级学生信息

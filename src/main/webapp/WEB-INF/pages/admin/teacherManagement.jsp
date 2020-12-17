@@ -16,6 +16,8 @@
     int i=1;
     String error = (String) request.getAttribute("addTeacherError");
     String ok = (String) request.getAttribute("ok_addT");
+    String ok_update = (String) request.getAttribute("ok_update");
+
 %>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -34,6 +36,10 @@
         if (ok != 'null'){
             alert(ok);
         }
+        var ok_update = '<%=ok_update%>'
+        if (ok_update != 'null'){
+            alert(ok_update);
+        }
     }
 </script>
 
@@ -44,14 +50,18 @@
 <body>
 
 <%--导航条--%>
-<%--<%@include file="../component/top.jsp"%>--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">用户管理</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加教师</button>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;教师管理
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加教师
+        </button>
     </div>
     <%--打印教师信息--%>
     <table class="table table-striped">
@@ -75,11 +85,15 @@
                 <td class="border-right">${t.t_id}</td>
                 <td class="border-right">${t.t_name}</td>
                 <td class="border-right">${t.t_rank}</td>
-                <td class="border-right">${t.t_phone}</td>
                 <td class="border-right">${t.t_college}</td>
+                <td class="border-right">${t.t_phone}</td>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">删除</button>
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改
+                    </button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">
+                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;删除
+                    </button>
                 </td>
             </tr>
             <%--修改信息模态框--%>
@@ -87,48 +101,65 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改信息
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
                             <!--此处是修改表单-->
-                            <form action="updateTeacherInformation" method="post">
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                            <form action="updateTeacherInformation">
+                                <div class="form-row">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="teacherId">工号</label>
+                                        <input type="text" class="form-control" name="t_id" id="teacherId" value="${t.t_id}" required>
+                                        <div class="invalid-feedback">
+                                            请输入工号
+                                        </div>
                                     </div>
-                                    <input type="text" class="form-control" name="t_id" id="teacherId" value="${t.t_id}">
+                                    <div class="col-md-6 mb-3">
+                                        <label for="teacherName">姓名</label>
+                                        <input type="text" class="form-control" name="t_name" id="teacherName" value="${t.t_name}" required>
+                                        <div class="invalid-feedback">
+                                            请输入姓名
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+
+                                <div>
+                                    <label for="teacherRank">职称</label>
+                                    <select class="custom-select" id="teacherRank" name="t_rank" required>
+                                        <option selected disabled></option>
+                                        <option>教授</option>
+                                        <option>副教授</option>
+                                        <option>讲师</option>
+                                        <option>助教</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        请输入职称
                                     </div>
-                                    <input type="text" class="form-control" name="t_name" id="teacherName" value="${t.t_name}">
                                 </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherRank" class="input-group-text">&nbsp;&nbsp;&nbsp;班&nbsp;级&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <input type="text" class="form-control" name="t_rank" id="teacherRank" value="${t.t_rank}">
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherCollege" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;院&nbsp;&nbsp;&nbsp;</label>
-                                    </div>
-                                    <select class="form-control" id="teacherCollege" name="t_college">
-                                        <option style="display: none;"></option>
+                                <div>
+                                    <label for="teacherCollege">学院</label>
+                                    <select class="custom-select" id="teacherCollege" name="t_college" required>
+                                        <option selected disabled></option>
                                         <option>计算机学院</option>
                                         <option>电机学院</option>
                                         <option>传媒艺术学院</option>
                                         <option>外语学院</option>
                                     </select>
-                                </div>
-                                <div class="input-group mb-3">
-                                    <div class="input-group-prepend">
-                                        <label for="teacherPhone" class="input-group-text">联系方式</label>
+                                    <div class="invalid-feedback">
+                                        请选择学院
                                     </div>
-                                    <input type="text" class="form-control" name="t_phone" id="teacherPhone" value="${t.t_phone}">
                                 </div>
+                                <div>
+                                    <label for="teacherPhone">联系方式</label>
+                                    <input type="text" class="form-control" name="t_phone" id="teacherPhone" value="${t.t_phone}" required>
+                                    <div class="invalid-feedback">
+                                        请输入联系方式
+                                    </div>
+                                </div>
+                                <br>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                     <button type="submit" class="btn btn-primary">提交</button>
@@ -143,7 +174,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="del">confirm</h3>
+                            <h3 class="modal-title" id="del">
+                                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Confirm
+                            </h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -152,12 +185,12 @@
                                 <input style="display: none" type="text" class="form-control" name="t_id" value="${t.t_id}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-danger">删除</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;删除
+                                    </button>
                                 </div>
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -170,26 +203,31 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="add">添加教师</h4>
+                <h4 class="modal-title" id="add">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加教师
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="addTeacherInformation" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addTeacherId" class="input-group-text">&nbsp;&nbsp;&nbsp;工&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                <form action="addTeacherInformation" method="post" class="needs-validation" novalidate>
+                    <div class="col-md-12">
+                        <label for="addTeacherId">工号</label>
+                        <input type="text" class="form-control" name="t_id" id="addTeacherId" required>
+                        <div class="invalid-feedback">
+                            请输入工号
                         </div>
-                        <input type="text" class="form-control" name="t_id" id="addTeacherId">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addTeacherName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                    <div class="col-md-12">
+                        <label for="addTeacherName">姓名</label>
+                        <input type="text" class="form-control" name="t_name" id="addTeacherName" required>
+                        <div class="invalid-feedback">
+                            请输入姓名
                         </div>
-                        <input type="text" class="form-control" name="t_name" id="addTeacherName">
                     </div>
+                    <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary" id="addTeacher">提交</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
                     </div>
                 </form>
             </div>
@@ -198,6 +236,26 @@
     </div>
 </div>
 
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 </body>
 </html>

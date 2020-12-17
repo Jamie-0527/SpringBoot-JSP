@@ -1,7 +1,10 @@
 package com.min.graduation.controller;
 
 
+import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Login;
+import com.min.graduation.entity.Student;
+import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.LoginService;
 import com.min.graduation.service.StudentService;
@@ -50,6 +53,7 @@ public class LoginController {
                         if (password.equals(l.getPassword())){
                             //密码正确则判断权限 超级管理员0、学生1、教师2、企业员工3
                             if (l.getAuthority() == 0){
+                                /*获得用户名*/
                                 String userName = l.getUserName();
                                 session.setAttribute("userName",userName);
                                 session.setAttribute("Authority",l.getAuthority());
@@ -60,24 +64,30 @@ public class LoginController {
                                 String userName = l.getUserName();
                                 session.setAttribute("userName",userName);
                                 session.setAttribute("Authority",l.getAuthority());
+                                /*获取姓名*/
+                                Student studentName = loginService.getStudentName(userName);
+                                session.setAttribute("name",studentName.getS_name());
                                 return "forward:studentToHome";
 
                             }else if (l.getAuthority() == 2) {
-
                                 /*获得用户名*/
                                 String userName = l.getUserName();
                                 session.setAttribute("userName",userName);
                                 session.setAttribute("Authority",l.getAuthority());
+                                /*获取姓名*/
+                                Teacher teacherName = loginService.getTeacherName(userName);
+                                session.setAttribute("name",teacherName.getT_name());
                                 return "forward:teacherToHome";
 
                             }else if (l.getAuthority() == 3) {
-
                                 /*获得用户名*/
                                 String userName = l.getUserName();
                                 session.setAttribute("userName",userName);
                                 session.setAttribute("Authority",l.getAuthority());
+                                /*获取姓名*/
+                                Company companyPersonName = loginService.getCompanyPersonName(userName);
+                                session.setAttribute("name",companyPersonName.getCompany_person());
                                 return "forward:companyToHome";
-
                             }
                         }
                         else {
@@ -95,6 +105,7 @@ public class LoginController {
             }
 
         }catch (Exception e){
+            e.printStackTrace();
             model.addAttribute("error", "账号或密码错误！请重新输入");
             return "login";
 
@@ -121,6 +132,13 @@ public class LoginController {
             return "component/updatePassword";
 
         }
+    }
+
+    //退出登录
+    @RequestMapping("signOut")
+    public String signOut(HttpSession session){
+        session.invalidate();
+        return "login";
     }
 
 }

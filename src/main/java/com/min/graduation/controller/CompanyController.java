@@ -1,6 +1,7 @@
 package com.min.graduation.controller;
 
 import com.min.graduation.entity.*;
+import com.min.graduation.service.AdminService;
 import com.min.graduation.service.CompanyService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -23,6 +24,8 @@ public class CompanyController {
 
     @Autowired
     private CompanyService companyService;
+    @Autowired
+    private AdminService adminService;
 
 
     //主页
@@ -36,7 +39,7 @@ public class CompanyController {
                 long time = now.getTime()-report.getCommit_time().getTime();
                 report.setUpdatedOn(time/(1000*60*60));
             }
-            Collections.reverse(companyReport);
+            //Collections.reverse(companyReport);
             model.addAttribute("news",companyReport);
             return "company/home";
         }
@@ -58,6 +61,18 @@ public class CompanyController {
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         return "login";
+    }
+
+    //更新公司信息
+    @RequestMapping("companyUpdateInformation")
+    public String companyUpdateInformation(Model model, Company company) {
+
+        adminService.updateCompany(company);
+        Company result = companyService.personInformation(company.getCompany_person_id());
+        model.addAttribute("company",result);
+        model.addAttribute("ok_update","更新成功！");
+
+        return "company/companyInformation";
     }
 
     //查询公司实训学生信息

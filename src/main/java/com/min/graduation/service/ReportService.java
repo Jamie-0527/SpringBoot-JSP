@@ -22,4 +22,7 @@ public interface ReportService {
 
     //实训报告打回重做
     int backReDo(Map<String,Object> map);
+
+    //重新提交实训报告---update
+    int reSubmitReport(Report report);
 }

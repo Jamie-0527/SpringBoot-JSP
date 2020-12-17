@@ -12,15 +12,17 @@
         <result property="status" column="status"/>
     </resultMap>
 
-
+    <!--登录账户-->
     <select id="login" parameterType="String" resultMap="LoginMapper">
         select user_name,password,authority,status from login where user_name=#{uname}
     </select>
 
+    <!--更新账户密码-->
     <update id="update" parameterType="String">
         update login set password = #{password},modify_time = now() where user_name = #{uname}
     </update>
 
+    <!--重置账户-->
     <update id="reset" parameterType="String">
         update login set password = '123456' where user_name = #{uname}
     </update>
@@ -29,5 +31,19 @@
     <update id="updatePassword" parameterType="String">
         update login set password = #{password} where user_name = #{user_name}
     </update>
-    
+
+    <!--获取学生姓名-->
+    <select id="getStudentName" parameterType="String" resultType="Student">
+        select s_name from student where s_id=#{s_id}
+    </select>
+
+    <!--获取教师姓名-->
+    <select id="getTeacherName" parameterType="String" resultType="Teacher">
+        select t_name from teacher where t_id=#{t_id}
+    </select>
+
+    <!--获取企业人员姓名-->
+    <select id="getCompanyPersonName" parameterType="String" resultType="Company">
+        select * from company where company_person_id=#{company_person_id}
+    </select>
 </mapper>

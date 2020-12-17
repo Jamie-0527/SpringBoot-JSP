@@ -16,6 +16,7 @@
     int i=1;
     String error = (String) request.getAttribute("addStudentError");
     String ok = (String) request.getAttribute("ok_addS");
+    String ok_update = (String) request.getAttribute("ok_update");
 %>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
@@ -34,6 +35,10 @@
         if (ok != 'null'){
             alert(ok);
         }
+        var ok_update = '<%=ok_update%>'
+        if (ok_update != 'null'){
+            alert(ok_update);
+        }
     }
 </script>
 
@@ -44,14 +49,18 @@
 <body>
 
 <%--导航条--%>
-<%--<%@include file="../component/top.jsp"%>--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">用户管理</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加学生</button>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;学生管理
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加学生
+        </button>
     </div>
     <%--打印学生信息--%>
     <table class="table table-striped">
@@ -80,8 +89,12 @@
                 <td class="border-right">${s.s_college}</td>
                 <td class="border-right">${s.company_name}</td>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
-                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">删除</button>
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改
+                    </button>
+                    <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">
+                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;删除
+                    </button>
                 </td>
             </tr>
             <%--修改信息模态框--%>
@@ -89,12 +102,14 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改信息
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
                             <%--此处是修改表单--%>
-                            <form action="updateStudentsInformation" method="post" class="needs-validation" novalidate>
+                            <form action="updateStudentsInformation">
                                 <div class="form-row">
                                     <div class="col-md-6 mb-3">
                                         <label for="studentId">学号</label>
@@ -111,35 +126,39 @@
                                         </div>
                                     </div>
                                 </div>
-
-                                <label for="studentGrade">班级</label>
-                                <input type="text" class="form-control" name="c_name" id="studentGrade" value="${s.grade.c_name}" required>
-                                <div class="invalid-feedback">
-                                    请输入班级
+                                <div>
+                                    <label for="studentGrade">班级</label>
+                                    <input type="text" class="form-control" name="c_name" id="studentGrade" value="${s.grade.c_name}" required>
+                                    <div class="invalid-feedback">
+                                        请输入班级
+                                    </div>
                                 </div>
-
-                                <label for="studentCollege">学院</label>
-                                <select class="custom-select" id="studentCollege" name="s_college" required>
-                                    <option selected disabled></option>
-                                    <option>计算机学院</option>
-                                    <option>电机学院</option>
-                                    <option>传媒艺术学院</option>
-                                    <option>外语学院</option>
-                                </select>
-                                <div class="invalid-feedback">
-                                    请选择学院
+                                <div>
+                                    <label for="studentCollege">学院</label>
+                                    <select class="custom-select" id="studentCollege" name="s_college" required>
+                                        <option selected disabled></option>
+                                        <option>计算机学院</option>
+                                        <option>电机学院</option>
+                                        <option>传媒艺术学院</option>
+                                        <option>外语学院</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        请选择学院
+                                    </div>
                                 </div>
-
-                                <label for="studentPhone">联系方式</label>
-                                <input type="text" class="form-control" name="s_phone" id="studentPhone" value="${s.s_phone}" required>
-                                <div class="invalid-feedback">
-                                    请输入联系方式
+                                <div>
+                                    <label for="studentPhone">联系方式</label>
+                                    <input type="text" class="form-control" name="s_phone" id="studentPhone" value="${s.s_phone}" required>
+                                    <div class="invalid-feedback">
+                                        请输入联系方式
+                                    </div>
                                 </div>
-
-                                <label for="studentCompany">实训公司
-                                </label>
-                                <input type="text" class="form-control" name="company_name" id="studentCompany" value="${s.company_name}"><br>
-
+                                <div>
+                                    <label for="studentCompany">实训公司
+                                    </label>
+                                    <input type="text" class="form-control" name="company_name" id="studentCompany" value="${s.company_name}">
+                                </div>
+                                <br>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                     <button type="submit" class="btn btn-primary">提交</button>
@@ -154,7 +173,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h3 class="modal-title" id="del">confirm</h3>
+                            <h3 class="modal-title" id="del">
+                                <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;Confirm
+                            </h3>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -163,7 +184,9 @@
                                 <input style="display: none" type="text" class="form-control" name="s_id" value="${s.s_id}">
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-danger">删除</button>
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;删除
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -179,25 +202,28 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="add">添加学生</h4>
+                <h4 class="modal-title" id="add">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加学生
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
                 <form action="addStudentsInformation" method="post" class="needs-validation" novalidate>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-12">
                         <label for="addStudentId">学号</label>
                         <input type="text" class="form-control" name="s_id" id="addStudentId" required>
                         <div class="invalid-feedback">
                             请输入学号
                         </div>
                     </div>
-                    <div class="col-md-6 mb-3">
+                    <div class="col-md-12">
                         <label for="addStudentName">姓名</label>
                         <input type="text" class="form-control" name="s_name" id="addStudentName" required>
                         <div class="invalid-feedback">
                             请输入姓名
                         </div>
                     </div>
+                    <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                         <button type="submit" class="btn btn-primary">提交</button>

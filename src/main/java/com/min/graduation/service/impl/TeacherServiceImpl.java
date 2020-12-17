@@ -55,6 +55,9 @@ public class TeacherServiceImpl implements TeacherService {
         List<Report> reports = teacherDao.getGradeReport(c_name);
         for (Report report : reports){
             report.setCommit_time(changeFormat.setFormat(report.getCommit_time()));
+            if (report.getT_review_time()!=null){
+                report.setT_review_time(changeFormat.setFormat(report.getT_review_time()));
+            }
         }
         return reports;
     }

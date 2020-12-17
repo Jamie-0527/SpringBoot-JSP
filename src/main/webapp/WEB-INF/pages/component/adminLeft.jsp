@@ -5,6 +5,7 @@
 </head>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
 <style>
     .clear-fillet{
@@ -32,10 +33,9 @@
 
 
 <script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/modify.js"></script>
 <script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 <script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-
+<script src="js/modify.js"></script>
 
 <body >
 <%--侧边栏--%>
@@ -44,28 +44,58 @@
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="infoManagement">
-        信息管理
+        <i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;信息管理
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="studentManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a1">学生管理</div></a>
-        <a href="teacherManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a2">教师管理</div></a>
-        <a href="companyManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a3">企业管理</div></a>
+        <a href="studentManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a1">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;学生管理
+            </div>
+        </a>
+        <a href="teacherManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a2">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;教师管理
+            </div>
+        </a>
+        <a href="companyManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a3">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;企业管理
+            </div>
+        </a>
     </div>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="userManagement">
-        账户管理
+        <i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;账户管理
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="studentAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b1">学生账户</div></a>
-        <a href="teacherAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">教师账户</div></a>
-        <a href="companyAccountManagement"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">企业账户</div></a>
+        <a href="studentAccountManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b1">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;学生账户
+            </div>
+        </a>
+        <a href="teacherAccountManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;教师账户
+            </div>
+        </a>
+        <a href="companyAccountManagement">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">
+                <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;企业账户
+            </div>
+        </a>
     </div>
-    <a id="paperManagement" href="findAllReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
+    <a id="paperManagement" href="findAllReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+        <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
+    </a>
 
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="personalCenter">
-        <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
+        <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;个人中心
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="adminToUpdatePassword"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">修改密码</div></a>
+        <a href="adminToUpdatePassword">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">
+                <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;修改密码
+            </div>
+        </a>
     </div>
 
     <div class="tail text-wrap" style="width: 15%;">

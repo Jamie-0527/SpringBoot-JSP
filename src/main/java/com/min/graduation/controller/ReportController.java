@@ -31,13 +31,18 @@ public class ReportController {
     //学生提交实训报告
     @RequestMapping("studentSubmitReport")
     public String studentSubmitReport(Model model, Report report, HttpServletRequest request){
-        //String-->LocalTime格式转换
-        String start_time = request.getParameter("start_time");
-        String over_time = request.getParameter("over_time");
-        report.setBegin_time(LocalDate.parse(start_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        report.setEnd_time(LocalDate.parse(over_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-        reportService.submitReport(report);
-        model.addAttribute("ok_submit","提交成功！");
+        if (report.getReport_status()==4){
+            reportService.reSubmitReport(report);
+            model.addAttribute("ok_submit","提交成功！");
+        }else {
+            //String-->LocalTime格式转换
+            String start_time = request.getParameter("start_time");
+            String over_time = request.getParameter("over_time");
+            report.setBegin_time(LocalDate.parse(start_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            report.setEnd_time(LocalDate.parse(over_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            reportService.submitReport(report);
+            model.addAttribute("ok_submit","提交成功！");
+        }
         return "forward:findMyReport";
     }
 

@@ -5,6 +5,7 @@
 </head>
 
 <link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
 
 <style>
     .clear-fillet{
@@ -40,14 +41,26 @@
     <a class="navbar-brand" href="companyToHome">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
-    <a id="studentManagement" href="companyStudentInformation" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">学生信息</a>
-    <a id="paperManagement" href="getCompanyReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">实训报告</a>
+    <a id="studentManagement" href="companyStudentInformation" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+        <i class="fa fa-users" aria-hidden="true"></i>&nbsp;学生管理
+    </a>
+    <a id="paperManagement" href="getCompanyReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+        <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
+    </a>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="companyPersonalCenter">
-        <i class="fa fa-user-o fa-lg" aria-hidden="true"></i>个人中心
+        <i class="fa fa-user-o" aria-hidden="true"></i>个人中心
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="companyPersonInformation"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">个人信息</div></a>
-        <a href="adminToUpdatePassword"><div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b5">修改密码</div></a>
+        <a href="companyPersonInformation">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b4">
+                <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;个人信息
+            </div>
+        </a>
+        <a href="adminToUpdatePassword">
+            <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b5">
+                <i class="fa fa-refresh" aria-hidden="true"></i>&nbsp;修改密码
+            </div>
+        </a>
     </div>
 
     <div class="tail text-wrap" style="width: 15%;">

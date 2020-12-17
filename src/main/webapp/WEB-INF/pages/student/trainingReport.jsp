@@ -1,5 +1,4 @@
-<%@ page import="java.util.Date" %>
-<%@ page import="java.text.SimpleDateFormat" %><%--
+<%--
   Created by IntelliJ IDEA.
   User: Zhangjiamin
   Date: 2020/12/12
@@ -42,13 +41,19 @@
 
 <body>
 
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/studentLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">实训报告</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加实训报告</button>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
+            <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;添加实训报告
+        </button>
     </div>
 
 <table class="table table-striped">
@@ -100,7 +105,9 @@
                 </td>
                 <%}%>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">查看详情</button>
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                        <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;查看详情
+                    </button>
                 </td>
             </tr>
 
@@ -109,14 +116,17 @@
                 <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">审核实训报告</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;审核实训报告
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                                <%--此处是修改表单--%>
-                            <form action="teacherReviewReport" method="post">
+                            <%--此处是修改表单--%>
+                            <form action="studentSubmitReport" method="post">
                                 <div class="form-row">
                                     <input type="number" style="display: none;" name="id" value="${r.id}">
+                                    <input type="number" style="display: none;" name="report_status" value="${r.report_status}">
                                     <div class="col-md-3 mb-3">
                                         <label for="studentId">学号</label>
                                         <input type="text" class="form-control" readonly="readonly" name="s_id" id="studentId" value="${r.s_id}" required>
@@ -176,7 +186,9 @@
         <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="add">添加实训报告</h4>
+                    <h4 class="modal-title" id="add">
+                        <i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;添加实训报告
+                    </h4>
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                 </div>
                 <div class="modal-body">

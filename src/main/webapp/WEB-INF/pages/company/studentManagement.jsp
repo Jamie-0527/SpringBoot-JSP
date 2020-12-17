@@ -48,13 +48,19 @@
 
 <body>
 
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/companyLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">学生管理</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加学生</button>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;学生管理
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加学生
+        </button>
     </div>
     <%--打印学生信息--%>
     <table class="table table-striped">
@@ -77,7 +83,9 @@
                 <td class="border-right">${s.s_name}</td>
                 <td class="border-right">${s.s_phone}</td>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改
+                    </button>
                 </td>
             </tr>
             <%--修改信息模态框--%>
@@ -85,7 +93,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改信息
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">

@@ -47,31 +47,31 @@ $(document).ready(function(){
         }
     });
 
-    /*添加学生*/
-    $("#addStudent").click(function(){
-        var addStudentId= $("#addStudentId").val()
-        var addStudentName = $("#addStudentName").val()
+    // /*添加学生*/
+    // $("#addStudent").click(function(){
+    //     var addStudentId= $("#addStudentId").val()
+    //     var addStudentName = $("#addStudentName").val()
+    //
+    //     if(addStudentId.length==0 || addStudentName.length==0){
+    //         alert("输入信息不能为空！");
+    //         return false;
+    //     }else {
+    //         return true;
+    //     }
+    // });
 
-        if(addStudentId.length==0 || addStudentName.length==0){
-            alert("输入信息不能为空！");
-            return false;
-        }else {
-            return true;
-        }
-    });
-
-    /*添加教师*/
-    $("#addTeacher").click(function(){
-        var addTeacherId= $("#addTeacherId").val()
-        var addTeacherName = $("#addTeacherName").val()
-
-        if(addTeacherId.length==0 || addTeacherName.length==0){
-            alert("输入信息不能为空！");
-            return false;
-        }else {
-            return true;
-        }
-    });
+    // /*添加教师*/
+    // $("#addTeacher").click(function(){
+    //     var addTeacherId= $("#addTeacherId").val()
+    //     var addTeacherName = $("#addTeacherName").val()
+    //
+    //     if(addTeacherId.length==0 || addTeacherName.length==0){
+    //         alert("输入信息不能为空！");
+    //         return false;
+    //     }else {
+    //         return true;
+    //     }
+    // });
 
     /*添加企业人员*/
     $("#addPerson").click(function(){

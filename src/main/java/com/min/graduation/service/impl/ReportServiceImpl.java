@@ -38,4 +38,9 @@ public class ReportServiceImpl implements ReportService {
     public int backReDo(Map<String, Object> map) {
         return reportDao.backReDo(map);
     }
+
+    @Override
+    public int reSubmitReport(Report report) {
+        return reportDao.reSubmitReport(report);
+    }
 }

@@ -43,6 +43,9 @@ public class CompanyServiceImpl implements CompanyService {
         List<Report> reports = companyDao.getCompanyReport(company_person_id);
         for (Report report : reports){
             report.setCommit_time(changeFormat.setFormat(report.getCommit_time()));
+            if (report.getEmp_review_time()!=null){
+                report.setEmp_review_time(changeFormat.setFormat(report.getEmp_review_time()));
+            }
         }
         return reports;
     }

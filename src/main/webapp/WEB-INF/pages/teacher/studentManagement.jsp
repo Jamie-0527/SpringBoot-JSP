@@ -48,13 +48,19 @@
 
 <body>
 
+<%--导航条--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/teacherLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
     <div class="border-bottom" style="background-color: rgb(248,249,250);font-size: 16px;line-height: 50px">
-        <span class="font-weight-bold" style="margin: 10px 20px 0px 20px">学生管理</span>
-        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">添加学生</button>
+        <span class="font-weight-bold" style="margin: 10px 50px 0px 20px">
+            <i class="fa fa-users" aria-hidden="true"></i>&nbsp;学生管理
+        </span>
+        <button class="btn btn-primary" data-toggle="modal" data-target="#modalAdd">
+            <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加学生
+        </button>
     </div>
     <%--打印学生信息--%>
     <table class="table table-striped">
@@ -79,7 +85,9 @@
                 <td class="border-right">${s.grade.c_name}</td>
                 <td class="border-right">${s.student.s_phone}</td>
                 <td>
-                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">修改</button>
+                    <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
+                        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改
+                    </button>
                 </td>
             </tr>
             <%--修改信息模态框--%>
@@ -87,7 +95,9 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h4 class="modal-title" id="myModalLabel">修改信息</h4>
+                            <h4 class="modal-title" id="myModalLabel">
+                                <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改信息
+                            </h4>
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
@@ -135,34 +145,58 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title" id="add">添加学生</h4>
+                <h4 class="modal-title" id="add">
+                    <i class="fa fa-user-plus" aria-hidden="true"></i>&nbsp;添加学生
+                </h4>
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="addStudentsInformation" method="post">
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>
+                <form action="addStudentsInformation" method="post" class="needs-validation" novalidate>
+                    <div class="col-md-12">
+                        <label for="addStudentId">学号</label>
+                        <input type="text" class="form-control" name="s_id" id="addStudentId" required>
+                        <div class="invalid-feedback">
+                            请输入学号
                         </div>
-                        <input type="text" class="form-control" name="s_id" id="addStudentId">
                     </div>
-                    <div class="input-group mb-3">
-                        <div class="input-group-prepend">
-                            <label for="addStudentName" class="input-group-text">&nbsp;&nbsp;&nbsp;姓&nbsp;名&nbsp;&nbsp;&nbsp;</label>
+                    <div class="col-md-12">
+                        <label for="addStudentName">姓名</label>
+                        <input type="text" class="form-control" name="s_name" id="addStudentName" required>
+                        <div class="invalid-feedback">
+                            请输入姓名
                         </div>
-                        <input type="text" class="form-control" name="s_name" id="addStudentName">
                     </div>
+                    <br>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                        <button type="submit" class="btn btn-primary" id="addStudent">提交</button>
+                        <button type="submit" class="btn btn-primary">提交</button>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>
 
+<script>
+    // Example starter JavaScript for disabling form submissions if there are invalid fields
+    (function() {
+        'use strict';
+        window.addEventListener('load', function() {
+            // Fetch all the forms we want to apply custom Bootstrap validation styles to
+            var forms = document.getElementsByClassName('needs-validation');
+            // Loop over them and prevent submission
+            var validation = Array.prototype.filter.call(forms, function(form) {
+                form.addEventListener('submit', function(event) {
+                    if (form.checkValidity() === false) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        }, false);
+    })();
+</script>
 
 </body>
 </html>
