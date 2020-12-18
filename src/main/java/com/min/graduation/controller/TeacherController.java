@@ -14,10 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * 此类为Teacher对象的控制层
@@ -50,11 +47,19 @@ public class TeacherController {
                     result.add(report);
                 }
             }
-            Collections.reverse(result);
+            //添加排序规则---递增
+            Collections.sort(result, new Comparator<Report>() {
+                public int compare(Report arg0, Report arg1) {
+                    return arg0.getUpdatedOn().compareTo(arg1.getUpdatedOn());
+                }
+            });
+            //倒叙
+            //Collections.reverse(result);
             model.addAttribute("news",result);
             return "teacher/home";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -70,19 +75,24 @@ public class TeacherController {
 
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
     //更新教师信息
     @RequestMapping("teacherUpdateInformation")
-    public String teacherUpdateInformation(Model model, Teacher teacher) {
-
-        adminService.updateTeacher(teacher);
-        Teacher result = teacherService.personInformation(teacher.getT_id());
-        model.addAttribute("teacher",result);
-        model.addAttribute("ok_update","更新成功！");
-
-        return "teacher/teacherInformation";
+    public String teacherUpdateInformation(Model model, Teacher teacher, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            adminService.updateTeacher(teacher);
+            Teacher result = teacherService.personInformation(teacher.getT_id());
+            model.addAttribute("teacher",result);
+            model.addAttribute("ok_update","更新成功！");
+            return "teacher/teacherInformation";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
     //查询班级学生信息
@@ -97,6 +107,7 @@ public class TeacherController {
         }
 
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -113,8 +124,8 @@ public class TeacherController {
 
         if (userName != null && userName != ""){
             /*匹配班级ID*/
-            Grade gradeInfo = studentService.findGradeInfo(c_name);
-            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone);
+            List<Grade> gradeInfo = studentService.findGradeInfo(c_name);
+            Student student = new Student(s_id,s_name,gradeInfo.get(0).getC_id(),s_phone);
             //更新学生对象
             teacherService.t_updateInfo(student);
             //查询数据并返回
@@ -126,6 +137,7 @@ public class TeacherController {
         }
 
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
 
     }
@@ -145,6 +157,12 @@ public class TeacherController {
                     result.add(report);
                 }
             }
+            //添加排序规则---递增
+            Collections.sort(result, new Comparator<Report>() {
+                public int compare(Report arg0, Report arg1) {
+                    return arg0.getReport_status().compareTo(arg1.getReport_status());
+                }
+            });
             //获取教师个人信息，提高用户体验
             Teacher teacher = teacherService.personInformation(userName);
             model.addAttribute("teacher",teacher);
@@ -153,6 +171,7 @@ public class TeacherController {
         }
 
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 

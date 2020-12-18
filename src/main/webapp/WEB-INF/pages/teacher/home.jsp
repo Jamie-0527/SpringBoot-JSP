@@ -14,28 +14,12 @@
     <title>首页</title>
 </head>
 
-<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <%
     String username = (String) session.getAttribute("userName");
     if (username == null || username == ""){
         request.getRequestDispatcher("../login.jsp").forward(request,response);
     }
-
-    String ok = (String) request.getAttribute("ok_init");
 %>
-<script>
-    window.onload=function () {
-        var ok = '<%=ok%>'
-        if (ok != 'null'){
-            alert(ok);
-        }
-    }
-</script>
 <body>
 
 <%--导航条--%>
@@ -44,17 +28,26 @@
 <%@include file="../component/teacherLeft.jsp"%>
 
 <div style="width: 85%;float:right;">
+    <c:set var="news" value="${news}" scope="page"></c:set>
+    <%
+        List<Report> news = (List<Report>) pageContext.getAttribute("news");
+        if (news.isEmpty()){
+    %>
+    <div class="text-center text-muted" style="margin-top:20%;">
+        <h3>暂时没有新的消息~</h3>
+    </div>
+    <%} else {%>
     <div class="form-row" style="margin: 10px" >
-        <c:forEach items="${news}" var="n">
-            <div class="col-md-4 mb-4">
+        <c:forEach items="${news}" var="n" end="8" >
+            <div class="col-md-4 mb-2">
                 <div class="card text-center text-white bg-dark">
                     <div class="card-header">
                         实训报告
+                        <a href="teacherGetReport" class="btn btn-outline-light" style="float: right">查看</a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">${n.s_id}&nbsp;&nbsp;${n.s_name}</h5>
                         <p class="card-text d-inline-block text-truncate" style="width: 100%">${n.report_context}</p>
-                        <a href="teacherGetReport" class="btn btn-outline-light">查看</a>
                     </div>
                     <div class="card-footer text-muted">
                         更新于
@@ -65,6 +58,7 @@
             </div>
         </c:forEach>
     </div>
+    <%}%>
 </div>
 
 </body>

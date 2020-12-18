@@ -67,7 +67,7 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
-    public Grade findGradeInfo(String className) {
+    public List<Grade> findGradeInfo(String className) {
         return studentDao.findGradeInfo(className);
     }
 

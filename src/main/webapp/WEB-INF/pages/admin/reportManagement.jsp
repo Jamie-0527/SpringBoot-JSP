@@ -211,7 +211,10 @@
                                                 ${r.report_experience}
                                         </textarea>
                                     </div>
-                                    <p style="color: #c6c8ca">提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span></p>
+                                    <p style="color: #c6c8ca">
+                                        上一次提交时间:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span>&nbsp;&nbsp;
+                                        审核人:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_name}&nbsp;&nbsp;${r.company_person}</span>
+                                    </p>
 <%--                                    <div class="modal-footer">--%>
 <%--                                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
 <%--                                        <button type="submit" class="btn btn-primary">提交审核</button>--%>

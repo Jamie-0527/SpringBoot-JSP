@@ -16,11 +16,6 @@
     String ok = (String) request.getAttribute("ok_update");
 %>
 
-<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
 <script>
     window.onload=function () {
         var ok = '<%=ok%>'
@@ -43,7 +38,7 @@
             <i class="fa fa-user-circle-o" aria-hidden="true"></i>&nbsp;个人中心
         </span>
     </div>
-    <div style="width: 30%; margin: 0px auto; margin-top: 200px;">
+    <div style="width: 30%; margin: 0px auto; margin-top: 150px;">
         <form>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">

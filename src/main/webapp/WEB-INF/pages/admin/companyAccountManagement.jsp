@@ -18,12 +18,6 @@
     String ok = (String) request.getAttribute("ok_addS");
 %>
 
-<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
-<script src="js/init.js"></script>
 <script>
     window.onload=function () {
         var msg = '<%=error%>'
@@ -44,7 +38,7 @@
 <body>
 
 <%--导航条--%>
-<%--<%@include file="../component/top.jsp"%>--%>
+<%@include file="../component/top.jsp"%>
 <%--侧边栏--%>
 <%@include file="../component/adminLeft.jsp"%>
 
@@ -74,6 +68,7 @@
             <tr align="center" id="lastLine">
                 <th class="border-right" scope="row">${status.index+1}</th>
                 <td class="border-right">${s.login.userName}</td>
+                <td class="border-right">${s.company.company_person}</td>
                 <td class="border-right">${s.company.company_name}</td>
                 <td class="border-right">${s.login.createTime}</td>
                 <td class="border-right">${s.login.modifyTime}</td>

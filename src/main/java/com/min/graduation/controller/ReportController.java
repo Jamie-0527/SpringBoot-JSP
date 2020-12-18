@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -30,56 +31,80 @@ public class ReportController {
 
     //学生提交实训报告
     @RequestMapping("studentSubmitReport")
-    public String studentSubmitReport(Model model, Report report, HttpServletRequest request){
-        if (report.getReport_status()==4){
-            reportService.reSubmitReport(report);
-            model.addAttribute("ok_submit","提交成功！");
-        }else {
-            //String-->LocalTime格式转换
-            String start_time = request.getParameter("start_time");
-            String over_time = request.getParameter("over_time");
-            report.setBegin_time(LocalDate.parse(start_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            report.setEnd_time(LocalDate.parse(over_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
-            reportService.submitReport(report);
-            model.addAttribute("ok_submit","提交成功！");
+    public String studentSubmitReport(Model model, Report report, HttpServletRequest request, HttpSession session){
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            if (report.getReport_status()==null){
+                //String-->LocalTime格式转换
+                String start_time = request.getParameter("start_time");
+                String over_time = request.getParameter("over_time");
+                report.setBegin_time(LocalDate.parse(start_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                report.setEnd_time(LocalDate.parse(over_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                reportService.submitReport(report);
+                model.addAttribute("ok_submit","提交成功！");
+            }else {
+                reportService.reSubmitReport(report);
+                model.addAttribute("ok_submit","提交成功！");
+            }
+            return "forward:findMyReport";
         }
-        return "forward:findMyReport";
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
     //教师审核实训报告
     @RequestMapping("teacherReviewReport")
-    public String teacherReviewReport(Model model, Report report, HttpServletRequest request){
+    public String teacherReviewReport(Model model, Report report, HttpServletRequest request, HttpSession session){
         //数据类型转换
-        String t_review_score = request.getParameter("t_review_score");
-        report.setEmp_review_score(Integer.parseInt(t_review_score));
-        reportService.teacherReviewReport(report);
-        model.addAttribute("ok_submit","提交成功！");
-        return "forward:teacherGetReport";
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            String t_review_score = request.getParameter("t_review_score");
+            report.setEmp_review_score(Integer.parseInt(t_review_score));
+            reportService.teacherReviewReport(report);
+            model.addAttribute("ok_submit","提交成功！");
+            return "forward:teacherGetReport";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
     //企业人员审核实训报告
     @RequestMapping("companyReviewReport")
-    public String companyReviewReport(Model model, Report report, HttpServletRequest request){
+    public String companyReviewReport(Model model, Report report, HttpServletRequest request, HttpSession session){
         //数据类型转换
-        String emp_review_score = request.getParameter("emp_review_score");
-        report.setEmp_review_score(Integer.parseInt(emp_review_score));
-        reportService.companyReviewReport(report);
-        model.addAttribute("ok_submit","提交成功！");
-        return "forward:getCompanyReport";
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            String emp_review_score = request.getParameter("emp_review_score");
+            report.setEmp_review_score(Integer.parseInt(emp_review_score));
+            reportService.companyReviewReport(report);
+            model.addAttribute("ok_submit","提交成功！");
+            return "forward:getCompanyReport";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
     //打回实训报告重做
     @RequestMapping("backReDo")
-    public String backReDo(HttpServletRequest request){
-        Map<String,Object> map = new HashMap<>();
-        String id = request.getParameter("id");
-        String s_id = request.getParameter("s_id");
-        //类型转换
-        int conversion = Integer.parseInt(id);
-        map.put("id",conversion);
-        map.put("s_id",s_id);
-        reportService.backReDo(map);
-        return "forward:teacherGetReport";
+    public String backReDo(HttpServletRequest request, HttpSession session, Model model){
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            Map<String,Object> map = new HashMap<>();
+            String id = request.getParameter("id");
+            String s_id = request.getParameter("s_id");
+            //类型转换
+            int conversion = Integer.parseInt(id);
+            map.put("id",conversion);
+            map.put("s_id",s_id);
+            reportService.backReDo(map);
+            return "forward:teacherGetReport";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
 }

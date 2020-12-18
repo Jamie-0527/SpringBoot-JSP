@@ -12,15 +12,15 @@
     <title>实训报告</title>
 </head>
 
-<link rel="stylesheet" href="/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">
+<%--<link rel="stylesheet" href="/css/bootstrap.min.css">--%>
+<%--<link rel="stylesheet" href="/css/bootstrap-datetimepicker.min.css">--%>
 
-<script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<%--<script src="js/jquery-3.5.1.min.js"></script>--%>
+<%--<script src="js/popper.min.js"></script>--%>
+<%--<script src="js/bootstrap.min.js"></script>--%>
 
-<script src="js/bootstrap-datetimepicker.min.js"></script>
-<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<%--<script src="js/bootstrap-datetimepicker.min.js"></script>--%>
+<%--<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>--%>
 
 <%
     //初始化一个int i，用于回去列表每行ID
@@ -111,6 +111,76 @@
                 </td>
             </tr>
 
+            <%if (checkStatus==0 || checkStatus==1 || checkStatus==2 || checkStatus==3){%>
+            <%--查看详情模态框--%>
+            <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title" id="myModalLabel1">
+                                <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;审核实训报告
+                            </h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        </div>
+                        <div class="modal-body">
+                            <%--此处是修改表单--%>
+                            <form action="studentSubmitReport" method="post">
+                                <div class="form-row">
+                                    <input type="number" style="display: none;" name="id" value="${r.id}">
+                                    <input type="number" style="display: none;" name="report_status" value="${r.report_status}">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="studentId1">学号</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="s_id" id="studentId1" value="${r.s_id}" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="studentName1">姓名</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="s_name" id="studentName1" value="${r.s_name}" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="studentGrade1">班级</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="c_name" id="studentGrade1" value="${r.c_name}" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="studentCollege1">学院</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="s_college" id="studentCollege1" value="${r.s_college}" required>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-9">
+                                        <label for="companyName1">实训公司</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="company_name" id="companyName1" value="${r.company_name}" required>
+                                    </div>
+                                    <div class="col-md-3 mb-3">
+                                        <label for="commitTime1">提交时间</label>
+                                        <input type="text" class="form-control" readonly="readonly" name="commitTime" id="commitTime1" value="${r.commit_time}" required>
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="reportContext1">实训内容</label>
+                                    <textarea type="text" rows="10" class="form-control" readonly="readonly" name="report_context" id="reportContext1" style="resize: none" required>
+                                            ${r.report_context}
+                                    </textarea>
+                                </div>
+                                <div>
+                                    <label for="reportExperience1">实训心得</label>
+                                    <textarea type="text" rows="10" class="form-control" readonly="readonly" name="report_experience" id="reportExperience1" style="resize: none" required>
+                                            ${r.report_experience}
+                                    </textarea>
+                                </div>
+                                <p style="color: #c6c8ca">
+                                    上一次提交时间:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span>&nbsp;&nbsp;
+                                    审核人:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_name}&nbsp;&nbsp;${r.company_person}</span>
+                                </p>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                    <button type="submit" class="btn btn-primary">提交审核</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <%}else {%>
             <%--查看详情模态框--%>
             <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
@@ -122,7 +192,7 @@
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                         </div>
                         <div class="modal-body">
-                            <%--此处是修改表单--%>
+                                <%--此处是修改表单--%>
                             <form action="studentSubmitReport" method="post">
                                 <div class="form-row">
                                     <input type="number" style="display: none;" name="id" value="${r.id}">
@@ -166,7 +236,7 @@
                                             ${r.report_experience}
                                     </textarea>
                                 </div>
-                                <p style="color: #c6c8ca">上一次审核提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_review_time}</span></p>
+                                <p style="color: #c6c8ca">上一次提交时间&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span></p>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
                                     <button type="submit" class="btn btn-primary">提交审核</button>
@@ -176,7 +246,7 @@
                     </div>
                 </div>
             </div>
-
+            <%}%>
         </c:forEach>
     </tbody>
 </table>
@@ -219,9 +289,15 @@
                             </div>
                             <div class="col-md-6 mb-3">
                                 <label for="s_college">学院</label>
-                                <input type="text" class="form-control" name="s_college" id="s_college" required>
+                                <select class="custom-select" id="s_college" name="s_college" required>
+                                    <option selected disabled></option>
+                                    <option>计算机学院</option>
+                                    <option>电机学院</option>
+                                    <option>传媒艺术学院</option>
+                                    <option>外语学院</option>
+                                </select>
                                 <div class="invalid-feedback">
-                                    请输入学院
+                                    请选择学院
                                 </div>
                             </div>
                         </div>

@@ -50,6 +50,11 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
+    public Grade findGrade(String c_name) {
+        return adminDao.findGrade(c_name);
+    }
+
+    @Override
     public List<Teacher> findAllTeacher() {
         return adminDao.findAllTeacher();
     }
@@ -57,6 +62,11 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public int addTeacher(Teacher teacher) {
         return adminDao.addTeacher(teacher);
+    }
+
+    @Override
+    public int addTeacherGrade(Grade grade) {
+        return adminDao.addTeacherGrade(grade);
     }
 
     @Override

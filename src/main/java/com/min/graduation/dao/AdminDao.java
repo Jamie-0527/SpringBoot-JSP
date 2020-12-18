@@ -31,12 +31,18 @@ public interface AdminDao {
     int deleteStudent(@Param("sid") String sid);
 
 
+    //查询班级信息-->
+    Grade findGrade(String c_name);
+
 
     //查询所有教师信息
     List<Teacher> findAllTeacher();
 
     //添加教师信息
     int addTeacher(Teacher teacher);
+
+    //添加教师班级-->
+    int addTeacherGrade(Grade grade);
 
     //更新教师信息
     int updateTeacher(Teacher teacher);

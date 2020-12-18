@@ -17,12 +17,12 @@
     Integer authority = init.getAuthority();
 %>
 
-<link rel="stylesheet" href="css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">
-
+<link rel="stylesheet" href="css/bootstrap.min.css" >
+<%--<link rel="stylesheet" href="https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.css">--%>
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <script src="js/jquery-3.5.1.min.js"></script>
-<script src="js/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-<script src="js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+<script src="js/popper.min.js"></script>
+<script src="js/bootstrap.min.js"></script>
 <script src="js/init.js"></script>
 
 <body>
@@ -32,7 +32,9 @@
     <p class="lead">为了您账号的安全性，不影响本系统的使用状态，<span style="color: red">请您尽快更改此账户的密码和有关信息!</span></p>
     <hr class="my-4">
     <p>点击下方按钮即可修改信息</p>
-    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" role="button">点击修改</button>
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#exampleModal" role="button">
+        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;点击修改
+    </button>
 </div>
 
 <div class="modal fade" id="exampleModal" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -162,6 +164,12 @@
                             请选择职称
                         </div>
 
+                        <label for="addTeacherGrade">授课班级</label>
+                        <input type="text" class="form-control" name="c_name" id="addTeacherGrade" required>
+                        <div class="invalid-feedback">
+                            请输入授课班级
+                        </div>
+
                         <label for="addTeacherCollege">学院</label>
                         <select class="custom-select" id="addTeacherCollege" name="t_college" required>
                             <option selected disabled></option>
@@ -186,7 +194,7 @@
                     </form>
                 <%}else if (authority==3){%>
                     <%--企业员工初始化--%>
-                    <form action="test" method="post" class="needs-validation" novalidate>
+                    <form action="initCompany" method="post" class="needs-validation" novalidate>
                         <div class="form-row">
                             <div class="col-md-6 mb-3">
                                 <label for="addCompanyPersonId">工号</label>

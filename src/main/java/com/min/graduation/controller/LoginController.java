@@ -43,6 +43,8 @@ public class LoginController {
             if ( (pwd!=null && pwd!="") && (loginName!=null && loginName!="")){
                 //如果密码为123456，则跳转强制修改密码和完善信息
                 if ("123456".equals(l.getPassword())){
+                    String userName = l.getUserName();
+                    session.setAttribute("userName",userName);
                     model.addAttribute("init",l);
                     return "component/init";
                 }else{
@@ -117,21 +119,27 @@ public class LoginController {
 
     //更改账户密码
     @RequestMapping("updatePassword")
-    public String updatePassword(Model model, String oldPassword, String user_name, String password) {
+    public String updatePassword(Model model, HttpSession session, String oldPassword, String user_name, String password) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            //校验旧密码
+            Login login = adminService.findAccountByUserName(user_name);
+            String old_pwd = md5Encryption.setEncryption(oldPassword);
+            if (old_pwd.equals(login.getPassword())){
+                loginService.updatePassword(user_name, password);
+                model.addAttribute("ok_update","更新成功！请重新登录");
+                return "login";
+            }else {
+                model.addAttribute("fail_update","密码错误，更新失败！");
+                model.addAttribute("login",login);
+                return "component/updatePassword";
 
-        //校验旧密码
-        Login login = adminService.findAccountByUserName(user_name);
-        String old_pwd = md5Encryption.setEncryption(oldPassword);
-        if (old_pwd.equals(login.getPassword())){
-            loginService.updatePassword(user_name, password);
-            model.addAttribute("ok_update","更新成功！请重新登录");
-            return "login";
-        }else {
-            model.addAttribute("fail_update","密码错误，更新失败！");
-            model.addAttribute("login",login);
-            return "component/updatePassword";
-
+            }
         }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
+
     }
 
     //退出登录

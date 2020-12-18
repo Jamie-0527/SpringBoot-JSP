@@ -143,7 +143,7 @@
                         </div>
                     </div>
                 </div>
-
+                <%if (checkStatus==0 || checkStatus==1){%>
                 <%--审核模态框--%>
                 <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
@@ -155,7 +155,7 @@
                                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                             </div>
                             <div class="modal-body">
-                                <%--此处是修改表单--%>
+                                    <%--此处是修改表单--%>
                                 <form action="companyReviewReport" method="post">
                                     <div class="form-row">
                                         <input type="number" style="display: none;" name="id" value="${r.id}">
@@ -228,6 +228,93 @@
                         </div>
                     </div>
                 </div>
+                <%}else {%>
+                <%--审核模态框--%>
+                <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h4 class="modal-title" id="myModalLabel1">
+                                    <i class="fa fa-eye" aria-hidden="true"></i>&nbsp;审核实训报告
+                                </h4>
+                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                            </div>
+                            <div class="modal-body">
+                                    <%--此处是修改表单--%>
+                                <form action="companyReviewReport" method="post">
+                                    <div class="form-row">
+                                        <input type="number" style="display: none;" name="id" value="${r.id}">
+                                        <input type="number" style="display: none;" name="report_status" value="${r.report_status}">
+                                        <div class="col-md-3 mb-3">
+                                            <label for="studentId1">学号</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="s_id" id="studentId1" value="${r.s_id}" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="studentName1">姓名</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="s_name" id="studentName1" value="${r.s_name}" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="studentGrade1">班级</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="c_name" id="studentGrade1" value="${r.c_name}" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="studentCollege1">学院</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="s_college" id="studentCollege1" value="${r.s_college}" required>
+                                        </div>
+                                    </div>
+                                    <div class="form-row">
+                                        <div class="col-md-9">
+                                            <label for="company_name1">实训公司</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="company_name" id="company_name1" value="${r.company_name}" required>
+                                        </div>
+                                        <div class="col-md-3 mb-3">
+                                            <label for="commitTime1">提交时间</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="commitTime" id="commitTime1" value="${r.commit_time}" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="report_context1">实训内容</label>
+                                        <textarea type="text" rows="10" class="form-control" readonly="readonly" name="report_context" id="report_context1" style="resize: none" required>
+                                                ${r.report_context}
+                                        </textarea>
+                                    </div>
+                                    <div>
+                                        <label for="report_experience1">实训心得</label>
+                                        <textarea type="text" rows="10" class="form-control" readonly="readonly" name="report_experience" id="report_experience1" style="resize: none" required>
+                                                ${r.report_experience}
+                                        </textarea>
+                                    </div>
+                                    <hr>
+                                    <div class="form-row">
+                                        <div class="col-md-4 mb-4">
+                                            <label for="company_person_id1">工号</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="company_person_id" id="company_person_id1" value="${company.company_person_id}" required>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label for="company_person1">姓名</label>
+                                            <input type="text" class="form-control" readonly="readonly" name="company_person" id="company_person1" value="${company.company_person}" required>
+                                        </div>
+                                        <div class="col-md-4 mb-4">
+                                            <label for="emp_review_score1">审核分数<span style="color: #c6c8ca">(0-100)</span></label>
+                                            <input type="number" class="form-control" readonly="readonly" name="emp_review_score" id="emp_review_score1" value="${r.emp_review_score}" required>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label for="emp_review_opinion1">审核意见</label>
+                                        <textarea type="text" rows="10" class="form-control" readonly="readonly" name="emp_review_opinion" id="emp_review_opinion1" style="resize: none" required>
+                                            ${r.emp_review_opinion}
+                                        </textarea>
+                                    </div>
+                                    <p style="color: #c6c8ca">
+                                        上一次审核提交时间:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.emp_review_time}</span>&nbsp;&nbsp;
+                                        审核人:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.company_person}</span>
+                                    </p>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <%}%>
             </c:forEach>
         </tbody>
     </table>

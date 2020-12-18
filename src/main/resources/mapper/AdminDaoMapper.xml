@@ -65,10 +65,10 @@
         insert into student (s_id,s_name,s_class_no,s_phone,s_college,company_name)
         values (#{s_id},#{s_name},#{s_class_no},#{s_phone},#{s_college},#{company_name})
     </insert>
-    <!--添加学生登录信息-->
+    <!--添加用户信息-->
     <insert id="addLogin" parameterType="Map">
-        insert into login (user_name,password,authority,create_time,modify_time)
-        values (#{userName},'123456',#{authority},now(),now())
+        insert into login (user_name,password,authority,create_time,modify_time,`status`)
+        values (#{userName},'123456',#{authority},now(),now(),0)
     </insert>
     <!--更新学生信息-->
     <update id="updateStudent" parameterType="Student">
@@ -86,6 +86,11 @@
         delete from student where s_id = #{sid}
     </delete>
 
+    <!--查询班级信息-->
+    <select id="findGrade" parameterType="String" resultType="Grade">
+        select * from grade where c_name=#{c_name}
+    </select>
+
     <!--查询教师信息-->
     <select id="findAllTeacher" resultMap="TeacherMapper">
         select t.t_id,t.t_name,t.t_rank,t.t_college,t.t_phone from teacher t
@@ -94,6 +99,11 @@
     <insert id="addTeacher" parameterType="Teacher">
         insert into teacher (t_id,t_name,t_rank,t_college,t_phone)
         values (#{t_id},#{t_name},#{t_rank},#{t_college},#{t_phone})
+    </insert>
+    <!--添加教师班级-->
+    <insert id="addTeacherGrade" parameterType="Grade">
+        insert into grade (c_id,c_name,t_id)
+        values (#{c_id},#{c_name},#{t_id})
     </insert>
     <!--更新教师信息-->
     <update id="updateTeacher" parameterType="Teacher">

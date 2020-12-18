@@ -45,7 +45,7 @@ public interface StudentDao {
     Student findCompany(@Param("name") String name);
 
     //根据班级名字查询班级信息
-    Grade findGradeInfo(@Param("className") String className);
+    List<Grade> findGradeInfo(@Param("className") String className);
 
     //查询我提交的实训报告
     List<Report> myReport(String s_id);

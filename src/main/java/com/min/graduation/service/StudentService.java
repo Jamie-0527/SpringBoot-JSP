@@ -42,7 +42,7 @@ public interface StudentService {
     Student findCompany(String name);
 
     //根据班级名字查询班级信息
-    Grade findGradeInfo(String className);
+    List<Grade> findGradeInfo(String className);
 
     //查询我提交的实训报告
     List<Report> myReport(String s_id);

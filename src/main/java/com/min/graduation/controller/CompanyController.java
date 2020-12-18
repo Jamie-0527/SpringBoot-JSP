@@ -10,10 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * @author zhangjiamin
@@ -39,11 +36,19 @@ public class CompanyController {
                 long time = now.getTime()-report.getCommit_time().getTime();
                 report.setUpdatedOn(time/(1000*60*60));
             }
+            //添加排序规则---递增
+            Collections.sort(companyReport, new Comparator<Report>() {
+                public int compare(Report arg0, Report arg1) {
+                    return arg0.getUpdatedOn().compareTo(arg1.getUpdatedOn());
+                }
+            });
+            //倒叙
             //Collections.reverse(companyReport);
             model.addAttribute("news",companyReport);
             return "company/home";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -60,19 +65,25 @@ public class CompanyController {
 
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
     //更新公司信息
     @RequestMapping("companyUpdateInformation")
-    public String companyUpdateInformation(Model model, Company company) {
+    public String companyUpdateInformation(Model model, Company company, HttpSession session) {
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            adminService.updateCompany(company);
+            Company result = companyService.personInformation(company.getCompany_person_id());
+            model.addAttribute("company",result);
+            model.addAttribute("ok_update","更新成功！");
+            return "company/companyInformation";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
 
-        adminService.updateCompany(company);
-        Company result = companyService.personInformation(company.getCompany_person_id());
-        model.addAttribute("company",result);
-        model.addAttribute("ok_update","更新成功！");
-
-        return "company/companyInformation";
     }
 
     //查询公司实训学生信息
@@ -85,8 +96,8 @@ public class CompanyController {
             model.addAttribute("companyStudent",companyStudent);
             return "company/studentManagement";
         }
-
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -114,6 +125,7 @@ public class CompanyController {
             return "company/studentManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -124,6 +136,12 @@ public class CompanyController {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Report> companyReport = companyService.getCompanyReport(userName);
+            //添加排序规则---递增
+            Collections.sort(companyReport, new Comparator<Report>() {
+                public int compare(Report arg0, Report arg1) {
+                    return arg0.getReport_status().compareTo(arg1.getReport_status());
+                }
+            });
             model.addAttribute("companyReport",companyReport);
             //获取教师个人信息，提高用户体验
             Company company = companyService.personInformation(userName);
@@ -133,6 +151,7 @@ public class CompanyController {
         }
 
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 }

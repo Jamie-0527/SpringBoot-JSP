@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -59,29 +61,35 @@ public class StudentController {
 
     //更新个人信息
     @RequestMapping("studentUpdateInformation")
-    public String studentUpdateInformation(Model model, HttpServletRequest request) {
+    public String studentUpdateInformation(Model model, HttpServletRequest request, HttpSession session) {
         //获取前端传来的数据
-        String s_id = request.getParameter("s_id");
-        String s_name = request.getParameter("s_name");
-        String c_name = request.getParameter("c_name");
-        String s_phone = request.getParameter("s_phone");
-        String s_college = request.getParameter("s_college");
-        String company_name = request.getParameter("company_name");
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            String s_id = request.getParameter("s_id");
+            String s_name = request.getParameter("s_name");
+            String c_name = request.getParameter("c_name");
+            String s_phone = request.getParameter("s_phone");
+            String s_college = request.getParameter("s_college");
+            String company_name = request.getParameter("company_name");
 
-        /*匹配班级ID*/
-        Grade gradeInfo = studentService.findGradeInfo(c_name);
-        if (company_name.length()==0){
-            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college);
-            adminService.updateStudent(student);
+            /*匹配班级ID*/
+            List<Grade> gradeInfo = studentService.findGradeInfo(c_name);
+            if (company_name.length()==0){
+                Student student = new Student(s_id,s_name,gradeInfo.get(0).getC_id(),s_phone,s_college);
+                adminService.updateStudent(student);
 
-        }else {
-            Student student = new Student(s_id,s_name,gradeInfo.getC_id(),s_phone,s_college,company_name);
-            adminService.updateStudent(student);
+            }else {
+                Student student = new Student(s_id,s_name,gradeInfo.get(0).getC_id(),s_phone,s_college,company_name);
+                adminService.updateStudent(student);
+            }
+            Student student = studentService.personInformation(s_id);
+            model.addAttribute("student",student);
+            model.addAttribute("ok_update","更新成功！");
+            return "student/studentInformation";
         }
-        Student student = studentService.personInformation(s_id);
-        model.addAttribute("student",student);
-        model.addAttribute("ok_update","更新成功！");
-        return "student/studentInformation";
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
     }
 
 //    //查询班级同学信息
@@ -115,11 +123,18 @@ public class StudentController {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Report> myReport = studentService.myReport(userName);
+            //添加排序规则---递增
+            Collections.sort(myReport, new Comparator<Report>() {
+                public int compare(Report arg0, Report arg1) {
+                    return arg0.getReport_status().compareTo(arg1.getReport_status());
+                }
+            });
             model.addAttribute("myReport",myReport);
             return "student/trainingReport";
 
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 
@@ -149,6 +164,7 @@ public class StudentController {
             }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
         return "login";
     }
 }

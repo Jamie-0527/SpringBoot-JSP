@@ -2,6 +2,7 @@ package com.min.graduation.service;
 
 
 import com.min.graduation.entity.*;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -17,15 +18,18 @@ public interface AdminService {
     //添加学生信息
     int addStudent(Student student);
 
-    //添加学生登录信息
+    //添加用户信息
     int addLogin(String userName, Integer authority);
 
     //更新学生信息
     int updateStudent(Student student);
 
     //删除学生信息
-    int deleteStudent(String sid);
+    int deleteStudent(@Param("sid") String sid);
 
+
+    //查询班级信息-->
+    Grade findGrade(String c_name);
 
 
     //查询所有教师信息
@@ -33,6 +37,9 @@ public interface AdminService {
 
     //添加教师信息
     int addTeacher(Teacher teacher);
+
+    //添加教师班级-->
+    int addTeacherGrade(Grade grade);
 
     //更新教师信息
     int updateTeacher(Teacher teacher);
