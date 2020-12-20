@@ -55,6 +55,7 @@
             <th class="border-right" scope="col">编号</th>
             <th class="border-right" scope="col">用户名</th>
             <th class="border-right" scope="col">姓名</th>
+            <th class="border-right" scope="col">公司名称</th>
             <th class="border-right" scope="col">账号创建时间</th>
             <th class="border-right" scope="col">密码修改时间</th>
             <th class="border-right" scope="col">状态</th>
