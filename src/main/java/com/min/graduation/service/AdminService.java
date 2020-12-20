@@ -29,7 +29,7 @@ public interface AdminService {
 
 
     //查询班级信息-->
-    Grade findGrade(String c_name);
+    List<Grade> findGrade(String c_name);
 
 
     //查询所有教师信息

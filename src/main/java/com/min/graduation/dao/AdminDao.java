@@ -31,8 +31,8 @@ public interface AdminDao {
     int deleteStudent(@Param("sid") String sid);
 
 
-    //查询班级信息-->
-    Grade findGrade(String c_name);
+    //查询班级信息
+    List<Grade> findGrade(String c_name);
 
 
     //查询所有教师信息

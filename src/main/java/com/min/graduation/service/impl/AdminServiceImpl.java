@@ -50,7 +50,7 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public Grade findGrade(String c_name) {
+    public List<Grade>  findGrade(String c_name) {
         return adminDao.findGrade(c_name);
     }
 

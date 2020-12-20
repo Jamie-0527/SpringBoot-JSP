@@ -86,8 +86,8 @@ public class UtilsController {
             adminService.addTeacher(teacher);
 
             //获取班级ID
-            Grade g = adminService.findGrade(c_name);
-            Grade grade = new Grade(g.getC_id(),c_name,t_id);
+            List<Grade> g = adminService.findGrade(c_name);
+            Grade grade = new Grade(g.get(0).getC_id(),c_name,t_id);
             //得到教师初始化后所带班级ID及名称，写入数据库
             adminService.addTeacherGrade(grade);
 
