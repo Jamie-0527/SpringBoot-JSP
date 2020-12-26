@@ -144,8 +144,9 @@ public class LoginController {
 
     //退出登录
     @RequestMapping("signOut")
-    public String signOut(HttpSession session){
+    public String signOut(HttpSession session, Model model){
         session.invalidate();
+        model.addAttribute("ok_update","账户已注销，请重新登录！");
         return "login";
     }
 

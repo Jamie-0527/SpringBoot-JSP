@@ -3,6 +3,7 @@ package com.min.graduation.controller;
 
 import com.min.graduation.entity.*;
 import com.min.graduation.service.*;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -43,17 +45,35 @@ public class AdminController {
 
     //查询学生信息
     @RequestMapping("studentManagement")
-    public String studentManagement(Model model, HttpSession session) {
+    public String studentManagement(Model model, HttpSession session, @Param("page") int page) {
 
-        String userName = (String) session.getAttribute("userName");
-        if (userName != null && userName != ""){
-            List<Student> allStudent = adminService.findAllStudent();
-            model.addAttribute("allStudent",allStudent);
+//        String userName = (String) session.getAttribute("userName");
+//        if (userName != null && userName != ""){
+        List<Student> allStudent = adminService.findAllStudent();
+            //方便分页处理，固定每页10条数据
+            Student[][] pageStudent = new Student[allStudent.size()/10+1][10];
+            int count = 0;
+            for (int i = 0; i < allStudent.size()/10+1; i++){
+                if (count < allStudent.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < allStudent.size()){
+                            pageStudent[i][j] = allStudent.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Student> showStudent = new ArrayList<Student>();
+            for (int i = 0; i < 10; i++){
+                System.out.println(pageStudent[page-1][i]);
+                showStudent.add(pageStudent[page-1][i]);
+            }
+            model.addAttribute("allStudent",showStudent);
             return "admin/studentManagement";
-        }
-        model.addAttribute("error","身份信息过期，请重新登录！");
-        session.invalidate();
-        return "login";
+//        }
+//        model.addAttribute("error","身份信息过期，请重新登录！");
+//        session.invalidate();
+//        return "login";
 
     }
 

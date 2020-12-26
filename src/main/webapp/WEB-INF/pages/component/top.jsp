@@ -33,21 +33,45 @@
             %>
             <div class="font-weight-bold">
                 <i class="fa fa-user" aria-hidden="true"></i>
-                <%=name%>&nbsp;,&nbsp;欢迎回来&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="signOut" class="btn btn-secondary" style="margin-bottom: 5px">
+                <%=name%>&nbsp;&nbsp;&nbsp;
+                <button href="signOut" class="btn btn-secondary" style="margin-bottom: 5px" data-toggle="modal" data-target="#logout">
                     <i class="fa fa-sign-out" aria-hidden="true">注销</i>
-                </a>
+                </button>
             </div>
 
             <%} else {%>
             <div class="font-weight-bold">
                 <i class="fa fa-user-secret" aria-hidden="true"></i>
                 超级管理员,欢迎回来&nbsp;&nbsp;&nbsp;&nbsp;
-                <a href="signOut" class="btn btn-secondary" style="margin-bottom: 5px">
+                <button href="signOut" class="btn btn-secondary" style="margin-bottom: 5px" data-toggle="modal" data-target="#logout">
                     <i class="fa fa-sign-out" aria-hidden="true">注销</i>
-                </a>
+                </button>
             </div>
             <%}%>
+        </div>
+        <%--注销模态框--%>
+        <div class="modal fade" id="logout" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="del" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="del">
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>&nbsp;Confirm
+                        </h3>
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <p>你确定要退出本系统吗？</p>
+                        <form action="signOut" method="post" >
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                                <button type="submit" class="btn btn-secondary">
+                                    <i class="fa fa-sign-out" aria-hidden="true">退出</i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 
