@@ -5,6 +5,7 @@ import com.min.graduation.service.AdminService;
 import com.min.graduation.service.CompanyService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
@@ -118,7 +120,7 @@ public class StudentController {
 
     //查询我提交的实训报告
     @RequestMapping("findMyReport")
-    public String findMyReport(Model model, HttpSession session){
+    public String findMyReport(Model model, HttpSession session, @Param("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -129,7 +131,29 @@ public class StudentController {
                     return arg0.getReport_status().compareTo(arg1.getReport_status());
                 }
             });
-            model.addAttribute("myReport",myReport);
+            //方便分页处理，固定每页10条数据
+            Report[][] pageReport = new Report[myReport.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < myReport.size()/10+1; i++){
+                if (count < myReport.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < myReport.size()){
+                            pageReport[i][j] = myReport.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Report> showReport = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageReport[page-1][i] != null){
+                    showReport.add(pageReport[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",myReport.size()/10+1);
+            model.addAttribute("myReport",showReport);
             return "student/trainingReport";
 
         }
@@ -140,23 +164,45 @@ public class StudentController {
 
     //根据学号查询实训报告
     @RequestMapping("findReportById")
-    public String findReportById(Model model, String s_id, HttpSession session){
+    public String findReportById(Model model, String s_id, HttpSession session, @Param("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         int authority = (int) session.getAttribute("Authority");
         if (userName != null && userName != ""){
             List<Report> reportById = studentService.myReport(s_id);
+            //方便分页处理，固定每页10条数据
+            Report[][] pageReport = new Report[reportById.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < reportById.size()/10+1; i++){
+                if (count < reportById.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < reportById.size()){
+                            pageReport[i][j] = reportById.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Report> showReport = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageReport[page-1][i] != null){
+                    showReport.add(pageReport[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",reportById.size()/10+1);
             if (authority==0){
-                model.addAttribute("allReport",reportById);
+                model.addAttribute("allReport",showReport);
                 return "admin/reportManagement";
             }else if (authority==2){
-                model.addAttribute("gradeReport",reportById);
+                model.addAttribute("gradeReport",showReport);
                 //获取教师个人信息，提高用户体验
                 Teacher teacher = teacherService.personInformation(userName);
                 model.addAttribute("teacher",teacher);
                 return "teacher/reportManagement";
             }else if (authority==3){
-                model.addAttribute("companyReport",reportById);
+                model.addAttribute("companyReport",showReport);
                 //获取教师个人信息，提高用户体验
                 Company company = companyService.personInformation(userName);
                 model.addAttribute("company",company);

@@ -42,10 +42,10 @@
     <a class="navbar-brand" href="teacherToHome">
         <img src="imgs/logo.png" width="100%" height="6%" alt="武汉晴川学院" loading="lazy">
     </a>
-    <a id="studentManagement" href="teacherGradeInformation" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+    <a id="studentManagement" href="teacherGradeInformation?page=1" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
         <i class="fa fa-users" aria-hidden="true"></i>&nbsp;学生管理
     </a>
-    <a id="paperManagement" href="teacherGetReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+    <a id="paperManagement" href="teacherGetReport?page=1" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
         <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
     </a>
     <div class="btn btn-outline-secondary btn-lg btn-block clear-fillet dropdown-toggle" id="teacherPersonalCenter">

@@ -47,12 +47,13 @@ public class AdminController {
     @RequestMapping("studentManagement")
     public String studentManagement(Model model, HttpSession session, @Param("page") int page) {
 
-//        String userName = (String) session.getAttribute("userName");
-//        if (userName != null && userName != ""){
-        List<Student> allStudent = adminService.findAllStudent();
+        String userName = (String) session.getAttribute("userName");
+        if (userName != null && userName != ""){
+            List<Student> allStudent = adminService.findAllStudent();
             //方便分页处理，固定每页10条数据
             Student[][] pageStudent = new Student[allStudent.size()/10+1][10];
             int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
             for (int i = 0; i < allStudent.size()/10+1; i++){
                 if (count < allStudent.size()){
                     for (int j = 0; j<10; j++){
@@ -63,17 +64,20 @@ public class AdminController {
                     }
                 } else { break; }
             }
-            List<Student> showStudent = new ArrayList<Student>();
+            List<Student> showStudent = new ArrayList<>();
             for (int i = 0; i < 10; i++){
-                System.out.println(pageStudent[page-1][i]);
-                showStudent.add(pageStudent[page-1][i]);
+                if (pageStudent[page-1][i] != null){
+                    showStudent.add(pageStudent[page-1][i]);
+                }
             }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",allStudent.size()/10+1);
             model.addAttribute("allStudent",showStudent);
             return "admin/studentManagement";
-//        }
-//        model.addAttribute("error","身份信息过期，请重新登录！");
-//        session.invalidate();
-//        return "login";
+        }
+        model.addAttribute("error","身份信息过期，请重新登录！");
+        session.invalidate();
+        return "login";
 
     }
 
@@ -166,12 +170,34 @@ public class AdminController {
 
     //查询教师信息
     @RequestMapping("teacherManagement")
-    public String teacherManagement(Model model, HttpSession session) {
+    public String teacherManagement(Model model, HttpSession session, @Param("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Teacher> allTeacher = adminService.findAllTeacher();
-            model.addAttribute("allTeacher",allTeacher);
+            //方便分页处理，固定每页10条数据
+            Teacher[][] pageTeacher = new Teacher[allTeacher.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < allTeacher.size()/10+1; i++){
+                if (count < allTeacher.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < allTeacher.size()){
+                            pageTeacher[i][j] = allTeacher.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Teacher> showTeacher = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageTeacher[page-1][i] != null){
+                    showTeacher.add(pageTeacher[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",allTeacher.size()/10+1);
+            model.addAttribute("allTeacher",showTeacher);
             return "admin/teacherManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -237,11 +263,33 @@ public class AdminController {
 
     //查询公司信息
     @RequestMapping("companyManagement")
-    public String companyManagement(Model model, HttpSession session) {
+    public String companyManagement(Model model, HttpSession session, @Param("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Company> allCompany = adminService.findAllCompany();
-            model.addAttribute("allCompany",allCompany);
+            //方便分页处理，固定每页10条数据
+            Company[][] pageCompany = new Company[allCompany.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < allCompany.size()/10+1; i++){
+                if (count < allCompany.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < allCompany.size()){
+                            pageCompany[i][j] = allCompany.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Company> showCompany = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageCompany[page-1][i] != null){
+                    showCompany.add(pageCompany[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",allCompany.size()/10+1);
+            model.addAttribute("allCompany",showCompany);
             return "admin/CompanyManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -306,11 +354,33 @@ public class AdminController {
 
     //查询学生账户信息
     @RequestMapping("studentAccountManagement")
-    public String studentAccountManagement(Model model, HttpSession session) {
+    public String studentAccountManagement(Model model, HttpSession session, @Param("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> studentAccount = adminService.findStudentAccount();
-            model.addAttribute("studentAccount",studentAccount);
+            //方便分页处理，固定每页10条数据
+            Admin[][] pageAccount = new Admin[studentAccount.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < studentAccount.size()/10+1; i++){
+                if (count < studentAccount.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < studentAccount.size()){
+                            pageAccount[i][j] = studentAccount.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Admin> showAccount = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageAccount[page-1][i] != null){
+                    showAccount.add(pageAccount[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",studentAccount.size()/10+1);
+            model.addAttribute("studentAccount",showAccount);
             return "admin/studentAccountManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -320,11 +390,33 @@ public class AdminController {
 
     //查询教师账户信息
     @RequestMapping("teacherAccountManagement")
-    public String teacherAccountManagement(Model model, HttpSession session) {
+    public String teacherAccountManagement(Model model, HttpSession session, @Param("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> teacherAccount = adminService.findTeacherAccount();
-            model.addAttribute("teacherAccount",teacherAccount);
+            //方便分页处理，固定每页10条数据
+            Admin[][] pageAccount = new Admin[teacherAccount.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < teacherAccount.size()/10+1; i++){
+                if (count < teacherAccount.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < teacherAccount.size()){
+                            pageAccount[i][j] = teacherAccount.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Admin> showAccount = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageAccount[page-1][i] != null){
+                    showAccount.add(pageAccount[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",teacherAccount.size()/10+1);
+            model.addAttribute("teacherAccount",showAccount);
             return "admin/teacherAccountManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -334,11 +426,33 @@ public class AdminController {
 
     //查询企业员工账户信息
     @RequestMapping("companyAccountManagement")
-    public String companyAccountManagement(Model model, HttpSession session) {
+    public String companyAccountManagement(Model model, HttpSession session, @Param("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> companyAccount = adminService.findCompanyAccount();
-            model.addAttribute("companyAccount",companyAccount);
+            //方便分页处理，固定每页10条数据
+            Admin[][] pageAccount = new Admin[companyAccount.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < companyAccount.size()/10+1; i++){
+                if (count < companyAccount.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < companyAccount.size()){
+                            pageAccount[i][j] = companyAccount.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Admin> showAccount = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageAccount[page-1][i] != null){
+                    showAccount.add(pageAccount[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",companyAccount.size()/10+1);
+            model.addAttribute("companyAccount",showAccount);
             return "admin/companyAccountManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -420,7 +534,7 @@ public class AdminController {
 
     //查询所有提交的实训报告
     @RequestMapping("findAllReport")
-    public String findAllReport(Model model, HttpSession session){
+    public String findAllReport(Model model, HttpSession session, @Param("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -431,7 +545,29 @@ public class AdminController {
                     return arg0.getReport_status().compareTo(arg1.getReport_status());
                 }
             });
-            model.addAttribute("allReport",allReport);
+            //方便分页处理，固定每页10条数据
+            Report[][] pageReport = new Report[allReport.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < allReport.size()/10+1; i++){
+                if (count < allReport.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < allReport.size()){
+                            pageReport[i][j] = allReport.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Report> showReport = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageReport[page-1][i] != null){
+                    showReport.add(pageReport[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",allReport.size()/10+1);
+            model.addAttribute("allReport",showReport);
             return "admin/reportManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");

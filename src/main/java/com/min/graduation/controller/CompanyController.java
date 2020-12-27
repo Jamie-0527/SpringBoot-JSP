@@ -3,6 +3,7 @@ package com.min.graduation.controller;
 import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.CompanyService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -88,12 +89,34 @@ public class CompanyController {
 
     //查询公司实训学生信息
     @RequestMapping("companyStudentInformation")
-    public String companyStudentInformation(Model model, HttpSession session) {
+    public String companyStudentInformation(Model model, HttpSession session, @Param("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Student> companyStudent = companyService.findCompanyStudent(userName);
-            model.addAttribute("companyStudent",companyStudent);
+            //方便分页处理，固定每页10条数据
+            Student[][] pageStudent = new Student[companyStudent.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < companyStudent.size()/10+1; i++){
+                if (count < companyStudent.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < companyStudent.size()){
+                            pageStudent[i][j] = companyStudent.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Student> showStudent = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageStudent[page-1][i] != null){
+                    showStudent.add(pageStudent[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",companyStudent.size()/10+1);
+            model.addAttribute("companyStudent",showStudent);
             return "company/studentManagement";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -131,7 +154,7 @@ public class CompanyController {
 
     //查询实训学生提交的实训报告
     @RequestMapping("getCompanyReport")
-    public String getCompanyReport(Model model, HttpSession session) {
+    public String getCompanyReport(Model model, HttpSession session, @Param("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -142,7 +165,29 @@ public class CompanyController {
                     return arg0.getReport_status().compareTo(arg1.getReport_status());
                 }
             });
-            model.addAttribute("companyReport",companyReport);
+            //方便分页处理，固定每页10条数据
+            Report[][] pageReport = new Report[companyReport.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < companyReport.size()/10+1; i++){
+                if (count < companyReport.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < companyReport.size()){
+                            pageReport[i][j] = companyReport.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Report> showReport = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageReport[page-1][i] != null){
+                    showReport.add(pageReport[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",companyReport.size()/10+1);
+            model.addAttribute("companyReport",showReport);
             //获取教师个人信息，提高用户体验
             Company company = companyService.personInformation(userName);
             model.addAttribute("company",company);

@@ -47,17 +47,17 @@
         <i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;信息管理
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="studentManagement">
+        <a href="studentManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a1">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;学生管理
             </div>
         </a>
-        <a href="teacherManagement">
+        <a href="teacherManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a2">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;教师管理
             </div>
         </a>
-        <a href="companyManagement">
+        <a href="companyManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="a3">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;企业管理
             </div>
@@ -67,23 +67,23 @@
         <i class="fa fa-list-ul" aria-hidden="true"></i>&nbsp;账户管理
     </div>
     <div style="background-color: rgb(22,24,29); ">
-        <a href="studentAccountManagement">
+        <a href="studentAccountManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b1">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;学生账户
             </div>
         </a>
-        <a href="teacherAccountManagement">
+        <a href="teacherAccountManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b2">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;教师账户
             </div>
         </a>
-        <a href="companyAccountManagement">
+        <a href="companyAccountManagement?page=1">
             <div class="btn btn-outline-light btn-lg btn-block clear-fillet" id="b3">
                 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>&nbsp;企业账户
             </div>
         </a>
     </div>
-    <a id="paperManagement" href="findAllReport" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
+    <a id="paperManagement" href="findAllReport?page=1" class="btn btn-outline-secondary btn-lg btn-block clear-fillet" style="margin: 0px;">
         <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
     </a>
 

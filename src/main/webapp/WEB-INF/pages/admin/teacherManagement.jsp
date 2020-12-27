@@ -191,6 +191,72 @@
         </c:forEach>
         </tbody>
     </table>
+    <%--分页组件--%>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+            <c:choose>
+                <c:when test="${pageNum > 1}">
+                    <li class="page-item">
+                        <a class="page-link" href="teacherManagement?page=${pageNum-1 }" tabindex="-1">Previous</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >Previous</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+
+            <c:choose>
+                <%-- 当总页数不足10页，显示所有页数 --%>
+                <c:when test="${pageCount <=10}">
+                    <c:set var="begin" value="1"/>
+                    <c:set var="end" value="${pageCount}"/>
+                </c:when>
+                <c:otherwise>
+                    <%-- 当总页数大于10页，通过公式计算出begin和end --%>
+                    <c:set var="begin" value="${pageNum-5}"/>
+                    <c:set var="end" value="${pageNum+4}"/>
+                    <%-- 头溢出 --%>
+                    <c:if test="${begin<1}">
+                        <c:set var="begin" value="1"/>
+                        <c:set var="end" value="10"/>
+                    </c:if>
+                    <%-- 尾溢出 --%>
+                    <c:if test="${end>pageCount}">
+                        <c:set var="begin" value="${pageCount-9}"/>
+                        <c:set var="end" value="${pageCount}"/>
+                    </c:if>
+                </c:otherwise>
+            </c:choose>
+            <%-- 循环遍历页码列表 --%>
+            <c:forEach var="i" begin="${begin}" end="${end}">
+                <c:choose>
+                    <c:when test="${i eq pageNum}">
+                        <li class="page-item active" aria-current="page">
+                            <a class="page-link" href="teacherManagement?page=${i}">${i}<span class="sr-only">(current)</span></a>
+                        </li>
+                    </c:when>
+                    <c:otherwise>
+                        <li class="page-item"><a class="page-link" href="teacherManagement?page=${i}">${i}</a></li>
+                    </c:otherwise>
+                </c:choose>
+            </c:forEach>
+
+            <c:choose>
+                <c:when test="${pageNum < pageCount}">
+                    <li class="page-item">
+                        <a class="page-link" href="teacherManagement?page=${pageNum+1 }" tabindex="-1">Next</a>
+                    </li>
+                </c:when>
+                <c:otherwise>
+                    <li class="page-item disabled">
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >Next</a>
+                    </li>
+                </c:otherwise>
+            </c:choose>
+        </ul>
+    </nav>
 </div>
 <%--添加教师的模态框--%>
 <div class="modal fade" id="modalAdd" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="add" aria-hidden="true">

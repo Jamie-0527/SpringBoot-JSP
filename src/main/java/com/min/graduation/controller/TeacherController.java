@@ -7,6 +7,7 @@ import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -97,12 +98,34 @@ public class TeacherController {
 
     //查询班级学生信息
     @RequestMapping("teacherGradeInformation")
-    public String teacherGradeInformation(Model model, HttpSession session) {
+    public String teacherGradeInformation(Model model, HttpSession session, @Param("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Teacher> classStudent = teacherService.findClassStudent(userName);
-            model.addAttribute("classStudent",classStudent);
+            //方便分页处理，固定每页10条数据
+            Teacher[][] pageStudent = new Teacher[classStudent.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < classStudent.size()/10+1; i++){
+                if (count < classStudent.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < classStudent.size()){
+                            pageStudent[i][j] = classStudent.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Teacher> showStudent = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageStudent[page-1][i] != null){
+                    showStudent.add(pageStudent[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",classStudent.size()/10+1);
+            model.addAttribute("classStudent",showStudent);
             return "teacher/studentManagement";
         }
 
@@ -144,7 +167,7 @@ public class TeacherController {
 
     //获取学生的实训报告
     @RequestMapping("teacherGetReport")
-    public String teacherGetReport(Model model, HttpSession session) {
+    public String teacherGetReport(Model model, HttpSession session, @Param("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -163,10 +186,32 @@ public class TeacherController {
                     return arg0.getReport_status().compareTo(arg1.getReport_status());
                 }
             });
+            //方便分页处理，固定每页10条数据
+            Report[][] pageReport = new Report[result.size()/10+1][10];
+            int count = 0;
+            // 将对象封装在一个二维数组当中，方便页面取出
+            for (int i = 0; i < result.size()/10+1; i++){
+                if (count < result.size()){
+                    for (int j = 0; j<10; j++){
+                        if (count < result.size()){
+                            pageReport[i][j] = result.get(count);
+                            count++;
+                        } else { break; }
+                    }
+                } else { break; }
+            }
+            List<Report> showReport = new ArrayList<>();
+            for (int i = 0; i < 10; i++){
+                if (pageReport[page-1][i] != null){
+                    showReport.add(pageReport[page-1][i]);
+                }
+            }
+            model.addAttribute("pageNum",page);
+            model.addAttribute("pageCount",result.size()/10+1);
             //获取教师个人信息，提高用户体验
             Teacher teacher = teacherService.personInformation(userName);
             model.addAttribute("teacher",teacher);
-            model.addAttribute("gradeReport",result);
+            model.addAttribute("gradeReport",showReport);
             return "teacher/reportManagement";
         }
 
