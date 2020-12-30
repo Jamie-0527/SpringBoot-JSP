@@ -32,80 +32,72 @@ public class LoginController {
 
     @RequestMapping("login")
     public String loginUser(HttpServletRequest request, HttpSession session, Model model){
-
         try {
             //获得用户输入的密码，进行md5算法换算后与数据匹配
             String pwd = request.getParameter("password");
             String loginName = request.getParameter("loginName");
             Login l = loginService.login(loginName);
 
-            //账号密码不为空
-            if ( (pwd!=null && pwd!="") && (loginName!=null && loginName!="")){
-                //如果密码为123456，则跳转强制修改密码和完善信息
-                if ("123456".equals(l.getPassword())){
-                    String userName = l.getUserName();
-                    session.setAttribute("userName",userName);
-                    model.addAttribute("init",l);
-                    return "component/init";
-                }else{
-                    //账号状态有效
-                    if (l.getStatus()==0){
-                        //将当前密码转义在数据库进行校验
-                        String password = md5Encryption.setEncryption(pwd);
-                        if (password.equals(l.getPassword())){
-                            //密码正确则判断权限 超级管理员0、学生1、教师2、企业员工3
-                            if (l.getAuthority() == 0){
-                                /*获得用户名*/
-                                String userName = l.getUserName();
-                                session.setAttribute("userName",userName);
-                                session.setAttribute("Authority",l.getAuthority());
-                                return "forward:adminToHome";
+            //如果密码为123456，则跳转强制修改密码和完善信息
+            if ("123456".equals(l.getPassword())){
+                String userName = l.getUserName();
+                session.setAttribute("userName",userName);
+                model.addAttribute("init",l);
+                return "component/init";
+            }else{
+                //账号状态有效
+                if (l.getStatus()==0){
+                    //将当前密码转义在数据库进行校验
+                    String password = md5Encryption.setEncryption(pwd);
+                    if (password.equals(l.getPassword())){
+                        //密码正确则判断权限 超级管理员0、学生1、教师2、企业员工3
+                        if (l.getAuthority() == 0){
+                            /*获得用户名*/
+                            String userName = l.getUserName();
+                            session.setAttribute("userName",userName);
+                            session.setAttribute("Authority",l.getAuthority());
+                            return "forward:adminToHome";
 
-                            }else if (l.getAuthority() == 1){
-                                /*获得用户名*/
-                                String userName = l.getUserName();
-                                session.setAttribute("userName",userName);
-                                session.setAttribute("Authority",l.getAuthority());
-                                /*获取姓名*/
-                                Student studentName = loginService.getStudentName(userName);
-                                session.setAttribute("name",studentName.getS_name());
-                                return "forward:studentToHome";
+                        }else if (l.getAuthority() == 1){
+                            /*获得用户名*/
+                            String userName = l.getUserName();
+                            session.setAttribute("userName",userName);
+                            session.setAttribute("Authority",l.getAuthority());
+                            /*获取姓名*/
+                            Student studentName = loginService.getStudentName(userName);
+                            session.setAttribute("name",studentName.getS_name());
+                            return "forward:studentToHome";
 
-                            }else if (l.getAuthority() == 2) {
-                                /*获得用户名*/
-                                String userName = l.getUserName();
-                                session.setAttribute("userName",userName);
-                                session.setAttribute("Authority",l.getAuthority());
-                                /*获取姓名*/
-                                Teacher teacherName = loginService.getTeacherName(userName);
-                                session.setAttribute("name",teacherName.getT_name());
-                                return "forward:teacherToHome";
+                        }else if (l.getAuthority() == 2) {
+                            /*获得用户名*/
+                            String userName = l.getUserName();
+                            session.setAttribute("userName",userName);
+                            session.setAttribute("Authority",l.getAuthority());
+                            /*获取姓名*/
+                            Teacher teacherName = loginService.getTeacherName(userName);
+                            session.setAttribute("name",teacherName.getT_name());
+                            return "forward:teacherToHome";
 
-                            }else if (l.getAuthority() == 3) {
-                                /*获得用户名*/
-                                String userName = l.getUserName();
-                                session.setAttribute("userName",userName);
-                                session.setAttribute("Authority",l.getAuthority());
-                                /*获取姓名*/
-                                Company companyPersonName = loginService.getCompanyPersonName(userName);
-                                session.setAttribute("name",companyPersonName.getCompany_person());
-                                return "forward:companyToHome";
-                            }
+                        }else if (l.getAuthority() == 3) {
+                            /*获得用户名*/
+                            String userName = l.getUserName();
+                            session.setAttribute("userName",userName);
+                            session.setAttribute("Authority",l.getAuthority());
+                            /*获取姓名*/
+                            Company companyPersonName = loginService.getCompanyPersonName(userName);
+                            session.setAttribute("name",companyPersonName.getCompany_person());
+                            return "forward:companyToHome";
                         }
-                        else {
-                            model.addAttribute("error", "账号或密码错误！请重新输入");
-                            return "login";
-                        }
-                    }else {
-                        model.addAttribute("error", "此账号被禁用，请联系管理员解决");
+                    }
+                    else {
+                        model.addAttribute("error", "账号或密码错误！请重新输入");
                         return "login";
                     }
+                }else {
+                    model.addAttribute("error", "此账号被禁用，请联系管理员解决");
+                    return "login";
                 }
-            }else {
-                model.addAttribute("error", "账号或密码不可以为空！");
-                return "login";
             }
-
         }catch (Exception e){
             e.printStackTrace();
             model.addAttribute("error", "账号或密码错误！请重新输入");
