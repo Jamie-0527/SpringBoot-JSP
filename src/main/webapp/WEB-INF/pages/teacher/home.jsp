@@ -44,7 +44,7 @@
                 <div class="card text-center text-white bg-dark">
                     <div class="card-header">
                         实训报告
-                        <a href="teacherGetReport" class="btn btn-outline-light" style="float: right">查看</a>
+                        <a href="teacherGetReport?page=1" class="btn btn-outline-light" style="float: right">查看</a>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">${n.s_id}&nbsp;&nbsp;${n.s_name}</h5>

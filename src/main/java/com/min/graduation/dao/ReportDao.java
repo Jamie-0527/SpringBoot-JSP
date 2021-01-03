@@ -1,6 +1,7 @@
 package com.min.graduation.dao;
 
 import com.min.graduation.entity.Report;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
  * @author zhangjiamin
  * @date 2020/12/12 21:19
  */
-@Repository
+@Mapper
 public interface ReportDao {
 
     //学生提交报告

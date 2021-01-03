@@ -3,6 +3,7 @@ package com.min.graduation.dao;
 import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  * @author zhangjiamin
  * @date 2020/12/11 17:51
  */
-@Repository
+@Mapper
 public interface CompanyDao {
 
     //查询个人信息

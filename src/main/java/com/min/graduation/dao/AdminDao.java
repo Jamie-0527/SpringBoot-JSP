@@ -2,6 +2,7 @@ package com.min.graduation.dao;
 
 import com.min.graduation.entity.*;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  * 此类为管理员类的Dao接口
  */
 
-@Repository
+@Mapper
 public interface AdminDao {
 
     //查询所有学生信息

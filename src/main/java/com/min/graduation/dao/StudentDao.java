@@ -4,6 +4,7 @@ import com.min.graduation.entity.Grade;
 import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -14,7 +15,7 @@ import java.util.List;
  * 此类为学生实体类（Student）的Dao层接口
  */
 
-@Repository
+@Mapper
 public interface StudentDao {
 
     //查询所有用户

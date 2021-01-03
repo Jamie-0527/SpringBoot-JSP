@@ -4,6 +4,7 @@ import com.min.graduation.entity.Company;
 import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Repository;
  * 此类为学生实体类（Login）的Dao层接口
  */
 
-@Repository
+@Mapper
 public interface LoginDao {
 
     //用户登录

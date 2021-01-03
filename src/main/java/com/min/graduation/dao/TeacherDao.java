@@ -5,6 +5,7 @@ import com.min.graduation.entity.Report;
 import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 
@@ -14,7 +15,7 @@ import java.util.List;
  *此类为教师类的Dao曾接口
  */
 
-@Repository
+@Mapper
 public interface TeacherDao {
 
     //查询个人信息
