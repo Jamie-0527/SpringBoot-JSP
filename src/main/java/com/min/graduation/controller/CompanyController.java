@@ -3,11 +3,11 @@ package com.min.graduation.controller;
 import com.min.graduation.entity.*;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.CompanyService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -89,7 +89,7 @@ public class CompanyController {
 
     //查询公司实训学生信息
     @RequestMapping("companyStudentInformation")
-    public String companyStudentInformation(Model model, HttpSession session, @Param("page") int page) {
+    public String companyStudentInformation(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -154,7 +154,7 @@ public class CompanyController {
 
     //查询实训学生提交的实训报告
     @RequestMapping("getCompanyReport")
-    public String getCompanyReport(Model model, HttpSession session, @Param("page") int page) {
+    public String getCompanyReport(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){

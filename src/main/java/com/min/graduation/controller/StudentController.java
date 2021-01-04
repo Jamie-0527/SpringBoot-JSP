@@ -5,7 +5,6 @@ import com.min.graduation.service.AdminService;
 import com.min.graduation.service.CompanyService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -120,7 +119,7 @@ public class StudentController {
 
     //查询我提交的实训报告
     @RequestMapping("findMyReport")
-    public String findMyReport(Model model, HttpSession session, @Param("page") int page){
+    public String findMyReport(Model model, HttpSession session, @RequestParam("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -164,7 +163,7 @@ public class StudentController {
 
     //根据学号查询实训报告
     @RequestMapping("findReportById")
-    public String findReportById(Model model, String s_id, HttpSession session, @Param("page") int page){
+    public String findReportById(Model model, String s_id, HttpSession session, @RequestParam("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         int authority = (int) session.getAttribute("Authority");

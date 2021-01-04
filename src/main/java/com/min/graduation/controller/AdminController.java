@@ -3,11 +3,11 @@ package com.min.graduation.controller;
 
 import com.min.graduation.entity.*;
 import com.min.graduation.service.*;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -45,7 +45,7 @@ public class AdminController {
 
     //查询学生信息
     @RequestMapping("studentManagement")
-    public String studentManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String studentManagement(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -170,7 +170,7 @@ public class AdminController {
 
     //查询教师信息
     @RequestMapping("teacherManagement")
-    public String teacherManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String teacherManagement(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -263,7 +263,7 @@ public class AdminController {
 
     //查询公司信息
     @RequestMapping("companyManagement")
-    public String companyManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String companyManagement(Model model, HttpSession session, @RequestParam("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Company> allCompany = adminService.findAllCompany();
@@ -354,7 +354,7 @@ public class AdminController {
 
     //查询学生账户信息
     @RequestMapping("studentAccountManagement")
-    public String studentAccountManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String studentAccountManagement(Model model, HttpSession session, @RequestParam("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> studentAccount = adminService.findStudentAccount();
@@ -390,7 +390,7 @@ public class AdminController {
 
     //查询教师账户信息
     @RequestMapping("teacherAccountManagement")
-    public String teacherAccountManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String teacherAccountManagement(Model model, HttpSession session, @RequestParam("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> teacherAccount = adminService.findTeacherAccount();
@@ -426,7 +426,7 @@ public class AdminController {
 
     //查询企业员工账户信息
     @RequestMapping("companyAccountManagement")
-    public String companyAccountManagement(Model model, HttpSession session, @Param("page") int page) {
+    public String companyAccountManagement(Model model, HttpSession session, @RequestParam("page") int page) {
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
             List<Admin> companyAccount = adminService.findCompanyAccount();
@@ -534,7 +534,7 @@ public class AdminController {
 
     //查询所有提交的实训报告
     @RequestMapping("findAllReport")
-    public String findAllReport(Model model, HttpSession session, @Param("page") int page){
+    public String findAllReport(Model model, HttpSession session, @RequestParam("page") int page){
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){

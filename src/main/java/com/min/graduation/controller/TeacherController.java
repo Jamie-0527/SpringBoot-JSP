@@ -7,11 +7,11 @@ import com.min.graduation.entity.Teacher;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.StudentService;
 import com.min.graduation.service.TeacherService;
-import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -98,7 +98,7 @@ public class TeacherController {
 
     //查询班级学生信息
     @RequestMapping("teacherGradeInformation")
-    public String teacherGradeInformation(Model model, HttpSession session, @Param("page") int page) {
+    public String teacherGradeInformation(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -167,7 +167,7 @@ public class TeacherController {
 
     //获取学生的实训报告
     @RequestMapping("teacherGetReport")
-    public String teacherGetReport(Model model, HttpSession session, @Param("page") int page) {
+    public String teacherGetReport(Model model, HttpSession session, @RequestParam("page") int page) {
 
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
