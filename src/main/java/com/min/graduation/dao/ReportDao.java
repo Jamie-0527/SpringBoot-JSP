@@ -1,7 +1,9 @@
 package com.min.graduation.dao;
 
+import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Report;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,5 +30,8 @@ public interface ReportDao {
 
     //重新提交实训报告---update
     int reSubmitReport(Report report);
+
+    // 获取用户权限
+    Login getAuthority(@Param("uname") String username);
 
 }

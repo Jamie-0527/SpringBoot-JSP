@@ -106,7 +106,7 @@ public class AdminController {
                 adminService.updateStudent(student);
             }
             model.addAttribute("ok_update","更新成功！");
-            return "forward:studentManagement";
+            return "redirect:studentManagement"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -214,7 +214,7 @@ public class AdminController {
             adminService.updateTeacher(teacher);
             Teacher result = teacherService.personInformation(teacher.getT_id());
             model.addAttribute("ok_update","更新成功！");
-            return "forward:teacherManagement";
+            return "redirect:teacherManagement"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -305,7 +305,7 @@ public class AdminController {
             adminService.updateCompany(company);
             Company result = companyService.personInformation(company.getCompany_person_id());
             model.addAttribute("ok_update","更新成功！");
-            return "forward:companyManagement";
+            return "redirect:companyManagement"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -467,20 +467,11 @@ public class AdminController {
         if (userName != null && userName != ""){
             adminService.disableAccount(user_name);
             if (authority==1){
-                List<Admin> studentAccount = adminService.findStudentAccount();
-                model.addAttribute("studentAccount",studentAccount);
-
-                return "admin/studentAccountManagement";
+                return "redirect:studentAccountManagement"+"?page=1";
             }else if (authority==2){
-                List<Admin> teacherAccount = adminService.findTeacherAccount();
-                model.addAttribute("teacherAccount",teacherAccount);
-
-                return "admin/teacherAccountManagement";
+                return "redirect:teacherAccountManagement"+"?page=1";
             }else {
-                List<Admin> companyAccount = adminService.findCompanyAccount();
-                model.addAttribute("companyAccount",companyAccount);
-
-                return "admin/companyAccountManagement";
+                return "redirect:companyAccountManagement"+"?page=1";
             }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -495,20 +486,11 @@ public class AdminController {
         if (userName != null && userName != ""){
             adminService.enableAccount(user_name);
             if (authority==1){
-                List<Admin> studentAccount = adminService.findStudentAccount();
-                model.addAttribute("studentAccount",studentAccount);
-
-                return "admin/studentAccountManagement";
+                return "redirect:studentAccountManagement"+"?page=1";
             }else if (authority==2){
-                List<Admin> teacherAccount = adminService.findTeacherAccount();
-                model.addAttribute("teacherAccount",teacherAccount);
-
-                return "admin/teacherAccountManagement";
+                return "redirect:teacherAccountManagement"+"?page=1";
             }else {
-                List<Admin> companyAccount = adminService.findCompanyAccount();
-                model.addAttribute("companyAccount",companyAccount);
-
-                return "admin/companyAccountManagement";
+                return "redirect:companyAccountManagement"+"?page=1";
             }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");

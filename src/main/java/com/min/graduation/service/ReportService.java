@@ -1,8 +1,8 @@
 package com.min.graduation.service;
 
+import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Report;
 
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,4 +25,7 @@ public interface ReportService {
 
     //重新提交实训报告---update
     int reSubmitReport(Report report);
+
+    // 获取用户权限
+    Login getAuthority(String username);
 }

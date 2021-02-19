@@ -142,10 +142,8 @@ public class CompanyController {
             student.setS_phone(s_phone);
             companyService.c_updateInfo(student);
             //查询数据并返回
-            List<Student> companyStudent = companyService.findCompanyStudent(userName);
-            model.addAttribute("companyStudent",companyStudent);
             model.addAttribute("ok_update","更新成功！");
-            return "company/studentManagement";
+            return "redirect:companyStudentInformation"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();

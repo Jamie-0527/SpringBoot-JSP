@@ -1,6 +1,7 @@
 package com.min.graduation.service.impl;
 
 import com.min.graduation.dao.ReportDao;
+import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Report;
 import com.min.graduation.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,5 +43,10 @@ public class ReportServiceImpl implements ReportService {
     @Override
     public int reSubmitReport(Report report) {
         return reportDao.reSubmitReport(report);
+    }
+
+    @Override
+    public Login getAuthority(String username) {
+        return reportDao.getAuthority(username);
     }
 }

@@ -1,5 +1,6 @@
 package com.min.graduation.controller;
 
+import com.min.graduation.entity.Login;
 import com.min.graduation.entity.Report;
 import com.min.graduation.service.AdminService;
 import com.min.graduation.service.ReportService;
@@ -25,8 +26,6 @@ public class ReportController {
 
     @Autowired
     private ReportService reportService;
-    @Autowired
-    private AdminService adminService;
 
 
     //学生提交实训报告
@@ -46,7 +45,7 @@ public class ReportController {
                 reportService.reSubmitReport(report);
                 model.addAttribute("ok_submit","提交成功！");
             }
-            return "forward:findMyReport";
+            return "redirect:findMyReport"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -63,7 +62,7 @@ public class ReportController {
             report.setEmp_review_score(Integer.parseInt(t_review_score));
             reportService.teacherReviewReport(report);
             model.addAttribute("ok_submit","提交成功！");
-            return "forward:teacherGetReport";
+            return "redirect:teacherGetReport"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -80,7 +79,7 @@ public class ReportController {
             report.setEmp_review_score(Integer.parseInt(emp_review_score));
             reportService.companyReviewReport(report);
             model.addAttribute("ok_submit","提交成功！");
-            return "forward:getCompanyReport";
+            return "redirect:getCompanyReport"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -92,6 +91,9 @@ public class ReportController {
     public String backReDo(HttpServletRequest request, HttpSession session, Model model){
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
+            // 获取权限
+            Login login = reportService.getAuthority(userName);
+
             Map<String,Object> map = new HashMap<>();
             String id = request.getParameter("id");
             String s_id = request.getParameter("s_id");
@@ -100,7 +102,12 @@ public class ReportController {
             map.put("id",conversion);
             map.put("s_id",s_id);
             reportService.backReDo(map);
-            return "forward:teacherGetReport";
+            if (login.getAuthority() == 2){
+                return "redirect:teacherGetReport"+"?page=1";
+            }else {
+                return "redirect:getCompanyReport"+"?page=1";
+            }
+
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();

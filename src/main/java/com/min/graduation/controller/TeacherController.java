@@ -152,11 +152,11 @@ public class TeacherController {
             //更新学生对象
             teacherService.t_updateInfo(student);
             //查询数据并返回
-            List<Teacher> classStudent = teacherService.findClassStudent(userName);
-
-            model.addAttribute("classStudent",classStudent);
+//            List<Teacher> classStudent = teacherService.findClassStudent(userName);
+//            model.addAttribute("classStudent",classStudent);
             model.addAttribute("ok_update","更新成功！");
-            return "teacher/studentManagement";
+            return "redirect:teacherGradeInformation"+"?page=1";
+//            return "teacher/studentManagement";
         }
 
         model.addAttribute("error","身份信息过期，请重新登录！");
