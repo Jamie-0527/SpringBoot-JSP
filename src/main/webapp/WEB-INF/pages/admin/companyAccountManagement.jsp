@@ -164,12 +164,12 @@
             <c:choose>
                 <c:when test="${pageNum > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="companyAccountManagement?page=${pageNum-1 }" tabindex="-1">Previous</a>
+                        <a class="page-link" href="companyAccountManagement?page=${pageNum-1 }" tabindex="-1">上一页</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="page-item disabled">
-                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >Previous</a>
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >上一页</a>
                     </li>
                 </c:otherwise>
             </c:choose>
@@ -213,12 +213,12 @@
             <c:choose>
                 <c:when test="${pageNum < pageCount}">
                     <li class="page-item">
-                        <a class="page-link" href="companyAccountManagement?page=${pageNum+1 }" tabindex="-1">Next</a>
+                        <a class="page-link" href="companyAccountManagement?page=${pageNum+1 }" tabindex="-1">下一页</a>
                     </li>
                 </c:when>
                 <c:otherwise>
                     <li class="page-item disabled">
-                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >Next</a>
+                        <a class="page-link" href="javascript:void(0)" tabindex="-1" >下一页</a>
                     </li>
                 </c:otherwise>
             </c:choose>

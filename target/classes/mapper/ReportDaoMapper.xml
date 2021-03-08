@@ -55,4 +55,9 @@
         update training_report set report_status=4,t_review_time=now() where id=#{id} and s_id=#{s_id}
     </update>
 
+    <!--获取账户权限-->
+    <select id="getAuthority" parameterType="String" resultType="Login">
+        select user_name,password,authority,status from login where user_name=#{uname}
+    </select>
+
 </mapper>

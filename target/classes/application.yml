@@ -17,3 +17,7 @@ spring:
 mybatis:
   typeAliasesPackage: com.min.graduation.entity
   mapperLocations: classpath:mapper/*Mapper.xml
+
+resources:
+  static-locations:
+    - classpath: /webapp/
