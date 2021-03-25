@@ -42,7 +42,7 @@
             <i class="fa fa-newspaper-o" aria-hidden="true"></i>&nbsp;实训报告
         </span>
         <div style="float:right;  padding-right: 20px">
-            <form class="form-inline my-2 my-lg-0" action="findReportById" method="post">
+            <form class="form-inline my-2 my-lg-0" action="findReportById?page=1" method="post">
                 <span>
                     <i class="fa fa-search" aria-hidden="true"></i>&nbsp;查询实训报告&nbsp;&nbsp;
                 </span>
