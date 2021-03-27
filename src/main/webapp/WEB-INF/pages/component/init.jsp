@@ -28,7 +28,7 @@
 <body>
 
 <div class="jumbotron">
-    <h1 class="display-4">您好！欢迎使用本系统</h1>
+    <h4 style="font-size: 36px">您好！欢迎使用本系统</h4>
     <p class="lead">为了您账号的安全性，不影响本系统的使用状态，<span style="color: red">请您尽快更改此账户的密码和有关信息!</span></p>
     <hr class="my-4">
     <p>点击下方按钮即可修改信息</p>
