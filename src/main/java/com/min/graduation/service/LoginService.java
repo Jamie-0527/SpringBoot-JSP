@@ -21,7 +21,7 @@ public interface LoginService {
     int reset(String username);
 
     //更改密码
-    int updatePassword(String user_name, String password);
+//    int updatePassword(String user_name, String password);
 
     //获取学生姓名
     Student getStudentName(String s_id);

@@ -76,19 +76,19 @@
         <c:forEach items="${allCompany}" var="c" varStatus="status">
             <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
             <tr align="center" id="lastLine">
-                <th class="border-right" scope="row">${status.index+1}</th>
-                <td class="border-right">${c.company_id}</td>
-                <td class="border-right">${c.company_name}</td>
-                <td class="border-right">${c.company_address}</td>
-                <td class="border-right">${c.company_person_id}</td>
-                <td class="border-right">${c.company_person}</td>
-                <td class="border-right">${c.company_phone}</td>
+                <th class="border-right" scope="row" style="width: 50px">${status.index+1}</th>
+                <td class="border-right" style="width: 80px">${c.company_id}</td>
+                <td class="border-right" style="width: 200px">${c.company_name}</td>
+                <td class="border-right" style="width: 350px">${c.company_address}</td>
+                <td class="border-right" style="width: 100px">${c.company_person_id}</td>
+                <td class="border-right" style="width: 100px">${c.company_person}</td>
+                <td class="border-right" style="width: 150px">${c.company_phone}</td>
                 <td>
                     <button class="btn btn-info btn-sm" data-toggle="modal" data-target="#myModify<%=i%>">
-                        <i class="fa fa-wrench" aria-hidden="true"></i>&nbsp;修改
+                        <i class="fa fa-wrench" aria-hidden="true"></i>修改
                     </button>
                     <button class="btn btn-danger btn-sm" data-toggle="modal" data-target="#modalDel<%=i%>">
-                        <i class="fa fa-trash" aria-hidden="true"></i>&nbsp;删除
+                        <i class="fa fa-trash" aria-hidden="true"></i>删除
                     </button>
                 </td>
             </tr>

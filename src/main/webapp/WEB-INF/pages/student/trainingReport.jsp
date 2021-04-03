@@ -171,17 +171,17 @@
                                     上一次提交时间:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.commit_time}</span>&nbsp;&nbsp;
                                     审核人:&nbsp;&nbsp;<span style="color:#000;font-weight: bold;">${r.t_name}&nbsp;&nbsp;${r.company_person}</span>
                                 </p>
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-                                    <button type="submit" class="btn btn-primary">提交审核</button>
-                                </div>
+<%--                                <div class="modal-footer">--%>
+<%--                                    <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>--%>
+<%--                                    <button type="submit" class="btn btn-primary">提交审核</button>--%>
+<%--                                </div>--%>
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
             <%}else {%>
-            <%--查看详情模态框--%>
+            <%--新建模态框--%>
             <div class="modal fade" id="myModify<%=i%>" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
                 <div class="modal-dialog modal-dialog-centered modal-xl modal-dialog-scrollable">
                     <div class="modal-content">
@@ -339,7 +339,9 @@
                                 请输入实训心得
                             </div>
                         </div>
-                        <button style="float: right" class="btn btn-primary" type="submit">提交</button>
+                        <div class="modal-footer">
+                            <button style="float: right" class="btn btn-primary" type="submit">提交</button>
+                        </div>
                     </form>
                 </div>
 

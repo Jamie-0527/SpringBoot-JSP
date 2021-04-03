@@ -6,7 +6,6 @@ import com.min.graduation.entity.Student;
 import com.min.graduation.entity.Teacher;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
-import org.springframework.stereotype.Repository;
 
 /**
  * 此类为学生实体类（Login）的Dao层接口
@@ -25,7 +24,7 @@ public interface LoginDao {
     int reset(@Param("uname") String username);
 
     //更改密码
-    int updatePassword(String user_name, String password);
+//    int updatePassword(String user_name, String password);
 
     //获取学生姓名
     Student getStudentName(String s_id);

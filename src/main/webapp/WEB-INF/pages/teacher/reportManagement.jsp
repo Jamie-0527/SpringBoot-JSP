@@ -70,13 +70,13 @@
             <c:forEach items="${gradeReport}" var="r" varStatus="status">
                 <%--此处累加i的值，获取不同模态的数据--%><% i++; %>
                 <tr align="center" id="lastLine">
-                    <th class="border-right" scope="row">${status.index+1}</th>
-                    <td class="border-right">${r.s_id}</td>
-                    <td class="border-right">${r.s_name}</td>
-                    <td class="border-right">${r.c_name}</td>
-                    <td class="border-right">${r.s_college}</td>
-                    <td class="border-right">${r.commit_time}</td>
-                    <td class="border-right">${r.company_name}</td>
+                    <th class="border-right" scope="row" style="width: 50px">${status.index+1}</th>
+                    <td class="border-right" style="width: 80px">${r.s_id}</td>
+                    <td class="border-right" style="width: 80px">${r.s_name}</td>
+                    <td class="border-right" style="width: 120px">${r.c_name}</td>
+                    <td class="border-right" style="width: 100px">${r.s_college}</td>
+                    <td class="border-right" style="width: 120px">${r.commit_time}</td>
+                    <td class="border-right" style="width: 150px">${r.company_name}</td>
                     <td class="border-right">
                         <span class="d-inline-block text-truncate" style="max-width: 200px;">
                           ${r.report_context}

@@ -39,6 +39,8 @@ public class ReportController {
                 String over_time = request.getParameter("over_time");
                 report.setBegin_time(LocalDate.parse(start_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
                 report.setEnd_time(LocalDate.parse(over_time, DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+                report.setReport_context(report.getReport_context().trim());
+                report.setReport_experience(report.getReport_experience().trim());
                 reportService.submitReport(report);
                 model.addAttribute("ok_submit","提交成功！");
             }else {
@@ -60,6 +62,7 @@ public class ReportController {
         if (userName != null && userName != ""){
             String t_review_score = request.getParameter("t_review_score");
             report.setEmp_review_score(Integer.parseInt(t_review_score));
+            report.setT_review_opinion(report.getT_review_opinion().trim());
             reportService.teacherReviewReport(report);
             model.addAttribute("ok_submit","提交成功！");
             return "redirect:teacherGetReport"+"?page=1";
@@ -77,6 +80,7 @@ public class ReportController {
         if (userName != null && userName != ""){
             String emp_review_score = request.getParameter("emp_review_score");
             report.setEmp_review_score(Integer.parseInt(emp_review_score));
+            report.setEmp_review_opinion(report.getEmp_review_opinion().trim());
             reportService.companyReviewReport(report);
             model.addAttribute("ok_submit","提交成功！");
             return "redirect:getCompanyReport"+"?page=1";

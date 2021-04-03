@@ -36,11 +36,11 @@ public class LoginServiceImpl implements LoginService {
         return loginDao.reset(username);
     }
 
-    @Override
-    public int updatePassword(String user_name, String password) {
-        String cipherText = md5Encryption.setEncryption(password);
-        return loginDao.updatePassword(user_name, cipherText);
-    }
+//    @Override
+//    public int updatePassword(String user_name, String password) {
+//        String cipherText = md5Encryption.setEncryption(password);
+//        return loginDao.updatePassword(user_name, cipherText);
+//    }
 
     @Override
     public Student getStudentName(String s_id) {

@@ -115,7 +115,7 @@ public class AdminController {
 
     //添加学生信息
     @RequestMapping("addStudentsInformation")
-    public String addStudentsInformation(Model model, Student student, HttpSession session) {
+    public String addStudentsInformation(Model model, Student student, HttpSession session, @RequestParam("page") int page) {
         Integer Authority = (Integer) session.getAttribute("Authority");
         String userName = (String) session.getAttribute("userName");
         if (userName != null && userName != ""){
@@ -128,15 +128,83 @@ public class AdminController {
                 if (Authority != null) {
                     if (Authority==0){
                         List<Student> allStudent = adminService.findAllStudent();
-                        model.addAttribute("allStudent", allStudent);
+                        //方便分页处理，固定每页10条数据
+                        Student[][] pageStudent = new Student[allStudent.size()/10+1][10];
+                        int count = 0;
+                        // 将对象封装在一个二维数组当中，方便页面取出
+                        for (int i = 0; i < allStudent.size()/10+1; i++){
+                            if (count < allStudent.size()){
+                                for (int j = 0; j<10; j++){
+                                    if (count < allStudent.size()){
+                                        pageStudent[i][j] = allStudent.get(count);
+                                        count++;
+                                    } else { break; }
+                                }
+                            } else { break; }
+                        }
+                        List<Student> showStudent = new ArrayList<>();
+                        for (int i = 0; i < 10; i++){
+                            if (pageStudent[page-1][i] != null){
+                                showStudent.add(pageStudent[page-1][i]);
+                            }
+                        }
+                        model.addAttribute("pageNum",page);
+                        model.addAttribute("pageCount",allStudent.size()/10+1);
+                        model.addAttribute("allStudent",showStudent);
                         return "admin/studentManagement";
+
                     }else if (Authority==2){
                         List<Teacher> classStudent = teacherService.findClassStudent(userName);
-                        model.addAttribute("classStudent",classStudent);
+                        //方便分页处理，固定每页10条数据
+                        Teacher[][] pageStudent = new Teacher[classStudent.size()/10+1][10];
+                        int count = 0;
+                        // 将对象封装在一个二维数组当中，方便页面取出
+                        for (int i = 0; i < classStudent.size()/10+1; i++){
+                            if (count < classStudent.size()){
+                                for (int j = 0; j<10; j++){
+                                    if (count < classStudent.size()){
+                                        pageStudent[i][j] = classStudent.get(count);
+                                        count++;
+                                    } else { break; }
+                                }
+                            } else { break; }
+                        }
+                        List<Teacher> showStudent = new ArrayList<>();
+                        for (int i = 0; i < 10; i++){
+                            if (pageStudent[page-1][i] != null){
+                                showStudent.add(pageStudent[page-1][i]);
+                            }
+                        }
+                        model.addAttribute("pageNum",page);
+                        model.addAttribute("pageCount",classStudent.size()/10+1);
+                        model.addAttribute("classStudent",showStudent);
                         return "teacher/studentManagement";
+
                     }else {
                         List<Student> companyStudent = companyService.findCompanyStudent(userName);
-                        model.addAttribute("companyStudent",companyStudent);
+                        //方便分页处理，固定每页10条数据
+                        Student[][] pageStudent = new Student[companyStudent.size()/10+1][10];
+                        int count = 0;
+                        // 将对象封装在一个二维数组当中，方便页面取出
+                        for (int i = 0; i < companyStudent.size()/10+1; i++){
+                            if (count < companyStudent.size()){
+                                for (int j = 0; j<10; j++){
+                                    if (count < companyStudent.size()){
+                                        pageStudent[i][j] = companyStudent.get(count);
+                                        count++;
+                                    } else { break; }
+                                }
+                            } else { break; }
+                        }
+                        List<Student> showStudent = new ArrayList<>();
+                        for (int i = 0; i < 10; i++){
+                            if (pageStudent[page-1][i] != null){
+                                showStudent.add(pageStudent[page-1][i]);
+                            }
+                        }
+                        model.addAttribute("pageNum",page);
+                        model.addAttribute("pageCount",companyStudent.size()/10+1);
+                        model.addAttribute("companyStudent",showStudent);
                         return "company/studentManagement";
                     }
                 }
@@ -232,9 +300,7 @@ public class AdminController {
             }catch (Exception exception){
                 model.addAttribute("addTeacherError","该用户已存在！");
             }finally {
-                List<Teacher> allTeacher = adminService.findAllTeacher();
-                model.addAttribute("allTeacher",allTeacher);
-                return "admin/teacherManagement";
+                return "redirect:teacherManagement"+"?page=1";
             }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -251,9 +317,7 @@ public class AdminController {
             String t_id = request.getParameter("t_id");
             adminService.deleteTeacher(t_id);
             loginService.reset(t_id);
-            List<Teacher> allTeacher = adminService.findAllTeacher();
-            model.addAttribute("allTeacher",allTeacher);
-            return "admin/teacherManagement";
+            return "redirect:teacherManagement"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();
@@ -324,9 +388,7 @@ public class AdminController {
                 model.addAttribute("addCompanyError","该用户已存在！");
                 exception.printStackTrace();
             }finally {
-                List<Company> allCompany = adminService.findAllCompany();
-                model.addAttribute("allCompany",allCompany);
-                return "admin/CompanyManagement";
+                return "redirect:companyManagement"+"?page=1";
             }
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
@@ -343,9 +405,7 @@ public class AdminController {
             String company_person_id = request.getParameter("company_person_id");
             adminService.deleteCompany(company_person_id);
             loginService.reset(company_person_id);
-            List<Company> allCompany = adminService.findAllCompany();
-            model.addAttribute("allCompany",allCompany);
-            return "admin/CompanyManagement";
+            return "redirect:companyManagement"+"?page=1";
         }
         model.addAttribute("error","身份信息过期，请重新登录！");
         session.invalidate();

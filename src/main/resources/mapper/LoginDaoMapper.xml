@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace需要对应dao接口的完全限定名 （包名+类名）-->
 <mapper namespace="com.min.graduation.dao.LoginDao">
-    
+
     <resultMap id="LoginMapper" type="Login">
         <id property="userName" column="user_name"/>
         <result property="password" column="password"/>
@@ -19,7 +19,7 @@
 
     <!--更新账户密码-->
     <update id="update" parameterType="String">
-        update login set password = #{password},modify_time = now() where user_name = #{uname}
+        update login set password = #{password} where user_name = #{uname}
     </update>
 
     <!--重置账户-->

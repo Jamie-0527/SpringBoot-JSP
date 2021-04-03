@@ -201,7 +201,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="addStudentsInformation" method="post">
+                <form action="addStudentsInformation?page=1" method="post">
                     <div class="input-group mb-3">
                         <div class="input-group-prepend">
                             <label for="addStudentId" class="input-group-text">&nbsp;&nbsp;&nbsp;学&nbsp;号&nbsp;&nbsp;&nbsp;</label>

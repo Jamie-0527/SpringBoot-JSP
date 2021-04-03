@@ -270,7 +270,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
             </div>
             <div class="modal-body">
-                <form action="addStudentsInformation" method="post" class="needs-validation" novalidate>
+                <form action="addStudentsInformation?page=1" method="post" class="needs-validation" novalidate>
                     <div class="col-md-12">
                         <label for="addStudentId">学号</label>
                         <input type="text" class="form-control" name="s_id" id="addStudentId" required>

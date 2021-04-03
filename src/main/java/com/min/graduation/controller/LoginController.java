@@ -118,7 +118,7 @@ public class LoginController {
             Login login = adminService.findAccountByUserName(user_name);
             String old_pwd = md5Encryption.setEncryption(oldPassword);
             if (old_pwd.equals(login.getPassword())){
-                loginService.updatePassword(user_name, password);
+                loginService.update(user_name, password);
                 model.addAttribute("ok_update","更新成功！请重新登录");
                 return "login";
             }else {
