@@ -233,7 +233,7 @@
             <c:choose>
                 <c:when test="${pageNum > 1}">
                     <li class="page-item">
-                        <a class="page-link" href="studentManagement?page=${pageNum-1 }" tabindex="-1">上一页</a>
+                        <a class="page-link" href="findAllReport?page=${pageNum-1 }" tabindex="-1">上一页</a>
                     </li>
                 </c:when>
                 <c:otherwise>
@@ -270,11 +270,11 @@
                 <c:choose>
                     <c:when test="${i eq pageNum}">
                         <li class="page-item active" aria-current="page">
-                            <a class="page-link" href="studentManagement?page=${i}">${i}<span class="sr-only">(current)</span></a>
+                            <a class="page-link" href="findAllReport?page=${i}">${i}<span class="sr-only">(current)</span></a>
                         </li>
                     </c:when>
                     <c:otherwise>
-                        <li class="page-item"><a class="page-link" href="studentManagement?page=${i}">${i}</a></li>
+                        <li class="page-item"><a class="page-link" href="findAllReport?page=${i}">${i}</a></li>
                     </c:otherwise>
                 </c:choose>
             </c:forEach>
@@ -282,7 +282,7 @@
             <c:choose>
                 <c:when test="${pageNum < pageCount}">
                     <li class="page-item">
-                        <a class="page-link" href="studentManagement?page=${pageNum+1 }" tabindex="-1">下一页</a>
+                        <a class="page-link" href="findAllReport?page=${pageNum+1 }" tabindex="-1">下一页</a>
                     </li>
                 </c:when>
                 <c:otherwise>
